@@ -2,7 +2,7 @@
 
 ## Resume entry
 
-**Industrial Project Cost, Productivity & Profitability Analytics** | PostgreSQL, Python (pandas, Matplotlib), Excel, Power BI (DAX) | *Case study on synthetic data, inspired by an EPC engineering-internship role* | github.com/<your-username>/industrial-project-analytics
+**Industrial Project Cost, Productivity & Profitability Analytics** | PostgreSQL, Python (pandas, Matplotlib), Excel, Power BI (DAX) | *Case study on synthetic data, inspired by an EPC engineering-internship role* | github.com/Prateekoog/industrial-project-analytics
 
 - Built an end-to-end analytics pipeline for a simulated Indian EPC company (80 projects, ~97K records): designed a PostgreSQL star schema (11 dimensions, 8 fact tables), cleaned ~3,000 injected data-quality issues, and validated every KPI with 83 automated reconciliation checks.
 - Quantified a ₹246 Cr (36%) erosion of bid profit across 62 completed projects using cost-variance decomposition, Pareto and root-cause analysis in SQL and Python; traced 67% of cost overruns to labour and material, and 55% of schedule slippage to engineering rework.
