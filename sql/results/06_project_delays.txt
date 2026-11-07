@@ -1,0 +1,181 @@
+SET search_path TO projectco;
+SET
+SELECT s.project_id, p.industry, s.planned_duration_days, s.delay_days, s.delay_pct, s.schedule_status,
+       ROUND(k.ld_deducted / 1e7, 2) AS ld_cr
+FROM v_project_schedule_status s
+JOIN dim_project p    ON p.project_id = s.project_id
+JOIN v_project_kpis k ON k.project_id = s.project_id
+WHERE s.status = 'Completed'
+ORDER BY s.delay_days DESC;
+ project_id |          industry          | planned_duration_days | delay_days | delay_pct | schedule_status | ld_cr 
+------------+----------------------------+-----------------------+------------+-----------+-----------------+-------
+ PRJ-044    | Industrial Batteries       |                   593 |        105 |     17.71 | Major delay     |  3.71
+ PRJ-036    | Industrial Equipment       |                   304 |         94 |     30.92 | Critical delay  |  1.51
+ PRJ-038    | Carbon Capture             |                   500 |         89 |     17.80 | Major delay     |  3.30
+ PRJ-007    | Industrial Equipment       |                   304 |         79 |     25.99 | Critical delay  |  0.75
+ PRJ-040    | Sugar                      |                   311 |         79 |     25.40 | Critical delay  |  1.34
+ PRJ-057    | Industrial Equipment       |                   367 |         75 |     20.44 | Critical delay  |  1.56
+ PRJ-024    | Carbon Capture             |                   625 |         73 |     11.68 | Major delay     |  3.65
+ PRJ-056    | Industrial Equipment       |                   479 |         73 |     15.24 | Major delay     |  0.55
+ PRJ-060    | Biochemicals               |                   512 |         70 |     13.67 | Major delay     |  2.44
+ PRJ-033    | Green Hydrogen             |                   730 |         67 |      9.18 | Minor delay     |  9.94
+ PRJ-014    | Cement                     |                   459 |         66 |     14.38 | Major delay     |  1.27
+ PRJ-050    | Cement                     |                   542 |         65 |     11.99 | Major delay     |  3.52
+ PRJ-037    | Mining & Material Handling |                   599 |         64 |     10.68 | Major delay     |  2.07
+ PRJ-011    | Cement                     |                   459 |         61 |     13.29 | Major delay     |  0.75
+ PRJ-046    | Industrial Equipment       |                   450 |         59 |     13.11 | Major delay     |  1.23
+ PRJ-021    | Biochemicals               |                   320 |         57 |     17.81 | Major delay     |  0.68
+ PRJ-003    | Mining & Material Handling |                   440 |         56 |     12.73 | Major delay     |  2.50
+ PRJ-032    | Green Hydrogen             |                   615 |         53 |      8.62 | Minor delay     |  2.24
+ PRJ-058    | Green Hydrogen             |                   550 |         52 |      9.45 | Minor delay     |  2.03
+ PRJ-018    | Wastewater Treatment       |                   498 |         51 |     10.24 | Major delay     |  1.29
+ PRJ-062    | Mining & Material Handling |                   436 |         51 |     11.70 | Major delay     |  0.00
+ PRJ-047    | Biochemicals               |                   415 |         50 |     12.05 | Major delay     |  1.02
+ PRJ-039    | Cement                     |                   505 |         45 |      8.91 | Minor delay     |  4.41
+ PRJ-051    | Biochemicals               |                   552 |         42 |      7.61 | Minor delay     |  2.64
+ PRJ-028    | Sugar                      |                   519 |         41 |      7.90 | Minor delay     |  2.75
+ PRJ-053    | Cement                     |                   554 |         39 |      7.04 | Minor delay     |  1.46
+ PRJ-012    | Mining & Material Handling |                   572 |         37 |      6.47 | Minor delay     |  2.41
+ PRJ-020    | Cement                     |                   450 |         36 |      8.00 | Minor delay     |  0.00
+ PRJ-035    | Thermal Energy             |                   675 |         34 |      5.04 | Minor delay     |  0.00
+ PRJ-025    | Industrial Equipment       |                   304 |         34 |     11.18 | Major delay     |  0.35
+ PRJ-013    | Industrial Equipment       |                   522 |         30 |      5.75 | Minor delay     |  0.00
+ PRJ-015    | Wastewater Treatment       |                   475 |         27 |      5.68 | Minor delay     |  0.86
+ PRJ-052    | Thermal Energy             |                   542 |         26 |      4.80 | Minor delay     |  0.00
+ PRJ-041    | Thermal Energy             |                   386 |         24 |      6.22 | Minor delay     |  1.23
+ PRJ-016    | Biochemicals               |                   507 |         23 |      4.54 | Minor delay     |  1.44
+ PRJ-049    | Wastewater Treatment       |                   325 |         23 |      7.08 | Minor delay     |  0.61
+ PRJ-054    | Industrial Batteries       |                   672 |         21 |      3.13 | Minor delay     |  2.43
+ PRJ-034    | Mining & Material Handling |                   588 |         21 |      3.57 | Minor delay     |  0.00
+ PRJ-022    | Biochemicals               |                   421 |         21 |      4.99 | Minor delay     |  0.83
+ PRJ-048    | Cement                     |                   624 |         20 |      3.21 | Minor delay     |  0.00
+ PRJ-008    | Wastewater Treatment       |                   494 |         18 |      3.64 | Minor delay     |  0.00
+ PRJ-006    | Sugar                      |                   516 |         17 |      3.29 | Minor delay     |  0.76
+ PRJ-059    | Industrial Equipment       |                   478 |         15 |      3.14 | Minor delay     |  0.00
+ PRJ-055    | Thermal Energy             |                   532 |         15 |      2.82 | Minor delay     |  0.00
+ PRJ-017    | Wastewater Treatment       |                   412 |         14 |      3.40 | Minor delay     |  0.00
+ PRJ-042    | Sugar                      |                   358 |         13 |      3.63 | Minor delay     |  0.00
+ PRJ-029    | Industrial Equipment       |                   382 |         13 |      3.40 | Minor delay     |  0.00
+ PRJ-004    | Mining & Material Handling |                   486 |         13 |      2.67 | Minor delay     |  0.00
+ PRJ-019    | Wastewater Treatment       |                   361 |         12 |      3.32 | Minor delay     |  0.00
+ PRJ-031    | Cement                     |                   532 |         11 |      2.07 | Minor delay     |  0.00
+ PRJ-005    | Sugar                      |                   422 |         11 |      2.61 | Minor delay     |  0.00
+ PRJ-026    | Mining & Material Handling |                   511 |         11 |      2.15 | Minor delay     |  0.00
+ PRJ-030    | Wastewater Treatment       |                   409 |         11 |      2.69 | Minor delay     |  0.00
+ PRJ-009    | Thermal Energy             |                   445 |         11 |      2.47 | Minor delay     |  0.00
+ PRJ-002    | Mining & Material Handling |                   631 |         10 |      1.58 | On time         |  0.00
+ PRJ-010    | Sugar                      |                   444 |          9 |      2.03 | Minor delay     |  0.00
+ PRJ-043    | Cement                     |                   620 |          7 |      1.13 | On time         |  0.00
+ PRJ-023    | Sugar                      |                   389 |          6 |      1.54 | On time         |  0.00
+ PRJ-045    | Cement                     |                   681 |          2 |      0.29 | On time         |  0.00
+ PRJ-001    | Thermal Energy             |                   619 |         -1 |     -0.16 | On time         |  0.00
+ PRJ-068    | Industrial Equipment       |                   417 |         -1 |     -0.24 | On time         |  0.00
+ PRJ-027    | Sugar                      |                   354 |         -4 |     -1.13 | On time         |  0.00
+(62 rows)
+
+SELECT st.stage_order, st.stage_name,
+       COUNT(*)                                                     AS completed_stages,
+       ROUND(AVG(m.end_delay_days - m.start_delay_days), 1)         AS avg_own_delay_days,
+       SUM(GREATEST(m.end_delay_days - m.start_delay_days, 0))      AS total_added_delay_days,
+       ROUND(100.0 * SUM(GREATEST(m.end_delay_days - m.start_delay_days, 0))
+             / SUM(SUM(GREATEST(m.end_delay_days - m.start_delay_days, 0))) OVER (), 1) AS share_pct
+FROM fact_milestones m
+JOIN dim_stage st ON st.stage_id = m.stage_id
+WHERE m.milestone_status = 'Completed'
+GROUP BY st.stage_order, st.stage_name
+ORDER BY st.stage_order;
+ stage_order |  stage_name   | completed_stages | avg_own_delay_days | total_added_delay_days | share_pct 
+-------------+---------------+------------------+--------------------+------------------------+-----------
+           1 | Concept       |               80 |                2.5 |                    222 |       2.0
+           2 | Engineering   |               77 |               27.9 |                   2146 |      19.2
+           3 | Procurement   |               72 |               96.5 |                   6950 |      62.1
+           4 | Fabrication   |               70 |               -5.8 |                    302 |       2.7
+           5 | Installation  |               66 |               18.4 |                   1272 |      11.4
+           6 | Testing       |               63 |                1.8 |                    214 |       1.9
+           7 | Commissioning |               62 |                0.7 |                     82 |       0.7
+(7 rows)
+
+SELECT m.delay_cause, COUNT(*) AS stages_affected,
+       SUM(GREATEST(m.end_delay_days - m.start_delay_days, 0)) AS added_delay_days
+FROM fact_milestones m
+WHERE m.milestone_status = 'Completed' AND m.delay_cause <> 'On schedule'
+  AND m.stage_id <> 3            -- procurement's "end" is its last (often non-critical) receipt; late critical
+                                 -- items are already coded as 'Supplier delay' on fabrication / installation
+GROUP BY m.delay_cause
+ORDER BY added_delay_days DESC;
+     delay_cause     | stages_affected | added_delay_days 
+---------------------+-----------------+------------------
+ Engineering rework  |              68 |             2182
+ Supplier delay      |              30 |              569
+ Labour productivity |              15 |              280
+ Client-side         |              21 |              278
+ Technical issues    |              22 |              264
+ Equipment breakdown |              15 |              233
+ Weather             |               8 |              178
+(7 rows)
+
+WITH t AS (
+    SELECT p.project_id,
+           SUM(CASE WHEN b.cost_category_id = 7 THEN 0.6 * b.revised_budget_inr
+                    WHEN b.cost_category_id = 4 THEN 0.5 * b.revised_budget_inr ELSE 0 END) AS time_based_budget
+    FROM dim_project p JOIN fact_budget b ON b.project_id = p.project_id
+    GROUP BY p.project_id
+)
+SELECT ss.schedule_status, COUNT(*) AS projects,
+       ROUND(AVG(ss.delay_days)) AS avg_delay_days,
+       ROUND(SUM(k.ld_deducted) / 1e7, 1) AS ld_cr,
+       ROUND(SUM(GREATEST(ss.delay_days, 0)::numeric / ss.planned_duration_days * t.time_based_budget) / 1e7, 1) AS extra_time_cost_cr,
+       ROUND(AVG(k.final_margin_pct), 1) AS avg_margin_pct
+FROM v_project_schedule_status ss
+JOIN v_project_kpis k ON k.project_id = ss.project_id
+JOIN t ON t.project_id = ss.project_id
+WHERE ss.status = 'Completed'
+GROUP BY ss.schedule_status
+ORDER BY MIN(ss.delay_pct);
+ schedule_status | projects | avg_delay_days | ld_cr | extra_time_cost_cr | avg_margin_pct 
+-----------------+----------+----------------+-------+--------------------+----------------
+ On time         |        7 |              3 |   0.0 |                0.5 |           12.9
+ Minor delay     |       35 |             25 |  36.0 |               10.3 |            9.2
+ Major delay     |       16 |             64 |  28.3 |                7.5 |            5.1
+ Critical delay  |        4 |             82 |   5.2 |                1.7 |            0.2
+(4 rows)
+
+SELECT ROUND(CORR(s.delay_pct, k.cost_variance_pct)::numeric, 3)        AS corr_delay_vs_cost_variance,
+       ROUND(CORR(s.delay_pct, k.margin_deterioration_pp)::numeric, 3)  AS corr_delay_vs_margin_loss
+FROM v_project_schedule s
+JOIN v_project_kpis k ON k.project_id = s.project_id
+WHERE s.status = 'Completed';
+ corr_delay_vs_cost_variance | corr_delay_vs_margin_loss 
+-----------------------------+---------------------------
+                       0.672 |                     0.749
+(1 row)
+
+SELECT s.project_id, p.project_name, p.percent_complete, s.delay_days AS current_slip_days, s.schedule_status,
+       (SELECT st.stage_name FROM fact_milestones m JOIN dim_stage st ON st.stage_id = m.stage_id
+         WHERE m.project_id = s.project_id AND m.milestone_status = 'In Progress'
+         ORDER BY st.stage_order DESC LIMIT 1) AS current_stage
+FROM v_project_schedule_status s
+JOIN dim_project p ON p.project_id = s.project_id
+WHERE s.status = 'In Progress' AND s.delay_days > 0
+ORDER BY s.delay_days DESC;
+ project_id |                  project_name                  | percent_complete | current_slip_days | schedule_status | current_stage 
+------------+------------------------------------------------+------------------+-------------------+-----------------+---------------
+ PRJ-074    | Suryansh - Cell Plant Utilities Package        |             41.3 |               122 | Critical delay  | Fabrication
+ PRJ-065    | Bhoomija - 100 TPH Boiler Package              |             98.3 |                94 | Critical delay  | Testing
+ PRJ-072    | Indrayani - 15 MLD Effluent Treatment Plant    |             78.2 |                87 | Critical delay  | Installation
+ PRJ-073    | Padmavan - 2,200 TPH Overland Conveyor         |             66.1 |                83 | Major delay     | Installation
+ PRJ-066    | Arvenya - 5,500 TCD Cane Mill Expansion        |             97.2 |                81 | Major delay     | Commissioning
+ PRJ-075    | Gaurang - Sugar Refinery Upgrade               |             85.1 |                72 | Major delay     | Installation
+ PRJ-063    | Lokesha - Clinker Cooler Retrofit              |             99.0 |                56 | Major delay     | Testing
+ PRJ-071    | Jalpari - Cement Grinding Unit                 |             77.0 |                52 | Major delay     | Installation
+ PRJ-067    | Tejaswa - Wagon Tippler Complex                |             89.5 |                50 | Minor delay     | Installation
+ PRJ-069    | Ekamra - Process House Modernisation           |             95.2 |                47 | Major delay     | Installation
+ PRJ-078    | Amaravat - 55 MW Electrolyser Balance-of-Plant |             34.4 |                39 | Minor delay     | Fabrication
+ PRJ-061    | Ekamra - Cogeneration Boiler Package           |             99.0 |                33 | Minor delay     | Commissioning
+ PRJ-064    | Tejaswa - Wagon Tippler Complex                |             83.6 |                24 | Minor delay     | Installation
+ PRJ-080    | Vidarbha - Hydrogen Compression and Storage    |             23.8 |                 9 | On time         | Procurement
+ PRJ-076    | Rohilkhand - 300 TPD CO2 Capture Unit          |             28.0 |                 7 | On time         | Procurement
+ PRJ-079    | Devgiri - Coal Handling Plant                  |             15.5 |                 7 | On time         | Procurement
+ PRJ-070    | Kaliyan - Electrode Material Handling Line     |             66.6 |                 5 | On time         | Installation
+(17 rows)
+

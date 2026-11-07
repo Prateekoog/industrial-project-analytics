@@ -1,0 +1,197 @@
+SET search_path TO projectco;
+SET
+WITH exceptions AS (
+    SELECT project_id, 'Cost ' || cost_status || ' (' || cost_variance_pct || '%)' AS reason
+    FROM v_project_kpis WHERE cost_status IN ('Warning', 'Critical')
+    UNION ALL
+    SELECT project_id, schedule_status || ' (' || delay_days || ' days)'
+    FROM v_project_schedule_status WHERE schedule_status IN ('Major delay', 'Critical delay')
+    UNION ALL
+    SELECT project_id, 'Margin below 5% (' || final_margin_pct || '%)'
+    FROM v_project_kpis WHERE final_margin_pct < 5
+)
+SELECT e.project_id, p.status, p.industry, COUNT(*) AS issues, STRING_AGG(e.reason, '; ') AS reasons
+FROM exceptions e
+JOIN dim_project p ON p.project_id = e.project_id
+GROUP BY e.project_id, p.status, p.industry
+ORDER BY p.status DESC, issues DESC, e.project_id;
+ project_id |   status    |          industry          | issues |                                  reasons                                   
+------------+-------------+----------------------------+--------+----------------------------------------------------------------------------
+ PRJ-072    | In Progress | Wastewater Treatment       |      3 | Critical delay (87 days); Margin below 5% (-0.97%); Cost Critical (15.17%)
+ PRJ-073    | In Progress | Mining & Material Handling |      3 | Cost Critical (14.32%); Major delay (83 days); Margin below 5% (1.44%)
+ PRJ-066    | In Progress | Sugar                      |      2 | Cost Warning (5.34%); Major delay (81 days)
+ PRJ-069    | In Progress | Sugar                      |      2 | Cost Warning (5.51%); Major delay (47 days)
+ PRJ-074    | In Progress | Industrial Batteries       |      2 | Critical delay (122 days); Cost Critical (13.14%)
+ PRJ-079    | In Progress | Thermal Energy             |      2 | Cost Warning (9.11%); Margin below 5% (1.02%)
+ PRJ-061    | In Progress | Sugar                      |      1 | Cost Warning (6.24%)
+ PRJ-063    | In Progress | Cement                     |      1 | Major delay (56 days)
+ PRJ-065    | In Progress | Thermal Energy             |      1 | Critical delay (94 days)
+ PRJ-070    | In Progress | Industrial Batteries       |      1 | Cost Warning (8.78%)
+ PRJ-071    | In Progress | Cement                     |      1 | Major delay (52 days)
+ PRJ-075    | In Progress | Sugar                      |      1 | Major delay (72 days)
+ PRJ-076    | In Progress | Carbon Capture             |      1 | Cost Warning (6.55%)
+ PRJ-003    | Completed   | Mining & Material Handling |      3 | Major delay (56 days); Margin below 5% (4.79%); Cost Warning (9.62%)
+ PRJ-007    | Completed   | Industrial Equipment       |      3 | Margin below 5% (-1.96%); Cost Critical (17.62%); Critical delay (79 days)
+ PRJ-021    | Completed   | Biochemicals               |      3 | Major delay (57 days); Margin below 5% (-1.61%); Cost Critical (15.07%)
+ PRJ-024    | Completed   | Carbon Capture             |      3 | Cost Warning (7.04%); Major delay (73 days); Margin below 5% (4.90%)
+ PRJ-036    | Completed   | Industrial Equipment       |      3 | Cost Critical (18.43%); Margin below 5% (-1.06%); Critical delay (94 days)
+ PRJ-038    | Completed   | Carbon Capture             |      3 | Cost Critical (16.28%); Margin below 5% (-0.92%); Major delay (89 days)
+ PRJ-040    | Completed   | Sugar                      |      3 | Cost Warning (8.06%); Margin below 5% (-0.12%); Critical delay (79 days)
+ PRJ-044    | Completed   | Industrial Batteries       |      3 | Major delay (105 days); Cost Critical (18.93%); Margin below 5% (-5.77%)
+ PRJ-046    | Completed   | Industrial Equipment       |      3 | Major delay (59 days); Cost Critical (16.01%); Margin below 5% (4.10%)
+ PRJ-057    | Completed   | Industrial Equipment       |      3 | Critical delay (75 days); Cost Warning (8.03%); Margin below 5% (4.05%)
+ PRJ-060    | Completed   | Biochemicals               |      3 | Cost Critical (11.10%); Margin below 5% (-2.54%); Major delay (70 days)
+ PRJ-012    | Completed   | Mining & Material Handling |      2 | Margin below 5% (3.85%); Cost Warning (9.61%)
+ PRJ-028    | Completed   | Sugar                      |      2 | Cost Warning (8.49%); Margin below 5% (0.88%)
+ PRJ-033    | Completed   | Green Hydrogen             |      2 | Cost Warning (7.31%); Margin below 5% (3.64%)
+ PRJ-037    | Completed   | Mining & Material Handling |      2 | Major delay (64 days); Cost Warning (5.06%)
+ PRJ-039    | Completed   | Cement                     |      2 | Margin below 5% (-0.03%); Cost Critical (10.29%)
+ PRJ-058    | Completed   | Green Hydrogen             |      2 | Cost Critical (12.88%); Margin below 5% (2.51%)
+ PRJ-002    | Completed   | Mining & Material Handling |      1 | Cost Warning (6.03%)
+ PRJ-011    | Completed   | Cement                     |      1 | Major delay (61 days)
+ PRJ-013    | Completed   | Industrial Equipment       |      1 | Cost Warning (7.99%)
+ PRJ-014    | Completed   | Cement                     |      1 | Major delay (66 days)
+ PRJ-015    | Completed   | Wastewater Treatment       |      1 | Cost Warning (8.36%)
+ PRJ-016    | Completed   | Biochemicals               |      1 | Cost Warning (6.39%)
+ PRJ-017    | Completed   | Wastewater Treatment       |      1 | Cost Warning (6.42%)
+ PRJ-018    | Completed   | Wastewater Treatment       |      1 | Major delay (51 days)
+ PRJ-022    | Completed   | Biochemicals               |      1 | Cost Warning (5.78%)
+ PRJ-025    | Completed   | Industrial Equipment       |      1 | Major delay (34 days)
+ PRJ-029    | Completed   | Industrial Equipment       |      1 | Cost Warning (5.15%)
+ PRJ-047    | Completed   | Biochemicals               |      1 | Major delay (50 days)
+ PRJ-050    | Completed   | Cement                     |      1 | Major delay (65 days)
+ PRJ-053    | Completed   | Cement                     |      1 | Cost Warning (5.38%)
+ PRJ-054    | Completed   | Industrial Batteries       |      1 | Cost Critical (10.07%)
+ PRJ-056    | Completed   | Industrial Equipment       |      1 | Major delay (73 days)
+ PRJ-062    | Completed   | Mining & Material Handling |      1 | Major delay (51 days)
+(47 rows)
+
+SELECT k.project_id, k.industry, k.cost_variance_pct,
+       ROUND((SELECT AVG(k2.cost_variance_pct) FROM v_project_kpis k2
+               WHERE k2.industry = k.industry AND k2.status = 'Completed'), 2) AS industry_avg
+FROM v_project_kpis k
+WHERE k.status = 'Completed'
+  AND k.cost_variance_pct > (SELECT AVG(k2.cost_variance_pct) FROM v_project_kpis k2
+                              WHERE k2.industry = k.industry AND k2.status = 'Completed') + 5
+ORDER BY k.cost_variance_pct DESC;
+ project_id |          industry          | cost_variance_pct | industry_avg 
+------------+----------------------------+-------------------+--------------
+ PRJ-036    | Industrial Equipment       |             18.43 |         8.49
+ PRJ-007    | Industrial Equipment       |             17.62 |         8.49
+ PRJ-046    | Industrial Equipment       |             16.01 |         8.49
+ PRJ-021    | Biochemicals               |             15.07 |         8.02
+ PRJ-039    | Cement                     |             10.29 |         2.34
+ PRJ-003    | Mining & Material Handling |              9.62 |         4.40
+ PRJ-012    | Mining & Material Handling |              9.61 |         4.40
+ PRJ-028    | Sugar                      |              8.49 |         1.34
+ PRJ-040    | Sugar                      |              8.06 |         1.34
+(9 rows)
+
+WITH v AS (
+    SELECT cc.cost_category,
+           SUM(a.actual) - SUM(b.revised_budget_inr) AS overrun
+    FROM fact_budget b
+    JOIN dim_project p ON p.project_id = b.project_id AND p.status = 'Completed'
+    JOIN dim_cost_category cc ON cc.cost_category_id = b.cost_category_id
+    JOIN (SELECT project_id, cost_category_id, SUM(amount_inr) AS actual
+            FROM fact_project_cost GROUP BY 1, 2) a
+      ON a.project_id = b.project_id AND a.cost_category_id = b.cost_category_id
+    GROUP BY cc.cost_category
+)
+SELECT cost_category, ROUND(overrun / 1e7, 1) AS overrun_cr,
+       ROUND(100 * SUM(overrun) OVER (ORDER BY overrun DESC ROWS UNBOUNDED PRECEDING)
+             / SUM(overrun) FILTER (WHERE overrun > 0) OVER (), 1) AS cumulative_share_pct
+FROM v
+ORDER BY overrun DESC;
+ cost_category  | overrun_cr | cumulative_share_pct 
+----------------+------------+----------------------
+ Labour         |       67.0 |                 34.8
+ Material       |       62.8 |                 67.3
+ Overhead       |       16.6 |                 75.9
+ Energy         |       13.7 |                 83.1
+ Equipment      |       13.4 |                 90.0
+ Transportation |        9.8 |                 95.1
+ Subcontractor  |        8.3 |                 99.4
+ Other          |        1.1 |                100.0
+(8 rows)
+
+SELECT q.works_location_id, d.fiscal_year,
+       ROUND(SUM(e.downtime_hours))                                       AS downtime_hours,
+       ROUND(SUM(e.downtime_hours * q.machine_hour_rate_inr) / 1e5, 1)     AS machine_time_lost_lakh
+FROM fact_equipment e
+JOIN dim_equipment q ON q.equipment_id = e.equipment_id
+JOIN dim_date d      ON d.date = e.log_date
+WHERE d.fiscal_year IN ('FY25', 'FY26')
+GROUP BY q.works_location_id, d.fiscal_year
+ORDER BY q.works_location_id, d.fiscal_year;
+ works_location_id | fiscal_year | downtime_hours | machine_time_lost_lakh 
+-------------------+-------------+----------------+------------------------
+ LOC-W1            | FY25        |           1902 |                   45.7
+ LOC-W1            | FY26        |           1825 |                   42.2
+ LOC-W2            | FY25        |           6756 |                  165.8
+ LOC-W2            | FY26        |           6382 |                  157.1
+ LOC-W3            | FY25        |           3136 |                   72.5
+ LOC-W3            | FY26        |           3249 |                   72.9
+(6 rows)
+
+SELECT 'PR to approval' AS step, ROUND(AVG(pr_approval_date - pr_date), 1) AS avg_days,
+       PERCENTILE_CONT(0.5) WITHIN GROUP (ORDER BY pr_approval_date - pr_date) AS median_days,
+       PERCENTILE_CONT(0.9) WITHIN GROUP (ORDER BY pr_approval_date - pr_date) AS p90_days
+FROM fact_procurement
+UNION ALL
+SELECT 'Approval to RFQ', ROUND(AVG(rfq_date - pr_approval_date), 1),
+       PERCENTILE_CONT(0.5) WITHIN GROUP (ORDER BY rfq_date - pr_approval_date),
+       PERCENTILE_CONT(0.9) WITHIN GROUP (ORDER BY rfq_date - pr_approval_date)
+FROM fact_procurement
+UNION ALL
+SELECT 'RFQ to PO', ROUND(AVG(po_date - rfq_date), 1),
+       PERCENTILE_CONT(0.5) WITHIN GROUP (ORDER BY po_date - rfq_date),
+       PERCENTILE_CONT(0.9) WITHIN GROUP (ORDER BY po_date - rfq_date)
+FROM fact_procurement
+UNION ALL
+SELECT 'PO to supplier confirmation', ROUND(AVG(supplier_confirm_date - po_date), 1),
+       PERCENTILE_CONT(0.5) WITHIN GROUP (ORDER BY supplier_confirm_date - po_date),
+       PERCENTILE_CONT(0.9) WITHIN GROUP (ORDER BY supplier_confirm_date - po_date)
+FROM fact_procurement WHERE supplier_confirm_date IS NOT NULL
+UNION ALL
+SELECT 'Delivery to goods receipt', ROUND(AVG(grn_date - delivery_date), 1),
+       PERCENTILE_CONT(0.5) WITHIN GROUP (ORDER BY grn_date - delivery_date),
+       PERCENTILE_CONT(0.9) WITHIN GROUP (ORDER BY grn_date - delivery_date)
+FROM fact_procurement WHERE grn_date IS NOT NULL;
+            step             | avg_days | median_days | p90_days 
+-----------------------------+----------+-------------+----------
+ PR to approval              |      9.3 |           8 |       18
+ Approval to RFQ             |      1.5 |           2 |        2
+ RFQ to PO                   |     15.5 |          16 |       20
+ PO to supplier confirmation |      3.5 |           4 |        6
+ Delivery to goods receipt   |      5.5 |           5 |        8
+(5 rows)
+
+SELECT k.project_id, k.project_name, k.percent_complete, k.cpi, k.cost_variance_pct AS forecast_cv_pct,
+       k.estimated_margin_pct, k.final_margin_pct AS forecast_margin_pct, s.delay_days AS current_slip_days
+FROM v_project_kpis k
+JOIN v_project_schedule s ON s.project_id = k.project_id
+WHERE k.status = 'In Progress'
+ORDER BY k.final_margin_pct;
+ project_id |                  project_name                  | percent_complete |  cpi  | forecast_cv_pct | estimated_margin_pct | forecast_margin_pct | current_slip_days 
+------------+------------------------------------------------+------------------+-------+-----------------+----------------------+---------------------+-------------------
+ PRJ-072    | Indrayani - 15 MLD Effluent Treatment Plant    |             78.2 | 0.868 |           15.17 |                12.33 |               -0.97 |                87
+ PRJ-079    | Devgiri - Coal Handling Plant                  |             15.5 | 0.917 |            9.11 |                 9.28 |                1.02 |                 7
+ PRJ-073    | Padmavan - 2,200 TPH Overland Conveyor         |             66.1 | 0.875 |           14.32 |                13.79 |                1.44 |                83
+ PRJ-065    | Bhoomija - 100 TPH Boiler Package              |             98.3 | 0.953 |            4.92 |                 9.86 |                5.42 |                94
+ PRJ-074    | Suryansh - Cell Plant Utilities Package        |             41.3 | 0.884 |           13.14 |                17.55 |                6.72 |               122
+ PRJ-061    | Ekamra - Cogeneration Boiler Package           |             99.0 | 0.941 |            6.24 |                12.26 |                6.78 |                33
+ PRJ-070    | Kaliyan - Electrode Material Handling Line     |             66.6 | 0.919 |            8.78 |                14.74 |                7.26 |                 5
+ PRJ-066    | Arvenya - 5,500 TCD Cane Mill Expansion        |             97.2 | 0.949 |            5.34 |                13.56 |                8.94 |                81
+ PRJ-071    | Jalpari - Cement Grinding Unit                 |             77.0 | 0.963 |            3.82 |                12.84 |                9.22 |                52
+ PRJ-075    | Gaurang - Sugar Refinery Upgrade               |             85.1 | 0.972 |            2.89 |                11.89 |                9.34 |                72
+ PRJ-069    | Ekamra - Process House Modernisation           |             95.2 | 0.948 |            5.51 |                14.15 |                9.42 |                47
+ PRJ-063    | Lokesha - Clinker Cooler Retrofit              |             99.0 | 0.973 |            2.83 |                13.09 |               10.63 |                56
+ PRJ-067    | Tejaswa - Wagon Tippler Complex                |             89.5 | 0.974 |            2.64 |                13.76 |               11.49 |                50
+ PRJ-076    | Rohilkhand - 300 TPD CO2 Capture Unit          |             28.0 | 0.939 |            6.55 |                17.41 |               12.00 |                 7
+ PRJ-064    | Tejaswa - Wagon Tippler Complex                |             83.6 | 0.993 |            0.72 |                13.64 |               13.02 |                24
+ PRJ-078    | Amaravat - 55 MW Electrolyser Balance-of-Plant |             34.4 | 0.996 |            0.44 |                16.91 |               16.54 |                39
+ PRJ-080    | Vidarbha - Hydrogen Compression and Storage    |             23.8 | 1.068 |           -6.36 |                14.11 |               19.57 |                 9
+ PRJ-077    | Rajvansh - Wagon Tippler Complex               |             66.7 | 1.084 |           -7.72 |                15.76 |               22.26 |                 0
+(18 rows)
+

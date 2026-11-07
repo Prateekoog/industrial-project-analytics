@@ -1,0 +1,146 @@
+SET search_path TO projectco;
+SET
+SELECT status,
+       COUNT(*)                                   AS projects,
+       ROUND(SUM(contract_value_inr) / 1e7, 1)    AS contract_value_cr,
+       ROUND(AVG(contract_value_inr) / 1e7, 1)    AS avg_contract_cr
+FROM dim_project
+GROUP BY status
+ORDER BY status;
+   status    | projects | contract_value_cr | avg_contract_cr 
+-------------+----------+-------------------+-----------------
+ Completed   |       62 |            5182.8 |            83.6
+ In Progress |       18 |            1838.3 |           102.1
+(2 rows)
+
+SELECT industry,
+       COUNT(*)                                                              AS projects,
+       ROUND(SUM(contract_value_inr) / 1e7, 0)                               AS contract_value_cr,
+       ROUND(100 * SUM(contract_value_inr) / (SELECT SUM(contract_value_inr) FROM dim_project), 1) AS share_pct,
+       ROUND(AVG(contract_value_inr) / 1e7, 1)                               AS avg_cr,
+       ROUND((PERCENTILE_CONT(0.5) WITHIN GROUP (ORDER BY contract_value_inr) / 1e7)::numeric, 1) AS median_cr
+FROM dim_project
+GROUP BY industry
+ORDER BY contract_value_cr DESC;
+          industry          | projects | contract_value_cr | share_pct | avg_cr | median_cr 
+----------------------------+----------+-------------------+-----------+--------+-----------
+ Cement                     |       12 |              1468 |      20.9 |  122.3 |     106.3
+ Mining & Material Handling |       12 |              1400 |      19.9 |  116.7 |      90.2
+ Thermal Energy             |        8 |              1134 |      16.1 |  141.7 |     123.7
+ Sugar                      |       12 |               651 |       9.3 |   54.3 |      48.8
+ Industrial Batteries       |        4 |               502 |       7.2 |  125.6 |     132.9
+ Green Hydrogen             |        5 |               490 |       7.0 |   98.0 |      83.6
+ Wastewater Treatment       |        8 |               409 |       5.8 |   51.2 |      46.4
+ Industrial Equipment       |       10 |               364 |       5.2 |   36.4 |      35.1
+ Biochemicals               |        6 |               337 |       4.8 |   56.2 |      53.1
+ Carbon Capture             |        3 |               264 |       3.8 |   88.1 |      73.1
+(10 rows)
+
+SELECT d.fiscal_year,
+       COUNT(*)                                AS projects_awarded,
+       ROUND(SUM(p.contract_value_inr) / 1e7)  AS order_intake_cr
+FROM dim_project p
+JOIN dim_date d ON d.date = p.award_date
+GROUP BY d.fiscal_year
+ORDER BY d.fiscal_year;
+ fiscal_year | projects_awarded | order_intake_cr 
+-------------+------------------+-----------------
+ FY21        |                2 |             477
+ FY22        |               12 |             738
+ FY23        |               19 |            1256
+ FY24        |               22 |            2392
+ FY25        |               18 |            1392
+ FY26        |                7 |             766
+(6 rows)
+
+SELECT p.project_id, p.project_name, c.client_name, e.employee_name AS project_manager,
+       ROUND(p.contract_value_inr / 1e7, 1) AS contract_cr, p.status
+FROM dim_project p
+JOIN dim_client c   ON c.client_id = p.client_id
+JOIN dim_employee e ON e.employee_id = p.project_manager_id
+ORDER BY p.contract_value_inr DESC
+LIMIT 10;
+ project_id |                  project_name                  |          client_name           | project_manager  | contract_cr |   status    
+------------+------------------------------------------------+--------------------------------+------------------+-------------+-------------
+ PRJ-035    | Devgiri - 240 TPH Boiler Package               | Devgiri Power Ltd              | Vivaan Rao       |       307.6 | Completed
+ PRJ-002    | Nirvaan - Crushing and Screening Plant         | Nirvaan Minerals Ltd           | Rajesh Mukherjee |       301.6 | Completed
+ PRJ-045    | Jalpari - Preheater and Kiln Upgrade           | Jalpari Cements Ltd            | Vivaan Rao       |       259.1 | Completed
+ PRJ-033    | Vidarbha - 90 MW Electrolyser Balance-of-Plant | Vidarbha Green Energy Ltd      | Aparna Ghosh     |       198.7 | Completed
+ PRJ-079    | Devgiri - Coal Handling Plant                  | Devgiri Power Ltd              | Riya Yadav       |       197.3 | In Progress
+ PRJ-043    | Lokesha - Preheater and Kiln Upgrade           | Lokesha Cements Ltd            | Vivaan Rao       |       183.4 | Completed
+ PRJ-048    | Kalpaka - Preheater and Kiln Upgrade           | Kalpaka Cements Ltd            | Riya Yadav       |       175.1 | Completed
+ PRJ-001    | Bhoomija - 160 TPH Boiler Package              | Bhoomija Power Ltd             | Riya Yadav       |       175.1 | Completed
+ PRJ-067    | Tejaswa - Wagon Tippler Complex                | Tejaswa Minerals Ltd           | Vivaan Rao       |       174.4 | In Progress
+ PRJ-054    | Suryansh - Electrode Material Handling Line    | Suryansh Cell Technologies Ltd | Rajesh Mukherjee |       162.3 | Completed
+(10 rows)
+
+SELECT c.client_name, c.industry, COUNT(*) AS projects,
+       ROUND(SUM(p.contract_value_inr) / 1e7, 1) AS total_cr
+FROM dim_project p
+JOIN dim_client c ON c.client_id = p.client_id
+GROUP BY c.client_name, c.industry
+HAVING COUNT(*) > 1
+ORDER BY projects DESC, total_cr DESC;
+            client_name             |          industry          | projects | total_cr 
+------------------------------------+----------------------------+----------+----------
+ Tejaswa Minerals Ltd               | Mining & Material Handling |        6 |    643.5
+ Lokesha Cements Ltd                | Cement                     |        4 |    516.1
+ Jalpari Cements Ltd                | Cement                     |        4 |    498.8
+ Vidarbha Green Energy Ltd          | Green Hydrogen             |        4 |    406.3
+ Dhanvira Sugars Ltd                | Sugar                      |        4 |    214.5
+ Indrayani Water Infrastructure Ltd | Wastewater Treatment       |        4 |    187.2
+ Bhoomija Power Ltd                 | Thermal Energy             |        3 |    385.2
+ Ekamra Sugars Ltd                  | Sugar                      |        3 |    242.3
+ Ujjwala Industries Ltd             | Industrial Equipment       |        3 |    156.5
+ Meghalay Water Infrastructure Ltd  | Wastewater Treatment       |        3 |    133.1
+ Prayag Biorefineries Ltd           | Biochemicals               |        3 |    122.6
+ Akshaya Industries Ltd             | Industrial Equipment       |        3 |    109.0
+ Devgiri Power Ltd                  | Thermal Energy             |        2 |    504.9
+ Nirvaan Minerals Ltd               | Mining & Material Handling |        2 |    439.3
+ Suryansh Cell Technologies Ltd     | Industrial Batteries       |        2 |    281.9
+ Kaliyan Cell Technologies Ltd      | Industrial Batteries       |        2 |    220.5
+ Rohilkhand Decarbonisation Ltd     | Carbon Capture             |        2 |    198.2
+ Padmavan Minerals Ltd              | Mining & Material Handling |        2 |    172.9
+ Shivalik Biorefineries Ltd         | Biochemicals               |        2 |    159.7
+ Chandrika Power Ltd                | Thermal Energy             |        2 |    152.8
+ Hiranya Cements Ltd                | Cement                     |        2 |    151.8
+ Brahmora Sugars Ltd                | Sugar                      |        2 |     83.7
+ Gaurang Sugars Ltd                 | Sugar                      |        2 |     75.5
+ Vanshika Industries Ltd            | Industrial Equipment       |        2 |     51.1
+(24 rows)
+
+SELECT project_id, project_name, industry, planned_start_date,
+       ROUND(contract_value_inr / 1e7, 1) AS contract_cr, percent_complete
+FROM dim_project
+WHERE status = 'In Progress'
+  AND planned_start_date >= DATE '2024-04-01'
+  AND contract_value_inr >= 100 * 1e7
+ORDER BY planned_start_date;
+ project_id |                project_name                |          industry          | planned_start_date | contract_cr | percent_complete 
+------------+--------------------------------------------+----------------------------+--------------------+-------------+------------------
+ PRJ-061    | Ekamra - Cogeneration Boiler Package       | Sugar                      | 2024-09-05         |       139.1 |             99.0
+ PRJ-064    | Tejaswa - Wagon Tippler Complex            | Mining & Material Handling | 2025-01-11         |       160.2 |             83.6
+ PRJ-067    | Tejaswa - Wagon Tippler Complex            | Mining & Material Handling | 2025-01-27         |       174.4 |             89.5
+ PRJ-070    | Kaliyan - Electrode Material Handling Line | Industrial Batteries       | 2025-04-12         |       146.3 |             66.6
+ PRJ-071    | Jalpari - Cement Grinding Unit             | Cement                     | 2025-04-30         |       110.7 |             77.0
+ PRJ-074    | Suryansh - Cell Plant Utilities Package    | Industrial Batteries       | 2025-05-22         |       119.6 |             41.3
+ PRJ-076    | Rohilkhand - 300 TPD CO2 Capture Unit      | Carbon Capture             | 2025-06-22         |       125.1 |             28.0
+ PRJ-079    | Devgiri - Coal Handling Plant              | Thermal Energy             | 2025-09-22         |       197.3 |             15.5
+(8 rows)
+
+SELECT CASE WHEN contract_value_inr < 50e7  THEN '1. < Rs 50 Cr'
+            WHEN contract_value_inr < 150e7 THEN '2. Rs 50-150 Cr'
+            ELSE '3. > Rs 150 Cr' END                          AS size_band,
+       COUNT(*)                                                AS projects,
+       ROUND(AVG(planned_duration_days) / 30.44, 1)            AS avg_planned_months,
+       MIN(EXTRACT(YEAR FROM planned_start_date))::int         AS first_start_year
+FROM dim_project
+GROUP BY 1
+ORDER BY 1;
+    size_band    | projects | avg_planned_months | first_start_year 
+-----------------+----------+--------------------+------------------
+ 1. < Rs 50 Cr   |       22 |               12.9 |             2021
+ 2. Rs 50-150 Cr |       46 |               16.7 |             2021
+ 3. > Rs 150 Cr  |       12 |               20.5 |             2021
+(3 rows)
+

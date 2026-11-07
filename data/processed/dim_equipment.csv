@@ -1,0 +1,43 @@
+equipment_id,equipment_name,equipment_type,work_centre_id,works_location_id,commission_year,rated_kw,machine_hour_rate_inr,rated_tonnes_per_hour
+EQ-W1-C1,CNC Plasma Cutter #1,CNC Plasma Cutter,WC-W1-C,LOC-W1,2011,120,1800,2.9
+EQ-W1-C2,CNC Plasma Cutter #2,CNC Plasma Cutter,WC-W1-C,LOC-W1,2015,120,1800,2.9
+EQ-W1-PR1,Plate Bending Rolls #1,Plate Bending Rolls,WC-W1-PR,LOC-W1,2015,90,2200,2.85
+EQ-W1-PR2,Plate Bending Rolls #2,Plate Bending Rolls,WC-W1-PR,LOC-W1,2018,90,2200,2.85
+EQ-W1-W1,SAW Welding Station #1,SAW Welding Station,WC-W1-W,LOC-W1,2015,45,1500,1.4
+EQ-W1-W2,SAW Welding Station #2,SAW Welding Station,WC-W1-W,LOC-W1,2012,45,1500,1.4
+EQ-W1-W3,SAW Welding Station #3,SAW Welding Station,WC-W1-W,LOC-W1,2016,45,1500,1.4
+EQ-W1-W4,SAW Welding Station #4,SAW Welding Station,WC-W1-W,LOC-W1,2014,45,1500,1.4
+EQ-W1-M1,Vertical Turning Lathe #1,Vertical Turning Lathe,WC-W1-M,LOC-W1,2019,75,4200,1.9
+EQ-W1-M2,Vertical Turning Lathe #2,Vertical Turning Lathe,WC-W1-M,LOC-W1,2011,75,4200,1.9
+EQ-W1-M3,Vertical Turning Lathe #3,Vertical Turning Lathe,WC-W1-M,LOC-W1,2014,75,4200,1.9
+EQ-W1-A1,Assembly Bay (EOT Crane) #1,Assembly Bay (EOT Crane),WC-W1-A,LOC-W1,2016,30,1600,2.9
+EQ-W1-A2,Assembly Bay (EOT Crane) #2,Assembly Bay (EOT Crane),WC-W1-A,LOC-W1,2015,30,1600,2.9
+EQ-W1-BP1,Shot Blasting and Paint Booth #1,Shot Blasting and Paint Booth,WC-W1-BP,LOC-W1,2012,110,2000,5.85
+EQ-W2-C1,CNC Plasma Cutter #1,CNC Plasma Cutter,WC-W2-C,LOC-W2,2004,120,1800,2.9
+EQ-W2-C2,CNC Plasma Cutter #2,CNC Plasma Cutter,WC-W2-C,LOC-W2,2011,120,1800,2.9
+EQ-W2-PR1,Plate Bending Rolls #1,Plate Bending Rolls,WC-W2-PR,LOC-W2,1999,90,2200,2.85
+EQ-W2-PR2,Plate Bending Rolls #2,Plate Bending Rolls,WC-W2-PR,LOC-W2,2011,90,2200,2.85
+EQ-W2-W1,SAW Welding Station #1,SAW Welding Station,WC-W2-W,LOC-W2,2013,45,1500,1.4
+EQ-W2-W2,SAW Welding Station #2,SAW Welding Station,WC-W2-W,LOC-W2,2005,45,1500,1.4
+EQ-W2-W3,SAW Welding Station #3,SAW Welding Station,WC-W2-W,LOC-W2,2003,45,1500,1.4
+EQ-W2-W4,SAW Welding Station #4,SAW Welding Station,WC-W2-W,LOC-W2,2015,45,1500,1.4
+EQ-W2-M1,Vertical Turning Lathe #1,Vertical Turning Lathe,WC-W2-M,LOC-W2,2005,75,4200,1.9
+EQ-W2-M2,Vertical Turning Lathe #2,Vertical Turning Lathe,WC-W2-M,LOC-W2,2003,75,4200,1.9
+EQ-W2-M3,Vertical Turning Lathe #3,Vertical Turning Lathe,WC-W2-M,LOC-W2,2012,75,4200,1.9
+EQ-W2-A1,Assembly Bay (EOT Crane) #1,Assembly Bay (EOT Crane),WC-W2-A,LOC-W2,2014,30,1600,2.9
+EQ-W2-A2,Assembly Bay (EOT Crane) #2,Assembly Bay (EOT Crane),WC-W2-A,LOC-W2,2015,30,1600,2.9
+EQ-W2-BP1,Shot Blasting and Paint Booth #1,Shot Blasting and Paint Booth,WC-W2-BP,LOC-W2,2009,110,2000,5.85
+EQ-W3-C1,CNC Plasma Cutter #1,CNC Plasma Cutter,WC-W3-C,LOC-W3,2014,120,1800,2.9
+EQ-W3-C2,CNC Plasma Cutter #2,CNC Plasma Cutter,WC-W3-C,LOC-W3,2014,120,1800,2.9
+EQ-W3-PR1,Plate Bending Rolls #1,Plate Bending Rolls,WC-W3-PR,LOC-W3,2015,90,2200,2.85
+EQ-W3-PR2,Plate Bending Rolls #2,Plate Bending Rolls,WC-W3-PR,LOC-W3,2017,90,2200,2.85
+EQ-W3-W1,SAW Welding Station #1,SAW Welding Station,WC-W3-W,LOC-W3,2015,45,1500,1.4
+EQ-W3-W2,SAW Welding Station #2,SAW Welding Station,WC-W3-W,LOC-W3,2015,45,1500,1.4
+EQ-W3-W3,SAW Welding Station #3,SAW Welding Station,WC-W3-W,LOC-W3,2011,45,1500,1.4
+EQ-W3-W4,SAW Welding Station #4,SAW Welding Station,WC-W3-W,LOC-W3,1999,45,1500,1.4
+EQ-W3-M1,Vertical Turning Lathe #1,Vertical Turning Lathe,WC-W3-M,LOC-W3,2008,75,4200,1.9
+EQ-W3-M2,Vertical Turning Lathe #2,Vertical Turning Lathe,WC-W3-M,LOC-W3,2015,75,4200,1.9
+EQ-W3-M3,Vertical Turning Lathe #3,Vertical Turning Lathe,WC-W3-M,LOC-W3,2007,75,4200,1.9
+EQ-W3-A1,Assembly Bay (EOT Crane) #1,Assembly Bay (EOT Crane),WC-W3-A,LOC-W3,2016,30,1600,2.9
+EQ-W3-A2,Assembly Bay (EOT Crane) #2,Assembly Bay (EOT Crane),WC-W3-A,LOC-W3,2012,30,1600,2.9
+EQ-W3-BP1,Shot Blasting and Paint Booth #1,Shot Blasting and Paint Booth,WC-W3-BP,LOC-W3,2012,110,2000,5.85

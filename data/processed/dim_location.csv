@@ -1,0 +1,34 @@
+location_id,location_name,location_type,city,state,region
+LOC-W1,Works-West,Works,Pune,Maharashtra,West
+LOC-W2,Works-East,Works,Kolkata,West Bengal,East
+LOC-W3,Works-South,Works,Chennai,Tamil Nadu,South
+LOC-S01,Site - Kolhapur,Project Site,Kolhapur,Maharashtra,West
+LOC-S02,Site - Ahmednagar,Project Site,Ahmednagar,Maharashtra,West
+LOC-S03,Site - Muzaffarnagar,Project Site,Muzaffarnagar,Uttar Pradesh,East
+LOC-S04,Site - Lakhimpur Kheri,Project Site,Lakhimpur Kheri,Uttar Pradesh,East
+LOC-S05,Site - Belagavi,Project Site,Belagavi,Karnataka,South
+LOC-S06,Site - Chittorgarh,Project Site,Chittorgarh,Rajasthan,West
+LOC-S07,Site - Satna,Project Site,Satna,Madhya Pradesh,West
+LOC-S08,Site - Kurnool,Project Site,Kurnool,Andhra Pradesh,South
+LOC-S09,Site - Raipur,Project Site,Raipur,Chhattisgarh,East
+LOC-S10,Site - Dhanbad,Project Site,Dhanbad,Jharkhand,East
+LOC-S11,Site - Angul,Project Site,Angul,Odisha,East
+LOC-S12,Site - Keonjhar,Project Site,Keonjhar,Odisha,East
+LOC-S13,Site - Korba,Project Site,Korba,Chhattisgarh,East
+LOC-S14,Site - Singrauli,Project Site,Singrauli,Madhya Pradesh,West
+LOC-S15,Site - Jharsuguda,Project Site,Jharsuguda,Odisha,East
+LOC-S16,Site - Chakan,Project Site,Chakan,Maharashtra,West
+LOC-S17,Site - Hosur,Project Site,Hosur,Tamil Nadu,South
+LOC-S18,Site - Vadodara,Project Site,Vadodara,Gujarat,West
+LOC-S19,Site - Coimbatore,Project Site,Coimbatore,Tamil Nadu,South
+LOC-S20,Site - Rourkela,Project Site,Rourkela,Odisha,East
+LOC-S21,Site - Nagpur,Project Site,Nagpur,Maharashtra,West
+LOC-S22,Site - Ennore,Project Site,Ennore,Tamil Nadu,South
+LOC-S23,Site - Patancheru,Project Site,Patancheru,Telangana,South
+LOC-S24,Site - Haldia,Project Site,Haldia,West Bengal,East
+LOC-S25,Site - Bharuch,Project Site,Bharuch,Gujarat,West
+LOC-S26,Site - Kutch,Project Site,Kutch,Gujarat,West
+LOC-S27,Site - Jamnagar,Project Site,Jamnagar,Gujarat,West
+LOC-S28,Site - Bikaner,Project Site,Bikaner,Rajasthan,West
+LOC-S29,Site - Sanand,Project Site,Sanand,Gujarat,West
+LOC-S30,Site - Visakhapatnam,Project Site,Visakhapatnam,Andhra Pradesh,South

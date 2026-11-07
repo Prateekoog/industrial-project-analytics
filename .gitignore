@@ -1,0 +1,21 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.ipynb_checkpoints/
+
+# OS / editor
+.DS_Store
+.vscode/
+.idea/
+
+# Office lock files
+~$*
+
+# Power BI local cache
+*.pbix.bak
+.pbi/
+
+# Regenerable answer-key copies of the true tables (python run_pipeline.py recreates them)
+data/qa/truth/

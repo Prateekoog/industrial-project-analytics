@@ -1,0 +1,13 @@
+symptom,present,projects,avg_cost_variance_pct,avg_delay_days,avg_margin_lost_pp
+Engineering slip > 30 days,True,20,10.08,58.9,11.96
+Engineering slip > 30 days,False,42,2.65,25.43,3.03
+Critical item arrived after need date,True,25,8.33,51.16,9.77
+Critical item arrived after need date,False,37,2.83,26.14,3.3
+Site labour efficiency < 90%,True,7,9.64,68.29,11.71
+Site labour efficiency < 90%,False,55,4.46,32.15,5.17
+Fabricated at Works-East,True,16,5.68,34.56,6.59
+Fabricated at Works-East,False,46,4.83,36.8,5.67
+New-energy technology,True,7,10.96,65.71,13.27
+New-energy technology,False,55,4.3,32.47,4.97
+Above-median low-OTD supplier spend,True,31,4.37,40.06,5.47
+Above-median low-OTD supplier spend,False,31,5.73,32.39,6.35

@@ -1,0 +1,19 @@
+work_centre_id,work_centre_name,works_location_id,process_type,std_mh_per_tonne,std_machine_hours_per_tonne,is_final_operation
+WC-W1-C,Cutting - Works-West,LOC-W1,Cutting,2.5,0.345,False
+WC-W1-PR,Plate Rolling - Works-West,LOC-W1,Plate Rolling,2.5,0.351,False
+WC-W1-W,Welding - Works-West,LOC-W1,Welding,12.0,0.714,False
+WC-W1-M,Machining - Works-West,LOC-W1,Machining,6.0,0.526,False
+WC-W1-A,Assembly - Works-West,LOC-W1,Assembly,5.0,0.345,False
+WC-W1-BP,Blasting & Painting - Works-West,LOC-W1,Blasting & Painting,2.0,0.171,True
+WC-W2-C,Cutting - Works-East,LOC-W2,Cutting,2.5,0.345,False
+WC-W2-PR,Plate Rolling - Works-East,LOC-W2,Plate Rolling,2.5,0.351,False
+WC-W2-W,Welding - Works-East,LOC-W2,Welding,12.0,0.714,False
+WC-W2-M,Machining - Works-East,LOC-W2,Machining,6.0,0.526,False
+WC-W2-A,Assembly - Works-East,LOC-W2,Assembly,5.0,0.345,False
+WC-W2-BP,Blasting & Painting - Works-East,LOC-W2,Blasting & Painting,2.0,0.171,True
+WC-W3-C,Cutting - Works-South,LOC-W3,Cutting,2.5,0.345,False
+WC-W3-PR,Plate Rolling - Works-South,LOC-W3,Plate Rolling,2.5,0.351,False
+WC-W3-W,Welding - Works-South,LOC-W3,Welding,12.0,0.714,False
+WC-W3-M,Machining - Works-South,LOC-W3,Machining,6.0,0.526,False
+WC-W3-A,Assembly - Works-South,LOC-W3,Assembly,5.0,0.345,False
+WC-W3-BP,Blasting & Painting - Works-South,LOC-W3,Blasting & Painting,2.0,0.171,True

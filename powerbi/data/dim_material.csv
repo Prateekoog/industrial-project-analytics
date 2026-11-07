@@ -1,0 +1,95 @@
+material_id,material_name,material_group,unit_of_measure,criticality_class,is_steel_linked,standard_lead_time_days,standard_price_inr
+MAT-001,ISMB 300 Beams,Structural Steel,MT,C,True,20,62000.0
+MAT-002,ISMC 200 Channels,Structural Steel,MT,C,True,38,60000.0
+MAT-003,Angles 100x100x10,Structural Steel,MT,C,True,34,58000.0
+MAT-004,RHS 200x100 Hollow Section,Structural Steel,MT,C,True,25,70000.0
+MAT-005,Chequered Plate 6 mm,Structural Steel,MT,C,True,36,64000.0
+MAT-006,Built-up Column Sections,Structural Steel,MT,C,True,37,76000.0
+MAT-007,Gratings and Handrails,Structural Steel,MT,C,True,20,95000.0
+MAT-008,Purlins and Girts,Structural Steel,MT,C,True,22,66000.0
+MAT-009,MS Plate 10 mm,Steel Plates,MT,B,True,38,63000.0
+MAT-010,MS Plate 20 mm,Steel Plates,MT,B,True,45,64000.0
+MAT-011,MS Plate 40 mm,Steel Plates,MT,B,True,25,67000.0
+MAT-012,Boiler Quality Plate SA516,Steel Plates,MT,B,True,38,88000.0
+MAT-013,Wear-resistant Plate 400 BHN,Steel Plates,MT,B,True,27,145000.0
+MAT-014,SS 304 Plate,Steel Plates,MT,B,True,38,240000.0
+MAT-015,SS 316L Plate,Steel Plates,MT,B,True,38,310000.0
+MAT-016,Alloy Steel Plate SA387,Steel Plates,MT,B,True,26,160000.0
+MAT-017,CS Pipe 6 inch Sch 40,Pipes & Fittings,m,B,True,42,3200.0
+MAT-018,CS Pipe 12 inch Sch 40,Pipes & Fittings,m,B,True,48,9800.0
+MAT-019,SS Pipe 4 inch Sch 10,Pipes & Fittings,m,B,True,47,5600.0
+MAT-020,Alloy Steel Pipe P22,Pipes & Fittings,m,B,True,25,14500.0
+MAT-021,Forged Elbows Set,Pipes & Fittings,Set,B,True,31,48000.0
+MAT-022,Weld-neck Flanges Set,Pipes & Fittings,Set,B,True,31,62000.0
+MAT-023,Expansion Bellows,Pipes & Fittings,Nos,B,True,36,185000.0
+MAT-024,Pipe Supports Kit,Pipes & Fittings,Set,B,True,28,38000.0
+MAT-025,Girth Gear Segment,Castings & Forgings,Nos,A,False,143,4800000.0
+MAT-026,Kiln Tyre Forging,Castings & Forgings,Nos,A,False,139,6500000.0
+MAT-027,Mill Roll Shell Casting,Castings & Forgings,Nos,A,False,141,2900000.0
+MAT-028,Crusher Hammer Set,Castings & Forgings,Set,A,False,110,950000.0
+MAT-029,Main Shaft Forging,Castings & Forgings,Nos,A,False,100,2200000.0
+MAT-030,Pinion Forging,Castings & Forgings,Nos,A,False,146,1350000.0
+MAT-031,Grate Plate Castings,Castings & Forgings,Set,A,False,114,1150000.0
+MAT-032,Liner Plate Castings,Castings & Forgings,Set,A,False,133,1600000.0
+MAT-033,Planetary Gearbox 500 kW,Gearboxes & Drives,Nos,A,False,155,7800000.0
+MAT-034,Helical Gearbox 200 kW,Gearboxes & Drives,Nos,A,False,102,2600000.0
+MAT-035,Helical Gearbox 75 kW,Gearboxes & Drives,Nos,A,False,100,980000.0
+MAT-036,Fluid Coupling Assembly,Gearboxes & Drives,Nos,A,False,100,640000.0
+MAT-037,Kiln Main Drive Unit,Gearboxes & Drives,Nos,A,False,109,11500000.0
+MAT-038,Conveyor Drive Unit,Gearboxes & Drives,Nos,A,False,103,1850000.0
+MAT-039,Mill Drive Gear Unit,Gearboxes & Drives,Nos,A,False,150,9200000.0
+MAT-040,Brake and Holdback Set,Gearboxes & Drives,Set,A,False,136,420000.0
+MAT-041,HT Motor 1 MW,Motors,Nos,A,False,129,5600000.0
+MAT-042,HT Motor 2.5 MW,Motors,Nos,A,False,120,11800000.0
+MAT-043,LT Motor 75 kW,Motors,Nos,A,False,129,420000.0
+MAT-044,LT Motor 15 kW,Motors,Nos,A,False,92,95000.0
+MAT-045,Slip-ring Motor 500 kW,Motors,Nos,A,False,94,3400000.0
+MAT-046,VFD Panel 500 kW,Motors,Nos,A,False,123,2900000.0
+MAT-047,Flameproof Motor 30 kW,Motors,Nos,A,False,92,240000.0
+MAT-048,Soft Starter Panel,Motors,Nos,A,False,82,560000.0
+MAT-049,Spherical Roller Bearing Set,Bearings & Power Transmission,Set,B,False,57,380000.0
+MAT-050,Plummer Block Assembly,Bearings & Power Transmission,Nos,B,False,62,145000.0
+MAT-051,Conveyor Idler Set,Bearings & Power Transmission,Set,B,False,69,9500.0
+MAT-052,Steel Cord Conveyor Belt,Bearings & Power Transmission,m,B,False,68,18500.0
+MAT-053,Fabric Conveyor Belt,Bearings & Power Transmission,m,B,False,34,6800.0
+MAT-054,Drive Pulley Assembly,Bearings & Power Transmission,Nos,B,False,61,860000.0
+MAT-055,Chain and Sprocket Set,Bearings & Power Transmission,Set,B,False,64,210000.0
+MAT-056,Flexible Coupling,Bearings & Power Transmission,Nos,B,False,58,78000.0
+MAT-057,Butterfly Valve 300 NB,Valves,Nos,B,False,73,165000.0
+MAT-058,Gate Valve 150 NB,Valves,Nos,B,False,74,72000.0
+MAT-059,Control Valve 100 NB,Valves,Nos,B,False,58,410000.0
+MAT-060,Safety Relief Valve,Valves,Nos,B,False,41,290000.0
+MAT-061,Knife Gate Valve 200 NB,Valves,Nos,B,False,58,135000.0
+MAT-062,Ball Valve SS 50 NB,Valves,Nos,B,False,48,38000.0
+MAT-063,Check Valve 200 NB,Valves,Nos,B,False,44,88000.0
+MAT-064,Motorised Damper,Valves,Nos,B,False,45,520000.0
+MAT-065,Centrifugal Pump 100 m3/h,Pumps & Compressors,Nos,A,False,115,780000.0
+MAT-066,Slurry Pump 250 m3/h,Pumps & Compressors,Nos,A,False,105,2100000.0
+MAT-067,Screw Air Compressor 250 cfm,Pumps & Compressors,Nos,A,False,107,1650000.0
+MAT-068,Process Blower,Pumps & Compressors,Nos,A,False,118,1250000.0
+MAT-069,Boiler Feed Pump,Pumps & Compressors,Nos,A,False,107,3900000.0
+MAT-070,Hydrogen Compressor Skid,Pumps & Compressors,Nos,A,False,112,18500000.0
+MAT-071,Dosing Pump Skid,Pumps & Compressors,Nos,A,False,84,420000.0
+MAT-072,Vacuum Pump,Pumps & Compressors,Nos,A,False,123,960000.0
+MAT-073,HT Cable 11 kV,Electrical & Cables,m,C,False,33,2400.0
+MAT-074,LT Power Cable,Electrical & Cables,m,C,False,24,680.0
+MAT-075,Control Cable,Electrical & Cables,m,C,False,45,210.0
+MAT-076,MCC Panel,Electrical & Cables,Nos,C,False,42,2800000.0
+MAT-077,Distribution Transformer 2 MVA,Electrical & Cables,Nos,C,False,21,3600000.0
+MAT-078,Cable Trays,Electrical & Cables,m,C,False,25,1150.0
+MAT-079,Earthing Kit,Electrical & Cables,Set,C,False,20,145000.0
+MAT-080,Lighting Package,Electrical & Cables,Set,C,False,28,650000.0
+MAT-081,Pressure Transmitter,Instrumentation,Nos,B,False,44,68000.0
+MAT-082,Electromagnetic Flow Meter,Instrumentation,Nos,B,False,69,185000.0
+MAT-083,PLC/DCS Cabinet,Instrumentation,Nos,B,False,61,4200000.0
+MAT-084,Gas Analyser,Instrumentation,Nos,B,False,80,1650000.0
+MAT-085,Level Transmitter,Instrumentation,Nos,B,False,70,92000.0
+MAT-086,Temperature Element Kit,Instrumentation,Set,B,False,65,58000.0
+MAT-087,Weigh Feeder Controller,Instrumentation,Nos,B,False,60,760000.0
+MAT-088,Vibration Monitoring Kit,Instrumentation,Set,B,False,42,340000.0
+MAT-089,Refractory Bricks 70% Alumina,Refractory & Insulation,MT,C,False,21,72000.0
+MAT-090,Low-cement Castable,Refractory & Insulation,MT,C,False,36,58000.0
+MAT-091,Ceramic Fibre Blanket,Refractory & Insulation,m2,C,False,20,1450.0
+MAT-092,Mineral Wool Insulation,Refractory & Insulation,m2,C,False,21,820.0
+MAT-093,Insulating Bricks,Refractory & Insulation,MT,C,False,25,64000.0
+MAT-094,Anchors and Accessories,Refractory & Insulation,Set,C,False,42,125000.0

@@ -1,0 +1,41 @@
+supplier_id,supplier_name,material_group,supplier_state,established_year
+SUP-001,Arkesh Structurals Industries Pvt Ltd,Structural Steel,Karnataka,2013
+SUP-002,Bhuvik Structurals Pvt Ltd,Structural Steel,Tamil Nadu,2001
+SUP-003,Charvik Structurals Pvt Ltd,Structural Steel,Karnataka,1998
+SUP-004,Dravin Structurals Pvt Ltd,Structural Steel,West Bengal,2003
+SUP-005,Ekansh Plates & Alloys Ltd,Steel Plates,West Bengal,2005
+SUP-006,Falgun Plates & Alloys Pvt Ltd,Steel Plates,Tamil Nadu,2002
+SUP-007,Girvan Plates & Alloys Ltd,Steel Plates,Punjab,2015
+SUP-008,Harsev Plates & Alloys Pvt Ltd,Steel Plates,Karnataka,2007
+SUP-009,Ishvar Pipes & Fittings Pvt Ltd,Pipes & Fittings,Haryana,1999
+SUP-010,Jalvik Pipes & Fittings Industries Pvt Ltd,Pipes & Fittings,Telangana,2010
+SUP-011,Kavrin Pipes & Fittings Pvt Ltd,Pipes & Fittings,Telangana,1995
+SUP-012,Lohit Castings Pvt Ltd,Castings & Forgings,Jharkhand,2015
+SUP-013,Madhvik Castings Industries Pvt Ltd,Castings & Forgings,Haryana,2010
+SUP-014,Navrin Castings Pvt Ltd,Castings & Forgings,Jharkhand,1997
+SUP-015,Ojasvi Castings Ltd,Castings & Forgings,Gujarat,2018
+SUP-016,Prakrit Gears Industries Pvt Ltd,Gearboxes & Drives,Karnataka,2009
+SUP-017,Ruchit Gears Industries Pvt Ltd,Gearboxes & Drives,Telangana,2017
+SUP-018,Saumik Gears Industries Pvt Ltd,Gearboxes & Drives,Telangana,2009
+SUP-019,Tanvik Electric Motors Ltd,Motors,Haryana,1999
+SUP-020,Udyan Electric Motors Pvt Ltd,Motors,Maharashtra,2008
+SUP-021,Vasvik Electric Motors Ltd,Motors,Jharkhand,2012
+SUP-022,Yashvin Transmission Industries Pvt Ltd,Bearings & Power Transmission,Jharkhand,2006
+SUP-023,Zorav Transmission Pvt Ltd,Bearings & Power Transmission,Punjab,2015
+SUP-024,Amrit Transmission Pvt Ltd,Bearings & Power Transmission,Telangana,1997
+SUP-025,Bhavik Valves Ltd,Valves,Karnataka,2017
+SUP-026,Chirag Valves Industries Pvt Ltd,Valves,Telangana,2003
+SUP-027,Darsh Valves Industries Pvt Ltd,Valves,Telangana,2010
+SUP-028,Eklav Pumps Pvt Ltd,Pumps & Compressors,Jharkhand,2002
+SUP-029,Gaurik Pumps Industries Pvt Ltd,Pumps & Compressors,Gujarat,1997
+SUP-030,Hemant Pumps Industries Pvt Ltd,Pumps & Compressors,Telangana,2004
+SUP-031,Indrav Electricals Pvt Ltd,Electrical & Cables,Jharkhand,2017
+SUP-032,Jivan Electricals Industries Pvt Ltd,Electrical & Cables,Haryana,2006
+SUP-033,Keshav Electricals Ltd,Electrical & Cables,Punjab,1995
+SUP-034,Lavik Electricals Ltd,Electrical & Cables,Karnataka,1997
+SUP-035,Mitrav Instruments Industries Pvt Ltd,Instrumentation,Haryana,1997
+SUP-036,Nikhar Instruments Pvt Ltd,Instrumentation,Maharashtra,2011
+SUP-037,Omkar Instruments Pvt Ltd,Instrumentation,Karnataka,2012
+SUP-038,Parth Refractories Industries Pvt Ltd,Refractory & Insulation,Punjab,2006
+SUP-039,Rudrav Refractories Pvt Ltd,Refractory & Insulation,West Bengal,2007
+SUP-040,Sarthak Refractories Industries Pvt Ltd,Refractory & Insulation,Jharkhand,1997

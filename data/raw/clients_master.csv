@@ -1,0 +1,38 @@
+client_id,client_name,industry,hq_state,client_since_year
+CL-001,Arvenya Sugars Ltd,Sugar,Maharashtra,2018
+CL-002,Brahmora Sugars Ltd,Sugar,Uttar Pradesh,2013
+CL-003,Dhanvira Sugars Ltd,Sugar,Uttar Pradesh,2019
+CL-004,Ekamra Sugars Ltd,Sugar,Maharashtra,2017
+CL-005,Gaurang Sugars Ltd,Sugar,Maharashtra,2009
+CL-006,Hiranya Cements Ltd,Cement,Andhra Pradesh,2020
+CL-007,Jalpari Cements Ltd,Cement,Andhra Pradesh,2017
+CL-008,Kalpaka Cements Ltd,Cement,Andhra Pradesh,2018
+CL-009,Lokesha Cements Ltd,Cement,Andhra Pradesh,2009
+CL-010,Mahodaya Cements Ltd,Cement,Chhattisgarh,2013
+CL-011,Nirvaan Minerals Ltd,Mining & Material Handling,Odisha,2012
+CL-012,Padmavan Minerals Ltd,Mining & Material Handling,Jharkhand,2020
+CL-013,Rajvansh Minerals Ltd,Mining & Material Handling,Chhattisgarh,2016
+CL-014,Sanjivani Minerals Ltd,Mining & Material Handling,Odisha,2018
+CL-015,Tejaswa Minerals Ltd,Mining & Material Handling,Odisha,2013
+CL-016,Ujjwala Industries Ltd,Industrial Equipment,Gujarat,2010
+CL-017,Vanshika Industries Ltd,Industrial Equipment,Maharashtra,2015
+CL-018,Vikrama Industries Ltd,Industrial Equipment,Odisha,2008
+CL-019,Yuvraj Industries Ltd,Industrial Equipment,Odisha,2018
+CL-020,Akshaya Industries Ltd,Industrial Equipment,Tamil Nadu,2016
+CL-021,Bhoomija Power Ltd,Thermal Energy,Chhattisgarh,2017
+CL-022,Chandrika Power Ltd,Thermal Energy,Madhya Pradesh,2012
+CL-023,Devgiri Power Ltd,Thermal Energy,Chhattisgarh,2020
+CL-024,Gomukh Power Ltd,Thermal Energy,Odisha,2019
+CL-025,Indrayani Water Infrastructure Ltd,Wastewater Treatment,Gujarat,2018
+CL-026,Kanakpur Water Infrastructure Ltd,Wastewater Treatment,Gujarat,2010
+CL-027,Meghalay Water Infrastructure Ltd,Wastewater Treatment,Tamil Nadu,2014
+CL-028,Narmadeya Water Infrastructure Ltd,Wastewater Treatment,Telangana,2008
+CL-029,Prayag Biorefineries Ltd,Biochemicals,Gujarat,2010
+CL-030,Shivalik Biorefineries Ltd,Biochemicals,Gujarat,2016
+CL-031,Trivenya Biorefineries Ltd,Biochemicals,West Bengal,2017
+CL-032,Vidarbha Green Energy Ltd,Green Hydrogen,Gujarat,2020
+CL-033,Amaravat Green Energy Ltd,Green Hydrogen,Gujarat,2012
+CL-034,Kaliyan Cell Technologies Ltd,Industrial Batteries,Gujarat,2012
+CL-035,Suryansh Cell Technologies Ltd,Industrial Batteries,Gujarat,2014
+CL-036,Rohilkhand Decarbonisation Ltd,Carbon Capture,Andhra Pradesh,2010
+CL-037,Satpura Decarbonisation Ltd,Carbon Capture,West Bengal,2009

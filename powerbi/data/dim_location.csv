@@ -1,0 +1,4 @@
+location_id,location_name,location_type,city,state,region
+LOC-W1,Works-West,Works,Pune,Maharashtra,West
+LOC-W2,Works-East,Works,Kolkata,West Bengal,East
+LOC-W3,Works-South,Works,Chennai,Tamil Nadu,South

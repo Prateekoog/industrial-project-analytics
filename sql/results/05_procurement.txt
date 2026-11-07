@@ -1,0 +1,274 @@
+SET search_path TO projectco;
+SET
+SELECT s.supplier_id, s.supplier_name, s.material_group,
+       COUNT(*)                                                            AS po_lines,
+       ROUND(SUM(f.line_value_inr) / 1e7, 2)                               AS spend_cr,
+       ROUND(100.0 * AVG(f.is_on_time::int), 1)                            AS otd_pct,
+       ROUND(AVG(f.delivery_delay_days) FILTER (WHERE f.delivery_delay_days > 0), 1) AS avg_days_late_when_late,
+       ROUND(AVG(f.lead_time_days), 0)                                     AS avg_lead_time_days,
+       ROUND(SUM(f.line_value_inr) / SUM(f.quantity * f.benchmark_unit_price_inr), 3) AS price_index,
+       ROUND(100 * SUM(f.qty_rejected) / SUM(f.quantity), 2)               AS rejection_pct
+FROM fact_procurement f
+JOIN dim_supplier s ON s.supplier_id = f.supplier_id
+WHERE f.delivery_date IS NOT NULL
+GROUP BY s.supplier_id, s.supplier_name, s.material_group
+ORDER BY otd_pct;
+ supplier_id |               supplier_name                |        material_group         | po_lines | spend_cr | otd_pct | avg_days_late_when_late | avg_lead_time_days | price_index | rejection_pct 
+-------------+--------------------------------------------+-------------------------------+----------+----------+---------+-------------------------+--------------------+-------------+---------------
+ SUP-008     | Harsev Plates & Alloys Pvt Ltd             | Steel Plates                  |      204 |   141.08 |    47.1 |                    24.1 |                 55 |       0.945 |          0.53
+ SUP-037     | Omkar Instruments Pvt Ltd                  | Instrumentation               |       73 |    50.53 |    49.3 |                    22.5 |                 78 |       0.920 |          0.65
+ SUP-021     | Vasvik Electric Motors Ltd                 | Motors                        |      145 |    99.47 |    51.7 |                    32.5 |                124 |       0.941 |          0.11
+ SUP-017     | Ruchit Gears Industries Pvt Ltd            | Gearboxes & Drives            |      148 |    90.83 |    52.0 |                    24.0 |                131 |       0.913 |          0.11
+ SUP-003     | Charvik Structurals Pvt Ltd                | Structural Steel              |      226 |   161.49 |    53.5 |                    23.6 |                 49 |       0.912 |          0.31
+ SUP-030     | Hemant Pumps Industries Pvt Ltd            | Pumps & Compressors           |      105 |    66.05 |    54.3 |                    21.6 |                127 |       0.934 |          0.40
+ SUP-013     | Madhvik Castings Industries Pvt Ltd        | Castings & Forgings           |      107 |    74.55 |    55.1 |                    22.9 |                141 |       0.936 |          0.22
+ SUP-007     | Girvan Plates & Alloys Ltd                 | Steel Plates                  |       88 |    69.71 |    73.9 |                    11.4 |                 45 |       0.969 |          0.17
+ SUP-039     | Rudrav Refractories Pvt Ltd                | Refractory & Insulation       |       45 |    30.33 |    75.6 |                     7.2 |                 40 |       0.981 |          6.36
+ SUP-018     | Saumik Gears Industries Pvt Ltd            | Gearboxes & Drives            |      166 |   117.11 |    76.5 |                    12.3 |                121 |       0.998 |          0.00
+ SUP-002     | Bhuvik Structurals Pvt Ltd                 | Structural Steel              |      211 |   165.57 |    76.8 |                    14.6 |                 39 |       0.999 |          0.16
+ SUP-027     | Darsh Valves Industries Pvt Ltd            | Valves                        |       52 |    36.35 |    76.9 |                     8.8 |                 73 |       0.960 |          8.96
+ SUP-029     | Gaurik Pumps Industries Pvt Ltd            | Pumps & Compressors           |      117 |    78.98 |    77.8 |                    10.3 |                119 |       1.008 |          0.12
+ SUP-032     | Jivan Electricals Industries Pvt Ltd       | Electrical & Cables           |      109 |    77.68 |    78.0 |                    11.5 |                 39 |       1.005 |          0.05
+ SUP-010     | Jalvik Pipes & Fittings Industries Pvt Ltd | Pipes & Fittings              |      171 |   118.61 |    78.4 |                    10.3 |                 46 |       0.999 |          0.35
+ SUP-023     | Zorav Transmission Pvt Ltd                 | Bearings & Power Transmission |      181 |   131.40 |    78.5 |                    11.2 |                 69 |       0.994 |          0.47
+ SUP-015     | Ojasvi Castings Ltd                        | Castings & Forgings           |      116 |    92.04 |    79.3 |                    12.5 |                134 |       1.021 |          0.00
+ SUP-014     | Navrin Castings Pvt Ltd                    | Castings & Forgings           |       60 |    37.16 |    80.0 |                    11.8 |                139 |       0.988 |          6.07
+ SUP-006     | Falgun Plates & Alloys Pvt Ltd             | Steel Plates                  |      191 |   141.74 |    80.6 |                    17.0 |                 46 |       1.030 |          0.18
+ SUP-020     | Udyan Electric Motors Pvt Ltd              | Motors                        |      150 |   113.58 |    80.7 |                    12.6 |                111 |       1.008 |          0.34
+ SUP-038     | Parth Refractories Industries Pvt Ltd      | Refractory & Insulation       |       81 |    48.36 |    81.5 |                    11.6 |                 36 |       1.007 |          0.16
+ SUP-011     | Kavrin Pipes & Fittings Pvt Ltd            | Pipes & Fittings              |      109 |    78.16 |    81.7 |                     9.2 |                 51 |       0.976 |         10.55
+ SUP-036     | Nikhar Instruments Pvt Ltd                 | Instrumentation               |       50 |    34.50 |    82.0 |                    14.8 |                 69 |       0.991 |          0.03
+ SUP-026     | Chirag Valves Industries Pvt Ltd           | Valves                        |      123 |    75.55 |    82.9 |                    12.1 |                 66 |       1.024 |          0.19
+ SUP-024     | Amrit Transmission Pvt Ltd                 | Bearings & Power Transmission |       93 |    71.65 |    84.9 |                     7.9 |                 65 |       0.996 |          0.29
+ SUP-033     | Keshav Electricals Ltd                     | Electrical & Cables           |       50 |    33.80 |    86.0 |                    11.4 |                 39 |       1.009 |          0.26
+ SUP-004     | Dravin Structurals Pvt Ltd                 | Structural Steel              |      110 |    73.34 |    86.4 |                     8.7 |                 38 |       0.990 |          0.01
+ SUP-019     | Tanvik Electric Motors Ltd                 | Motors                        |       93 |    67.77 |    87.1 |                     7.7 |                112 |       1.064 |          0.12
+ SUP-034     | Lavik Electricals Ltd                      | Electrical & Cables           |      122 |    90.98 |    87.7 |                    11.6 |                 39 |       1.023 |          0.39
+ SUP-012     | Lohit Castings Pvt Ltd                     | Castings & Forgings           |       54 |    44.18 |    88.9 |                     6.0 |                136 |       1.044 |          0.00
+ SUP-028     | Eklav Pumps Pvt Ltd                        | Pumps & Compressors           |       70 |    40.66 |    90.0 |                     6.1 |                116 |       1.044 |          0.00
+ SUP-005     | Ekansh Plates & Alloys Ltd                 | Steel Plates                  |      103 |    93.02 |    90.3 |                    29.6 |                 43 |       1.065 |          0.03
+ SUP-001     | Arkesh Structurals Industries Pvt Ltd      | Structural Steel              |      128 |    96.20 |    90.6 |                     5.0 |                 36 |       1.064 |          0.17
+ SUP-009     | Ishvar Pipes & Fittings Pvt Ltd            | Pipes & Fittings              |      106 |    80.59 |    90.6 |                    11.1 |                 44 |       1.056 |          0.03
+ SUP-035     | Mitrav Instruments Industries Pvt Ltd      | Instrumentation               |       40 |    34.20 |    92.5 |                     8.0 |                 70 |       1.066 |          0.44
+ SUP-022     | Yashvin Transmission Industries Pvt Ltd    | Bearings & Power Transmission |       93 |    76.91 |    93.5 |                     7.0 |                 66 |       1.062 |          0.00
+ SUP-040     | Sarthak Refractories Industries Pvt Ltd    | Refractory & Insulation       |       37 |    27.75 |    94.6 |                     9.0 |                 36 |       1.080 |          0.00
+ SUP-031     | Indrav Electricals Pvt Ltd                 | Electrical & Cables           |       57 |    44.21 |    94.7 |                     4.3 |                 37 |       1.076 |          0.00
+ SUP-016     | Prakrit Gears Industries Pvt Ltd           | Gearboxes & Drives            |       92 |    64.30 |    96.7 |                     5.3 |                117 |       1.071 |          0.14
+ SUP-025     | Bhavik Valves Ltd                          | Valves                        |       69 |    50.41 |    97.1 |                     6.5 |                 59 |       1.074 |          0.14
+(40 rows)
+
+WITH sc AS (
+    SELECT s.material_group, s.supplier_name,
+           AVG(f.is_on_time::int)                                         AS otd,
+           SUM(f.line_value_inr) / SUM(f.quantity * f.benchmark_unit_price_inr) AS price_index
+    FROM fact_procurement f
+    JOIN dim_supplier s ON s.supplier_id = f.supplier_id
+    WHERE f.delivery_date IS NOT NULL
+    GROUP BY s.material_group, s.supplier_name
+)
+SELECT material_group, supplier_name, ROUND(100 * otd, 1) AS otd_pct, ROUND(price_index, 3) AS price_index,
+       DENSE_RANK() OVER (PARTITION BY material_group ORDER BY price_index)  AS price_rank,
+       DENSE_RANK() OVER (PARTITION BY material_group ORDER BY otd DESC)     AS reliability_rank
+FROM sc
+ORDER BY material_group, price_rank;
+        material_group         |               supplier_name                | otd_pct | price_index | price_rank | reliability_rank 
+-------------------------------+--------------------------------------------+---------+-------------+------------+------------------
+ Bearings & Power Transmission | Zorav Transmission Pvt Ltd                 |    78.5 |       0.994 |          1 |                3
+ Bearings & Power Transmission | Amrit Transmission Pvt Ltd                 |    84.9 |       0.996 |          2 |                2
+ Bearings & Power Transmission | Yashvin Transmission Industries Pvt Ltd    |    93.5 |       1.062 |          3 |                1
+ Castings & Forgings           | Madhvik Castings Industries Pvt Ltd        |    55.1 |       0.936 |          1 |                4
+ Castings & Forgings           | Navrin Castings Pvt Ltd                    |    80.0 |       0.988 |          2 |                2
+ Castings & Forgings           | Ojasvi Castings Ltd                        |    79.3 |       1.021 |          3 |                3
+ Castings & Forgings           | Lohit Castings Pvt Ltd                     |    88.9 |       1.044 |          4 |                1
+ Electrical & Cables           | Jivan Electricals Industries Pvt Ltd       |    78.0 |       1.005 |          1 |                4
+ Electrical & Cables           | Keshav Electricals Ltd                     |    86.0 |       1.009 |          2 |                3
+ Electrical & Cables           | Lavik Electricals Ltd                      |    87.7 |       1.023 |          3 |                2
+ Electrical & Cables           | Indrav Electricals Pvt Ltd                 |    94.7 |       1.076 |          4 |                1
+ Gearboxes & Drives            | Ruchit Gears Industries Pvt Ltd            |    52.0 |       0.913 |          1 |                3
+ Gearboxes & Drives            | Saumik Gears Industries Pvt Ltd            |    76.5 |       0.998 |          2 |                2
+ Gearboxes & Drives            | Prakrit Gears Industries Pvt Ltd           |    96.7 |       1.071 |          3 |                1
+ Instrumentation               | Omkar Instruments Pvt Ltd                  |    49.3 |       0.920 |          1 |                3
+ Instrumentation               | Nikhar Instruments Pvt Ltd                 |    82.0 |       0.991 |          2 |                2
+ Instrumentation               | Mitrav Instruments Industries Pvt Ltd      |    92.5 |       1.066 |          3 |                1
+ Motors                        | Vasvik Electric Motors Ltd                 |    51.7 |       0.941 |          1 |                3
+ Motors                        | Udyan Electric Motors Pvt Ltd              |    80.7 |       1.008 |          2 |                2
+ Motors                        | Tanvik Electric Motors Ltd                 |    87.1 |       1.064 |          3 |                1
+ Pipes & Fittings              | Kavrin Pipes & Fittings Pvt Ltd            |    81.7 |       0.976 |          1 |                2
+ Pipes & Fittings              | Jalvik Pipes & Fittings Industries Pvt Ltd |    78.4 |       0.999 |          2 |                3
+ Pipes & Fittings              | Ishvar Pipes & Fittings Pvt Ltd            |    90.6 |       1.056 |          3 |                1
+ Pumps & Compressors           | Hemant Pumps Industries Pvt Ltd            |    54.3 |       0.934 |          1 |                3
+ Pumps & Compressors           | Gaurik Pumps Industries Pvt Ltd            |    77.8 |       1.008 |          2 |                2
+ Pumps & Compressors           | Eklav Pumps Pvt Ltd                        |    90.0 |       1.044 |          3 |                1
+ Refractory & Insulation       | Rudrav Refractories Pvt Ltd                |    75.6 |       0.981 |          1 |                3
+ Refractory & Insulation       | Parth Refractories Industries Pvt Ltd      |    81.5 |       1.007 |          2 |                2
+ Refractory & Insulation       | Sarthak Refractories Industries Pvt Ltd    |    94.6 |       1.080 |          3 |                1
+ Steel Plates                  | Harsev Plates & Alloys Pvt Ltd             |    47.1 |       0.945 |          1 |                4
+ Steel Plates                  | Girvan Plates & Alloys Ltd                 |    73.9 |       0.969 |          2 |                3
+ Steel Plates                  | Falgun Plates & Alloys Pvt Ltd             |    80.6 |       1.030 |          3 |                2
+ Steel Plates                  | Ekansh Plates & Alloys Ltd                 |    90.3 |       1.065 |          4 |                1
+ Structural Steel              | Charvik Structurals Pvt Ltd                |    53.5 |       0.912 |          1 |                4
+ Structural Steel              | Dravin Structurals Pvt Ltd                 |    86.4 |       0.990 |          2 |                2
+ Structural Steel              | Bhuvik Structurals Pvt Ltd                 |    76.8 |       0.999 |          3 |                3
+ Structural Steel              | Arkesh Structurals Industries Pvt Ltd      |    90.6 |       1.064 |          4 |                1
+ Valves                        | Darsh Valves Industries Pvt Ltd            |    76.9 |       0.960 |          1 |                3
+ Valves                        | Chirag Valves Industries Pvt Ltd           |    82.9 |       1.024 |          2 |                2
+ Valves                        | Bhavik Valves Ltd                          |    97.1 |       1.074 |          3 |                1
+(40 rows)
+
+WITH project_day_cost AS (
+    SELECT p.project_id,
+           SUM(CASE WHEN b.cost_category_id = 7 THEN 0.6 * b.revised_budget_inr
+                    WHEN b.cost_category_id = 4 THEN 0.5 * b.revised_budget_inr ELSE 0 END)
+           / MAX(p.planned_duration_days) AS time_cost_per_day
+    FROM dim_project p
+    JOIN fact_budget b ON b.project_id = p.project_id
+    GROUP BY p.project_id
+),
+lines AS (
+    SELECT f.supplier_id, f.line_value_inr, f.quantity * f.benchmark_unit_price_inr AS market_value,
+           CASE WHEN (m.criticality_class = 'A' OR m.is_steel_linked) AND f.grn_date > f.need_by_date
+                THEN (f.grn_date - f.need_by_date) * d.time_cost_per_day * 0.25 ELSE 0 END AS lateness_cost
+    FROM fact_procurement f
+    JOIN dim_material m       ON m.material_id = f.material_id
+    JOIN project_day_cost d   ON d.project_id = f.project_id
+    WHERE f.grn_date IS NOT NULL
+)
+SELECT s.supplier_name, s.material_group,
+       ROUND(SUM(market_value - line_value_inr) / 1e5, 1) AS price_saving_vs_market_lakh,
+       ROUND(SUM(lateness_cost) / 1e5, 1)                 AS lateness_cost_lakh,
+       ROUND(SUM(market_value - line_value_inr - lateness_cost) / 1e5, 1) AS net_benefit_lakh
+FROM lines l
+JOIN dim_supplier s ON s.supplier_id = l.supplier_id
+GROUP BY s.supplier_name, s.material_group
+ORDER BY net_benefit_lakh;
+               supplier_name                |        material_group         | price_saving_vs_market_lakh | lateness_cost_lakh | net_benefit_lakh 
+--------------------------------------------+-------------------------------+-----------------------------+--------------------+------------------
+ Ekansh Plates & Alloys Ltd                 | Steel Plates                  |                      -571.0 |              100.6 |           -671.7
+ Arkesh Structurals Industries Pvt Ltd      | Structural Steel              |                      -582.3 |               68.5 |           -650.8
+ Falgun Plates & Alloys Pvt Ltd             | Steel Plates                  |                      -413.6 |              210.0 |           -623.6
+ Ishvar Pipes & Fittings Pvt Ltd            | Pipes & Fittings              |                      -430.6 |              109.3 |           -539.9
+ Prakrit Gears Industries Pvt Ltd           | Gearboxes & Drives            |                      -424.3 |               24.3 |           -448.6
+ Yashvin Transmission Industries Pvt Ltd    | Bearings & Power Transmission |                      -443.5 |                0.0 |           -443.5
+ Tanvik Electric Motors Ltd                 | Motors                        |                      -395.2 |               19.3 |           -414.4
+ Bhavik Valves Ltd                          | Valves                        |                      -345.8 |                0.0 |           -345.8
+ Indrav Electricals Pvt Ltd                 | Electrical & Cables           |                      -302.5 |                0.0 |           -302.5
+ Ojasvi Castings Ltd                        | Castings & Forgings           |                      -193.0 |               35.5 |           -228.5
+ Mitrav Instruments Industries Pvt Ltd      | Instrumentation               |                      -212.3 |                0.0 |           -212.3
+ Sarthak Refractories Industries Pvt Ltd    | Refractory & Insulation       |                      -205.3 |                0.0 |           -205.3
+ Lavik Electricals Ltd                      | Electrical & Cables           |                      -200.3 |                0.0 |           -200.3
+ Lohit Castings Pvt Ltd                     | Castings & Forgings           |                      -188.0 |                8.4 |           -196.4
+ Eklav Pumps Pvt Ltd                        | Pumps & Compressors           |                      -172.2 |                8.2 |           -180.4
+ Chirag Valves Industries Pvt Ltd           | Valves                        |                      -174.3 |                0.0 |           -174.3
+ Jalvik Pipes & Fittings Industries Pvt Ltd | Pipes & Fittings              |                         6.8 |              166.3 |           -159.5
+ Bhuvik Structurals Pvt Ltd                 | Structural Steel              |                        13.8 |              158.0 |           -144.2
+ Udyan Electric Motors Pvt Ltd              | Motors                        |                       -84.1 |               23.6 |           -107.8
+ Gaurik Pumps Industries Pvt Ltd            | Pumps & Compressors           |                       -59.2 |               25.9 |            -85.0
+ Dravin Structurals Pvt Ltd                 | Structural Steel              |                        76.7 |              138.7 |            -62.0
+ Jivan Electricals Industries Pvt Ltd       | Electrical & Cables           |                       -39.6 |                0.0 |            -39.6
+ Parth Refractories Industries Pvt Ltd      | Refractory & Insulation       |                       -35.9 |                0.0 |            -35.9
+ Saumik Gears Industries Pvt Ltd            | Gearboxes & Drives            |                        21.3 |               53.2 |            -31.9
+ Kavrin Pipes & Fittings Pvt Ltd            | Pipes & Fittings              |                       188.3 |              219.4 |            -31.1
+ Keshav Electricals Ltd                     | Electrical & Cables           |                       -30.3 |                0.0 |            -30.3
+ Navrin Castings Pvt Ltd                    | Castings & Forgings           |                        43.2 |               26.2 |             17.0
+ Amrit Transmission Pvt Ltd                 | Bearings & Power Transmission |                        28.0 |                0.0 |             28.0
+ Nikhar Instruments Pvt Ltd                 | Instrumentation               |                        29.8 |                0.0 |             29.8
+ Rudrav Refractories Pvt Ltd                | Refractory & Insulation       |                        58.4 |                0.0 |             58.4
+ Zorav Transmission Pvt Ltd                 | Bearings & Power Transmission |                        84.8 |                0.0 |             84.8
+ Girvan Plates & Alloys Ltd                 | Steel Plates                  |                       220.0 |              130.4 |             89.5
+ Darsh Valves Industries Pvt Ltd            | Valves                        |                       144.8 |                0.0 |            144.8
+ Harsev Plates & Alloys Pvt Ltd             | Steel Plates                  |                       819.1 |              513.5 |            305.6
+ Hemant Pumps Industries Pvt Ltd            | Pumps & Compressors           |                       466.2 |               31.6 |            434.6
+ Omkar Instruments Pvt Ltd                  | Instrumentation               |                       438.9 |                0.0 |            438.9
+ Madhvik Castings Industries Pvt Ltd        | Castings & Forgings           |                       506.3 |               37.9 |            468.5
+ Vasvik Electric Motors Ltd                 | Motors                        |                       620.9 |               59.9 |            561.0
+ Ruchit Gears Industries Pvt Ltd            | Gearboxes & Drives            |                       861.8 |               61.4 |            800.4
+ Charvik Structurals Pvt Ltd                | Structural Steel              |                      1567.2 |              270.8 |           1296.4
+(40 rows)
+
+SELECT m.material_group, m.is_steel_linked, COUNT(*) AS po_lines,
+       ROUND(AVG(f.unit_price_inr / m.standard_price_inr), 3)                         AS avg_price_ratio,
+       ROUND(STDDEV(f.unit_price_inr / m.standard_price_inr) / AVG(f.unit_price_inr / m.standard_price_inr), 3) AS coeff_variation
+FROM fact_procurement f
+JOIN dim_material m ON m.material_id = f.material_id
+GROUP BY m.material_group, m.is_steel_linked
+ORDER BY coeff_variation DESC;
+        material_group         | is_steel_linked | po_lines | avg_price_ratio | coeff_variation 
+-------------------------------+-----------------+----------+-----------------+-----------------
+ Structural Steel              | t               |      682 |           1.111 |           0.092
+ Steel Plates                  | t               |      593 |           1.140 |           0.088
+ Pipes & Fittings              | t               |      392 |           1.142 |           0.071
+ Gearboxes & Drives            | f               |      420 |           0.981 |           0.068
+ Instrumentation               | f               |      167 |           0.976 |           0.066
+ Bearings & Power Transmission | f               |      373 |           1.012 |           0.059
+ Motors                        | f               |      399 |           0.996 |           0.056
+ Pumps & Compressors           | f               |      303 |           0.991 |           0.052
+ Electrical & Cables           | f               |      341 |           1.025 |           0.051
+ Castings & Forgings           | f               |      355 |           0.992 |           0.050
+ Valves                        | f               |      251 |           1.028 |           0.046
+ Refractory & Insulation       | f               |      163 |           1.017 |           0.044
+(12 rows)
+
+SELECT k.project_id, k.industry,
+       COUNT(*) FILTER (WHERE (m.criticality_class = 'A' OR m.is_steel_linked) AND f.grn_date > f.need_by_date) AS late_critical_lines,
+       ROUND(100.0 * AVG(CASE WHEN s.supplier_id IN (
+                 SELECT supplier_id FROM fact_procurement WHERE delivery_date IS NOT NULL
+                 GROUP BY supplier_id HAVING AVG(is_on_time::int) < 0.6) THEN 1 ELSE 0 END), 1) AS low_otd_supplier_share_pct,
+       k.cost_variance_pct, sc.delay_days
+FROM fact_procurement f
+JOIN dim_material m        ON m.material_id = f.material_id
+JOIN dim_supplier s        ON s.supplier_id = f.supplier_id
+JOIN v_project_kpis k      ON k.project_id = f.project_id
+JOIN v_project_schedule sc ON sc.project_id = f.project_id
+WHERE k.status = 'Completed'
+GROUP BY k.project_id, k.industry, k.cost_variance_pct, sc.delay_days
+ORDER BY late_critical_lines DESC
+LIMIT 15;
+ project_id |       industry       | late_critical_lines | low_otd_supplier_share_pct | cost_variance_pct | delay_days 
+------------+----------------------+---------------------+----------------------------+-------------------+------------
+ PRJ-007    | Industrial Equipment |                  30 |                        5.0 |             17.62 |         79
+ PRJ-036    | Industrial Equipment |                  22 |                       20.0 |             18.43 |         94
+ PRJ-028    | Sugar                |                  22 |                       31.3 |              8.49 |         41
+ PRJ-015    | Wastewater Treatment |                  22 |                       16.0 |              8.36 |         27
+ PRJ-060    | Biochemicals         |                  21 |                       34.1 |             11.10 |         70
+ PRJ-040    | Sugar                |                  21 |                       46.4 |              8.06 |         79
+ PRJ-038    | Carbon Capture       |                  16 |                       16.7 |             16.28 |         89
+ PRJ-019    | Wastewater Treatment |                  16 |                       12.0 |              4.81 |         12
+ PRJ-057    | Industrial Equipment |                  15 |                       31.8 |              8.03 |         75
+ PRJ-049    | Wastewater Treatment |                  15 |                       14.3 |              4.69 |         23
+ PRJ-039    | Cement               |                  14 |                       10.8 |             10.29 |         45
+ PRJ-046    | Industrial Equipment |                  14 |                       21.7 |             16.01 |         59
+ PRJ-056    | Industrial Equipment |                  13 |                       12.8 |              4.62 |         73
+ PRJ-029    | Industrial Equipment |                  13 |                       40.0 |              5.15 |         13
+ PRJ-042    | Sugar                |                  12 |                       29.7 |             -4.05 |         13
+(15 rows)
+
+SELECT DATE_TRUNC('quarter', po_date)::date AS quarter_start,
+       ROUND(SUM(line_value_inr) / 1e7, 1)  AS spend_cr,
+       ROUND(100.0 * AVG(is_on_time::int), 1) AS otd_pct
+FROM fact_procurement
+GROUP BY 1
+ORDER BY 1;
+ quarter_start | spend_cr | otd_pct 
+---------------+----------+---------
+ 2021-04-01    |      0.5 |   100.0
+ 2021-07-01    |    195.9 |    70.1
+ 2021-10-01    |    138.1 |    73.5
+ 2022-01-01    |     50.0 |    74.0
+ 2022-04-01    |    100.2 |    64.7
+ 2022-07-01    |     94.2 |    73.0
+ 2022-10-01    |    125.4 |    74.0
+ 2023-01-01    |    124.3 |    80.5
+ 2023-04-01    |    118.8 |    76.8
+ 2023-07-01    |    167.5 |    74.6
+ 2023-10-01    |    340.2 |    74.8
+ 2024-01-01    |    272.4 |    76.9
+ 2024-04-01    |    268.7 |    78.2
+ 2024-07-01    |    236.8 |    73.7
+ 2024-10-01    |    133.1 |    83.6
+ 2025-01-01    |    151.6 |    79.7
+ 2025-04-01    |    210.5 |    79.9
+ 2025-07-01    |    209.5 |    74.0
+ 2025-10-01    |    144.0 |    80.0
+ 2026-01-01    |    125.2 |    81.4
+(20 rows)
+

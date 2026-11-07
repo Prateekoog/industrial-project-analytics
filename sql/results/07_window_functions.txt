@@ -1,0 +1,431 @@
+SET search_path TO projectco;
+SET
+WITH m AS (
+    SELECT d.month_start,
+           SUM(CASE WHEN x.kind = 'revenue' THEN x.amount ELSE 0 END) AS revenue,
+           SUM(CASE WHEN x.kind = 'cost'    THEN x.amount ELSE 0 END) AS cost
+    FROM (SELECT invoice_date AS dt, amount_inr AS amount, 'revenue' AS kind FROM fact_revenue
+          UNION ALL
+          SELECT posting_date, amount_inr, 'cost' FROM fact_project_cost) x
+    JOIN dim_date d ON d.date = x.dt
+    GROUP BY d.month_start
+)
+SELECT month_start,
+       ROUND(revenue / 1e7, 1)                                  AS revenue_cr,
+       ROUND(cost / 1e7, 1)                                     AS cost_cr,
+       ROUND(SUM(revenue) OVER (ORDER BY month_start) / 1e7, 0) AS cumulative_revenue_cr,
+       ROUND(SUM(cost)    OVER (ORDER BY month_start) / 1e7, 0) AS cumulative_cost_cr
+FROM m
+ORDER BY month_start;
+ month_start | revenue_cr | cost_cr | cumulative_revenue_cr | cumulative_cost_cr 
+-------------+------------+---------+-----------------------+--------------------
+ 2021-04-01  |       47.7 |     0.7 |                    48 |                  1
+ 2021-05-01  |       13.2 |     3.9 |                    61 |                  5
+ 2021-06-01  |        0.0 |     5.2 |                    61 |                 10
+ 2021-07-01  |        4.7 |     7.4 |                    66 |                 17
+ 2021-08-01  |        5.0 |    38.4 |                    71 |                 56
+ 2021-09-01  |        7.7 |    63.1 |                    78 |                119
+ 2021-10-01  |       63.6 |    50.7 |                   142 |                169
+ 2021-11-01  |        4.7 |    39.6 |                   147 |                209
+ 2021-12-01  |        0.0 |    64.4 |                   147 |                273
+ 2022-01-01  |        7.1 |    84.2 |                   154 |                358
+ 2022-02-01  |       26.8 |    46.4 |                   181 |                404
+ 2022-03-01  |       29.9 |    51.7 |                   210 |                456
+ 2022-04-01  |      110.4 |    50.3 |                   321 |                506
+ 2022-05-01  |      126.5 |    57.9 |                   447 |                564
+ 2022-06-01  |       19.3 |    74.3 |                   467 |                638
+ 2022-07-01  |       64.9 |    68.5 |                   531 |                707
+ 2022-08-01  |      117.0 |    66.2 |                   648 |                773
+ 2022-09-01  |       80.7 |    80.3 |                   729 |                853
+ 2022-10-01  |       62.4 |    72.9 |                   792 |                926
+ 2022-11-01  |       49.5 |    79.4 |                   841 |               1006
+ 2022-12-01  |      147.4 |    67.6 |                   989 |               1073
+ 2023-01-01  |      148.8 |    66.8 |                  1137 |               1140
+ 2023-02-01  |       22.2 |    70.4 |                  1159 |               1211
+ 2023-03-01  |       81.7 |    77.9 |                  1241 |               1288
+ 2023-04-01  |       74.1 |    84.3 |                  1315 |               1373
+ 2023-05-01  |      142.8 |    91.8 |                  1458 |               1465
+ 2023-06-01  |       67.7 |    83.8 |                  1526 |               1548
+ 2023-07-01  |      109.2 |   107.5 |                  1635 |               1656
+ 2023-08-01  |      174.9 |    86.6 |                  1810 |               1742
+ 2023-09-01  |       40.7 |    90.9 |                  1851 |               1833
+ 2023-10-01  |      101.7 |   104.9 |                  1952 |               1938
+ 2023-11-01  |      133.2 |   114.5 |                  2086 |               2053
+ 2023-12-01  |       83.6 |   149.8 |                  2169 |               2203
+ 2024-01-01  |       77.8 |   118.5 |                  2247 |               2321
+ 2024-02-01  |      154.0 |   146.0 |                  2401 |               2467
+ 2024-03-01  |       72.8 |   156.0 |                  2474 |               2623
+ 2024-04-01  |      156.4 |   161.9 |                  2630 |               2785
+ 2024-05-01  |       68.0 |   166.5 |                  2698 |               2951
+ 2024-06-01  |      161.2 |   161.5 |                  2859 |               3113
+ 2024-07-01  |      182.5 |   154.3 |                  3042 |               3267
+ 2024-08-01  |      140.9 |   161.8 |                  3183 |               3429
+ 2024-09-01  |      106.2 |   153.8 |                  3289 |               3583
+ 2024-10-01  |      168.4 |   152.7 |                  3457 |               3736
+ 2024-11-01  |      125.4 |   136.4 |                  3583 |               3872
+ 2024-12-01  |      143.7 |   136.6 |                  3726 |               4009
+ 2025-01-01  |      174.6 |   147.3 |                  3901 |               4156
+ 2025-02-01  |      217.6 |   118.8 |                  4119 |               4275
+ 2025-03-01  |      126.7 |   136.4 |                  4245 |               4411
+ 2025-04-01  |      249.6 |   117.2 |                  4495 |               4528
+ 2025-05-01  |      145.9 |   162.2 |                  4641 |               4690
+ 2025-06-01  |      208.5 |   146.0 |                  4849 |               4836
+ 2025-07-01  |      104.5 |   122.3 |                  4954 |               4959
+ 2025-08-01  |      234.4 |   127.0 |                  5188 |               5086
+ 2025-09-01  |      162.1 |   147.2 |                  5350 |               5233
+ 2025-10-01  |      109.4 |   117.6 |                  5460 |               5350
+ 2025-11-01  |       86.9 |   118.7 |                  5547 |               5469
+ 2025-12-01  |      185.4 |   112.2 |                  5732 |               5581
+ 2026-01-01  |       68.3 |   115.2 |                  5800 |               5696
+ 2026-02-01  |       81.7 |    96.9 |                  5882 |               5793
+ 2026-03-01  |      189.8 |   110.8 |                  6072 |               5904
+(60 rows)
+
+WITH m AS (
+    SELECT DATE_TRUNC('month', posting_date)::date AS month_start, SUM(amount_inr) AS cost
+    FROM fact_project_cost GROUP BY 1
+)
+SELECT month_start,
+       ROUND(cost / 1e7, 1) AS cost_cr,
+       ROUND(AVG(cost) OVER (ORDER BY month_start ROWS BETWEEN 2 PRECEDING AND CURRENT ROW) / 1e7, 1) AS cost_3m_avg_cr,
+       ROUND(100 * (cost - LAG(cost) OVER (ORDER BY month_start)) / LAG(cost) OVER (ORDER BY month_start), 1) AS mom_change_pct
+FROM m
+ORDER BY month_start;
+ month_start | cost_cr | cost_3m_avg_cr | mom_change_pct 
+-------------+---------+----------------+----------------
+ 2021-04-01  |     0.7 |            0.7 |               
+ 2021-05-01  |     3.9 |            2.3 |          457.5
+ 2021-06-01  |     5.2 |            3.3 |           35.6
+ 2021-07-01  |     7.4 |            5.5 |           40.7
+ 2021-08-01  |    38.4 |           17.0 |          421.3
+ 2021-09-01  |    63.1 |           36.3 |           64.3
+ 2021-10-01  |    50.7 |           50.7 |          -19.7
+ 2021-11-01  |    39.6 |           51.1 |          -21.9
+ 2021-12-01  |    64.4 |           51.6 |           62.7
+ 2022-01-01  |    84.2 |           62.7 |           30.7
+ 2022-02-01  |    46.4 |           65.0 |          -44.9
+ 2022-03-01  |    51.7 |           60.8 |           11.4
+ 2022-04-01  |    50.3 |           49.5 |           -2.8
+ 2022-05-01  |    57.9 |           53.3 |           15.2
+ 2022-06-01  |    74.3 |           60.8 |           28.2
+ 2022-07-01  |    68.5 |           66.9 |           -7.7
+ 2022-08-01  |    66.2 |           69.7 |           -3.4
+ 2022-09-01  |    80.3 |           71.7 |           21.2
+ 2022-10-01  |    72.9 |           73.1 |           -9.2
+ 2022-11-01  |    79.4 |           77.5 |            9.0
+ 2022-12-01  |    67.6 |           73.3 |          -14.9
+ 2023-01-01  |    66.8 |           71.3 |           -1.2
+ 2023-02-01  |    70.4 |           68.3 |            5.5
+ 2023-03-01  |    77.9 |           71.7 |           10.5
+ 2023-04-01  |    84.3 |           77.6 |            8.3
+ 2023-05-01  |    91.8 |           84.7 |            8.9
+ 2023-06-01  |    83.8 |           86.6 |           -8.8
+ 2023-07-01  |   107.5 |           94.4 |           28.3
+ 2023-08-01  |    86.6 |           92.6 |          -19.4
+ 2023-09-01  |    90.9 |           95.0 |            5.0
+ 2023-10-01  |   104.9 |           94.1 |           15.3
+ 2023-11-01  |   114.5 |          103.4 |            9.2
+ 2023-12-01  |   149.8 |          123.0 |           30.9
+ 2024-01-01  |   118.5 |          127.6 |          -20.9
+ 2024-02-01  |   146.0 |          138.1 |           23.2
+ 2024-03-01  |   156.0 |          140.1 |            6.9
+ 2024-04-01  |   161.9 |          154.6 |            3.8
+ 2024-05-01  |   166.5 |          161.5 |            2.8
+ 2024-06-01  |   161.5 |          163.3 |           -3.0
+ 2024-07-01  |   154.3 |          160.8 |           -4.5
+ 2024-08-01  |   161.8 |          159.2 |            4.9
+ 2024-09-01  |   153.8 |          156.6 |           -5.0
+ 2024-10-01  |   152.7 |          156.1 |           -0.7
+ 2024-11-01  |   136.4 |          147.6 |          -10.7
+ 2024-12-01  |   136.6 |          141.9 |            0.2
+ 2025-01-01  |   147.3 |          140.1 |            7.8
+ 2025-02-01  |   118.8 |          134.2 |          -19.4
+ 2025-03-01  |   136.4 |          134.2 |           14.8
+ 2025-04-01  |   117.2 |          124.1 |          -14.1
+ 2025-05-01  |   162.2 |          138.6 |           38.4
+ 2025-06-01  |   146.0 |          141.8 |          -10.0
+ 2025-07-01  |   122.3 |          143.5 |          -16.2
+ 2025-08-01  |   127.0 |          131.7 |            3.9
+ 2025-09-01  |   147.2 |          132.1 |           15.9
+ 2025-10-01  |   117.6 |          130.6 |          -20.1
+ 2025-11-01  |   118.7 |          127.8 |            0.9
+ 2025-12-01  |   112.2 |          116.2 |           -5.5
+ 2026-01-01  |   115.2 |          115.4 |            2.7
+ 2026-02-01  |    96.9 |          108.1 |          -15.9
+ 2026-03-01  |   110.8 |          107.6 |           14.3
+(60 rows)
+
+SELECT industry, project_id, final_margin_pct,
+       ROW_NUMBER() OVER w AS row_num,       -- 1,2,3,4 always unique
+       RANK()       OVER w AS rnk,           -- ties share a rank, next rank skips (1,1,3)
+       DENSE_RANK() OVER w AS dense_rnk      -- ties share a rank, no gaps     (1,1,2)
+FROM v_project_kpis
+WHERE status = 'Completed'
+WINDOW w AS (PARTITION BY industry ORDER BY final_margin_pct DESC)
+ORDER BY industry, row_num;
+          industry          | project_id | final_margin_pct | row_num | rnk | dense_rnk 
+----------------------------+------------+------------------+---------+-----+-----------
+ Biochemicals               | PRJ-047    |             9.01 |       1 |   1 |         1
+ Biochemicals               | PRJ-051    |             8.74 |       2 |   2 |         2
+ Biochemicals               | PRJ-016    |             8.05 |       3 |   3 |         3
+ Biochemicals               | PRJ-022    |             6.15 |       4 |   4 |         4
+ Biochemicals               | PRJ-021    |            -1.61 |       5 |   5 |         5
+ Biochemicals               | PRJ-060    |            -2.54 |       6 |   6 |         6
+ Carbon Capture             | PRJ-024    |             4.90 |       1 |   1 |         1
+ Carbon Capture             | PRJ-038    |            -0.92 |       2 |   2 |         2
+ Cement                     | PRJ-020    |            15.89 |       1 |   1 |         1
+ Cement                     | PRJ-045    |            15.28 |       2 |   2 |         2
+ Cement                     | PRJ-043    |            11.23 |       3 |   3 |         3
+ Cement                     | PRJ-031    |            10.88 |       4 |   4 |         4
+ Cement                     | PRJ-011    |             8.76 |       5 |   5 |         5
+ Cement                     | PRJ-053    |             6.80 |       6 |   6 |         6
+ Cement                     | PRJ-048    |             6.75 |       7 |   7 |         7
+ Cement                     | PRJ-050    |             5.84 |       8 |   8 |         8
+ Cement                     | PRJ-014    |             5.68 |       9 |   9 |         9
+ Cement                     | PRJ-039    |            -0.03 |      10 |  10 |        10
+ Green Hydrogen             | PRJ-032    |             8.02 |       1 |   1 |         1
+ Green Hydrogen             | PRJ-033    |             3.64 |       2 |   2 |         2
+ Green Hydrogen             | PRJ-058    |             2.51 |       3 |   3 |         3
+ Industrial Batteries       | PRJ-054    |             6.64 |       1 |   1 |         1
+ Industrial Batteries       | PRJ-044    |            -5.77 |       2 |   2 |         2
+ Industrial Equipment       | PRJ-068    |            19.02 |       1 |   1 |         1
+ Industrial Equipment       | PRJ-056    |            13.29 |       2 |   2 |         2
+ Industrial Equipment       | PRJ-059    |            13.03 |       3 |   3 |         3
+ Industrial Equipment       | PRJ-029    |            11.35 |       4 |   4 |         4
+ Industrial Equipment       | PRJ-013    |            10.59 |       5 |   5 |         5
+ Industrial Equipment       | PRJ-025    |            10.51 |       6 |   6 |         6
+ Industrial Equipment       | PRJ-046    |             4.10 |       7 |   7 |         7
+ Industrial Equipment       | PRJ-057    |             4.05 |       8 |   8 |         8
+ Industrial Equipment       | PRJ-036    |            -1.06 |       9 |   9 |         9
+ Industrial Equipment       | PRJ-007    |            -1.96 |      10 |  10 |        10
+ Mining & Material Handling | PRJ-004    |            14.48 |       1 |   1 |         1
+ Mining & Material Handling | PRJ-026    |            14.04 |       2 |   2 |         2
+ Mining & Material Handling | PRJ-034    |            12.89 |       3 |   3 |         3
+ Mining & Material Handling | PRJ-062    |            10.19 |       4 |   4 |         4
+ Mining & Material Handling | PRJ-002    |             9.04 |       5 |   5 |         5
+ Mining & Material Handling | PRJ-037    |             6.72 |       6 |   6 |         6
+ Mining & Material Handling | PRJ-003    |             4.79 |       7 |   7 |         7
+ Mining & Material Handling | PRJ-012    |             3.85 |       8 |   8 |         8
+ Sugar                      | PRJ-027    |            17.33 |       1 |   1 |         1
+ Sugar                      | PRJ-042    |            16.52 |       2 |   2 |         2
+ Sugar                      | PRJ-006    |            15.20 |       3 |   3 |         3
+ Sugar                      | PRJ-010    |            11.87 |       4 |   4 |         4
+ Sugar                      | PRJ-005    |            10.81 |       5 |   5 |         5
+ Sugar                      | PRJ-023    |             9.96 |       6 |   6 |         6
+ Sugar                      | PRJ-028    |             0.88 |       7 |   7 |         7
+ Sugar                      | PRJ-040    |            -0.12 |       8 |   8 |         8
+ Thermal Energy             | PRJ-055    |             9.57 |       1 |   1 |         1
+ Thermal Energy             | PRJ-052    |             8.81 |       2 |   2 |         2
+ Thermal Energy             | PRJ-001    |             8.69 |       3 |   3 |         3
+ Thermal Energy             | PRJ-035    |             7.86 |       4 |   4 |         4
+ Thermal Energy             | PRJ-041    |             7.59 |       5 |   5 |         5
+ Thermal Energy             | PRJ-009    |             5.85 |       6 |   6 |         6
+ Wastewater Treatment       | PRJ-008    |            16.57 |       1 |   1 |         1
+ Wastewater Treatment       | PRJ-030    |            11.09 |       2 |   2 |         2
+ Wastewater Treatment       | PRJ-019    |            10.72 |       3 |   3 |         3
+ Wastewater Treatment       | PRJ-049    |             9.15 |       4 |   4 |         4
+ Wastewater Treatment       | PRJ-018    |             8.96 |       5 |   5 |         5
+ Wastewater Treatment       | PRJ-017    |             8.45 |       6 |   6 |         6
+ Wastewater Treatment       | PRJ-015    |             5.87 |       7 |   7 |         7
+(62 rows)
+
+WITH r AS (
+    SELECT industry, project_id, final_margin_pct,
+           ROW_NUMBER() OVER (PARTITION BY industry ORDER BY final_margin_pct DESC) AS best,
+           ROW_NUMBER() OVER (PARTITION BY industry ORDER BY final_margin_pct ASC)  AS worst
+    FROM v_project_kpis WHERE status = 'Completed'
+)
+SELECT industry,
+       MAX(project_id) FILTER (WHERE best = 1)        AS best_project,
+       MAX(final_margin_pct) FILTER (WHERE best = 1)  AS best_margin_pct,
+       MAX(project_id) FILTER (WHERE worst = 1)       AS worst_project,
+       MAX(final_margin_pct) FILTER (WHERE worst = 1) AS worst_margin_pct
+FROM r
+GROUP BY industry
+ORDER BY industry;
+          industry          | best_project | best_margin_pct | worst_project | worst_margin_pct 
+----------------------------+--------------+-----------------+---------------+------------------
+ Biochemicals               | PRJ-047      |            9.01 | PRJ-060       |            -2.54
+ Carbon Capture             | PRJ-024      |            4.90 | PRJ-038       |            -0.92
+ Cement                     | PRJ-020      |           15.89 | PRJ-039       |            -0.03
+ Green Hydrogen             | PRJ-032      |            8.02 | PRJ-058       |             2.51
+ Industrial Batteries       | PRJ-054      |            6.64 | PRJ-044       |            -5.77
+ Industrial Equipment       | PRJ-068      |           19.02 | PRJ-007       |            -1.96
+ Mining & Material Handling | PRJ-004      |           14.48 | PRJ-012       |             3.85
+ Sugar                      | PRJ-027      |           17.33 | PRJ-040       |            -0.12
+ Thermal Energy             | PRJ-055      |            9.57 | PRJ-009       |             5.85
+ Wastewater Treatment       | PRJ-008      |           16.57 | PRJ-015       |             5.87
+(10 rows)
+
+SELECT m.project_id, st.stage_name, m.planned_end_date, m.actual_end_date, m.end_delay_days,
+       LAG(m.end_delay_days)  OVER (PARTITION BY m.project_id ORDER BY st.stage_order) AS prev_stage_delay,
+       LEAD(st.stage_name)    OVER (PARTITION BY m.project_id ORDER BY st.stage_order) AS next_stage
+FROM fact_milestones m
+JOIN dim_stage st ON st.stage_id = m.stage_id
+WHERE m.project_id = (SELECT project_id FROM v_project_schedule ORDER BY delay_days DESC NULLS LAST LIMIT 1)
+ORDER BY st.stage_order;
+ project_id |  stage_name   | planned_end_date | actual_end_date | end_delay_days | prev_stage_delay |  next_stage   
+------------+---------------+------------------+-----------------+----------------+------------------+---------------
+ PRJ-074    | Concept       | 2025-06-26       | 2025-06-27      |              1 |                  | Engineering
+ PRJ-074    | Engineering   | 2025-11-14       | 2026-03-16      |            122 |                1 | Procurement
+ PRJ-074    | Procurement   | 2026-04-10       |                 |                |              122 | Fabrication
+ PRJ-074    | Fabrication   | 2026-08-05       |                 |                |                  | Installation
+ PRJ-074    | Installation  | 2026-11-13       |                 |                |                  | Testing
+ PRJ-074    | Testing       | 2026-12-12       |                 |                |                  | Commissioning
+ PRJ-074    | Commissioning | 2026-12-30       |                 |                |                  | 
+(7 rows)
+
+WITH s AS (
+    SELECT supplier_id, SUM(line_value_inr) AS spend FROM fact_procurement GROUP BY supplier_id
+)
+SELECT supplier_id, ROUND(spend / 1e7, 1) AS spend_cr,
+       ROUND(100 * spend / SUM(spend) OVER (), 1)                                        AS share_pct,
+       ROUND(100 * SUM(spend) OVER (ORDER BY spend DESC ROWS UNBOUNDED PRECEDING) / SUM(spend) OVER (), 1) AS cumulative_pct
+FROM s
+ORDER BY spend DESC;
+ supplier_id | spend_cr | share_pct | cumulative_pct 
+-------------+----------+-----------+----------------
+ SUP-002     |    167.7 |       5.2 |            5.2
+ SUP-003     |    164.5 |       5.1 |           10.4
+ SUP-008     |    144.7 |       4.5 |           14.9
+ SUP-006     |    142.4 |       4.4 |           19.3
+ SUP-023     |    136.5 |       4.3 |           23.6
+ SUP-018     |    125.9 |       3.9 |           27.5
+ SUP-010     |    124.0 |       3.9 |           31.4
+ SUP-020     |    116.7 |       3.6 |           35.0
+ SUP-021     |    100.6 |       3.1 |           38.1
+ SUP-001     |     96.2 |       3.0 |           41.1
+ SUP-015     |     96.0 |       3.0 |           44.1
+ SUP-017     |     95.4 |       3.0 |           47.1
+ SUP-005     |     93.5 |       2.9 |           50.0
+ SUP-034     |     91.9 |       2.9 |           52.9
+ SUP-029     |     82.1 |       2.6 |           55.4
+ SUP-009     |     82.1 |       2.6 |           58.0
+ SUP-011     |     78.6 |       2.5 |           60.5
+ SUP-032     |     78.5 |       2.4 |           62.9
+ SUP-013     |     78.1 |       2.4 |           65.3
+ SUP-026     |     77.4 |       2.4 |           67.7
+ SUP-022     |     76.9 |       2.4 |           70.1
+ SUP-004     |     76.8 |       2.4 |           72.5
+ SUP-024     |     75.0 |       2.3 |           74.9
+ SUP-019     |     72.0 |       2.2 |           77.1
+ SUP-007     |     70.0 |       2.2 |           79.3
+ SUP-030     |     68.5 |       2.1 |           81.5
+ SUP-016     |     64.3 |       2.0 |           83.5
+ SUP-025     |     52.9 |       1.7 |           85.1
+ SUP-037     |     51.5 |       1.6 |           86.7
+ SUP-038     |     48.4 |       1.5 |           88.2
+ SUP-012     |     46.1 |       1.4 |           89.7
+ SUP-028     |     44.6 |       1.4 |           91.1
+ SUP-031     |     44.2 |       1.4 |           92.4
+ SUP-014     |     42.0 |       1.3 |           93.7
+ SUP-036     |     38.1 |       1.2 |           94.9
+ SUP-027     |     36.4 |       1.1 |           96.1
+ SUP-035     |     34.2 |       1.1 |           97.1
+ SUP-033     |     34.0 |       1.1 |           98.2
+ SUP-039     |     30.3 |       0.9 |           99.1
+ SUP-040     |     27.8 |       0.9 |          100.0
+(40 rows)
+
+SELECT project_id, industry, cost_variance_pct,
+       NTILE(4) OVER (ORDER BY cost_variance_pct)                                  AS cv_quartile,
+       ROUND(AVG(cost_variance_pct) OVER (PARTITION BY industry), 2)               AS industry_avg_cv_pct,
+       ROUND(cost_variance_pct - AVG(cost_variance_pct) OVER (PARTITION BY industry), 2) AS gap_to_industry
+FROM v_project_kpis
+WHERE status = 'Completed'
+ORDER BY cost_variance_pct DESC;
+ project_id |          industry          | cost_variance_pct | cv_quartile | industry_avg_cv_pct | gap_to_industry 
+------------+----------------------------+-------------------+-------------+---------------------+-----------------
+ PRJ-044    | Industrial Batteries       |             18.93 |           4 |               14.50 |            4.43
+ PRJ-036    | Industrial Equipment       |             18.43 |           4 |                8.49 |            9.94
+ PRJ-007    | Industrial Equipment       |             17.62 |           4 |                8.49 |            9.13
+ PRJ-038    | Carbon Capture             |             16.28 |           4 |               11.66 |            4.62
+ PRJ-046    | Industrial Equipment       |             16.01 |           4 |                8.49 |            7.52
+ PRJ-021    | Biochemicals               |             15.07 |           4 |                8.02 |            7.05
+ PRJ-058    | Green Hydrogen             |             12.88 |           4 |                8.14 |            4.74
+ PRJ-060    | Biochemicals               |             11.10 |           4 |                8.02 |            3.08
+ PRJ-039    | Cement                     |             10.29 |           4 |                2.34 |            7.95
+ PRJ-054    | Industrial Batteries       |             10.07 |           4 |               14.50 |           -4.43
+ PRJ-003    | Mining & Material Handling |              9.62 |           4 |                4.40 |            5.22
+ PRJ-012    | Mining & Material Handling |              9.61 |           4 |                4.40 |            5.21
+ PRJ-028    | Sugar                      |              8.49 |           4 |                1.34 |            7.15
+ PRJ-015    | Wastewater Treatment       |              8.36 |           4 |                3.50 |            4.86
+ PRJ-040    | Sugar                      |              8.06 |           4 |                1.34 |            6.72
+ PRJ-057    | Industrial Equipment       |              8.03 |           3 |                8.49 |           -0.46
+ PRJ-013    | Industrial Equipment       |              7.99 |           3 |                8.49 |           -0.50
+ PRJ-033    | Green Hydrogen             |              7.31 |           3 |                8.14 |           -0.83
+ PRJ-024    | Carbon Capture             |              7.04 |           3 |               11.66 |           -4.62
+ PRJ-017    | Wastewater Treatment       |              6.42 |           3 |                3.50 |            2.92
+ PRJ-016    | Biochemicals               |              6.39 |           3 |                8.02 |           -1.63
+ PRJ-002    | Mining & Material Handling |              6.03 |           3 |                4.40 |            1.63
+ PRJ-022    | Biochemicals               |              5.78 |           3 |                8.02 |           -2.24
+ PRJ-053    | Cement                     |              5.38 |           3 |                2.34 |            3.04
+ PRJ-029    | Industrial Equipment       |              5.15 |           3 |                8.49 |           -3.34
+ PRJ-037    | Mining & Material Handling |              5.06 |           3 |                4.40 |            0.66
+ PRJ-047    | Biochemicals               |              4.92 |           3 |                8.02 |           -3.10
+ PRJ-051    | Biochemicals               |              4.88 |           3 |                8.02 |           -3.14
+ PRJ-023    | Sugar                      |              4.83 |           3 |                1.34 |            3.49
+ PRJ-019    | Wastewater Treatment       |              4.81 |           3 |                3.50 |            1.31
+ PRJ-025    | Industrial Equipment       |              4.78 |           2 |                8.49 |           -3.71
+ PRJ-050    | Cement                     |              4.77 |           2 |                2.34 |            2.43
+ PRJ-049    | Wastewater Treatment       |              4.69 |           2 |                3.50 |            1.19
+ PRJ-009    | Thermal Energy             |              4.69 |           2 |                1.55 |            3.14
+ PRJ-056    | Industrial Equipment       |              4.62 |           2 |                8.49 |           -3.87
+ PRJ-048    | Cement                     |              4.61 |           2 |                2.34 |            2.27
+ PRJ-014    | Cement                     |              4.54 |           2 |                2.34 |            2.20
+ PRJ-032    | Green Hydrogen             |              4.22 |           2 |                8.14 |           -3.92
+ PRJ-059    | Industrial Equipment       |              3.99 |           2 |                8.49 |           -4.50
+ PRJ-001    | Thermal Energy             |              3.82 |           2 |                1.55 |            2.27
+ PRJ-018    | Wastewater Treatment       |              3.00 |           2 |                3.50 |           -0.50
+ PRJ-062    | Mining & Material Handling |              2.87 |           2 |                4.40 |           -1.53
+ PRJ-043    | Cement                     |              2.62 |           2 |                2.34 |            0.28
+ PRJ-031    | Cement                     |              2.55 |           2 |                2.34 |            0.21
+ PRJ-035    | Thermal Energy             |              2.00 |           2 |                1.55 |            0.45
+ PRJ-034    | Mining & Material Handling |              1.96 |           2 |                4.40 |           -2.44
+ PRJ-010    | Sugar                      |              1.24 |           1 |                1.34 |           -0.10
+ PRJ-005    | Sugar                      |              1.07 |           1 |                1.34 |           -0.27
+ PRJ-026    | Mining & Material Handling |              0.58 |           1 |                4.40 |           -3.82
+ PRJ-011    | Cement                     |              0.53 |           1 |                2.34 |           -1.81
+ PRJ-052    | Thermal Energy             |              0.02 |           1 |                1.55 |           -1.53
+ PRJ-041    | Thermal Energy             |             -0.50 |           1 |                1.55 |           -2.05
+ PRJ-004    | Mining & Material Handling |             -0.50 |           1 |                4.40 |           -4.90
+ PRJ-030    | Wastewater Treatment       |             -0.65 |           1 |                3.50 |           -4.15
+ PRJ-055    | Thermal Energy             |             -0.73 |           1 |                1.55 |           -2.28
+ PRJ-068    | Industrial Equipment       |             -1.70 |           1 |                8.49 |          -10.19
+ PRJ-008    | Wastewater Treatment       |             -2.12 |           1 |                3.50 |           -5.62
+ PRJ-027    | Sugar                      |             -3.87 |           1 |                1.34 |           -5.21
+ PRJ-042    | Sugar                      |             -4.05 |           1 |                1.34 |           -5.39
+ PRJ-006    | Sugar                      |             -5.04 |           1 |                1.34 |           -6.38
+ PRJ-045    | Cement                     |             -5.76 |           1 |                2.34 |           -8.10
+ PRJ-020    | Cement                     |             -6.09 |           1 |                2.34 |           -8.43
+(62 rows)
+
+WITH w AS (
+    SELECT DATE_TRUNC('week', e.log_date)::date AS week_start,
+           100 * SUM(e.downtime_hours) / SUM(e.available_hours) AS downtime_pct
+    FROM fact_equipment e
+    JOIN dim_equipment q ON q.equipment_id = e.equipment_id
+    WHERE q.works_location_id = 'LOC-W2'
+    GROUP BY 1
+)
+SELECT week_start, ROUND(downtime_pct, 1) AS downtime_pct,
+       ROUND(AVG(downtime_pct) OVER (ORDER BY week_start ROWS BETWEEN 3 PRECEDING AND CURRENT ROW), 1) AS downtime_4wk_avg
+FROM w
+ORDER BY week_start DESC
+LIMIT 12;
+ week_start | downtime_pct | downtime_4wk_avg 
+------------+--------------+------------------
+ 2026-03-30 |         10.5 |             10.2
+ 2026-03-23 |          8.3 |              9.5
+ 2026-03-16 |         11.4 |              9.7
+ 2026-03-09 |         10.7 |              9.0
+ 2026-03-02 |          7.7 |              8.6
+ 2026-02-23 |          9.2 |              9.0
+ 2026-02-16 |          8.3 |              8.1
+ 2026-02-09 |          9.1 |              7.6
+ 2026-02-02 |          9.3 |              7.1
+ 2026-01-26 |          5.7 |              7.8
+ 2026-01-19 |          6.3 |              8.3
+ 2026-01-12 |          7.1 |              8.1
+(12 rows)
+

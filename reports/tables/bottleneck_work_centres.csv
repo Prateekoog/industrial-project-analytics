@@ -1,0 +1,19 @@
+works_location_id,process_type,constrained_project_days,share_pct,works
+LOC-W2,Plate Rolling,538,28.831725616291532,Works-East
+LOC-W2,Blasting & Painting,409,21.918542336548768,Works-East
+LOC-W2,Machining,348,18.64951768488746,Works-East
+LOC-W2,Welding,306,16.39871382636656,Works-East
+LOC-W2,Cutting,184,9.860664523043944,Works-East
+LOC-W2,Assembly,81,4.340836012861736,Works-East
+LOC-W3,Welding,474,31.245880026367832,Works-South
+LOC-W3,Machining,278,18.32564271588662,Works-South
+LOC-W3,Blasting & Painting,235,15.491100856954516,Works-South
+LOC-W3,Assembly,232,15.293342122610415,Works-South
+LOC-W3,Cutting,170,11.206328279499012,Works-South
+LOC-W3,Plate Rolling,128,8.437705998681608,Works-South
+LOC-W1,Blasting & Painting,134,47.857142857142854,Works-West
+LOC-W1,Welding,42,15.0,Works-West
+LOC-W1,Machining,39,13.928571428571429,Works-West
+LOC-W1,Cutting,26,9.285714285714286,Works-West
+LOC-W1,Plate Rolling,24,8.571428571428571,Works-West
+LOC-W1,Assembly,15,5.357142857142857,Works-West

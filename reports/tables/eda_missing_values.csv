@@ -1,0 +1,16 @@
+table,column,missing,missing_pct
+dim_project,actual_end_date,18,22.5
+fact_equipment,downtime_reason,55017,84.84
+fact_milestones,actual_start_date,38,6.79
+fact_milestones,actual_end_date,70,12.5
+fact_milestones,delay_cause,70,12.5
+fact_milestones,actual_duration_days,70,12.5
+fact_milestones,start_delay_days,38,6.79
+fact_milestones,end_delay_days,70,12.5
+fact_procurement,supplier_confirm_date,5,0.11
+fact_procurement,delivery_date,94,2.12
+fact_procurement,inspection_date,99,2.23
+fact_procurement,grn_date,103,2.32
+fact_procurement,lead_time_days,103,2.32
+fact_procurement,delivery_delay_days,94,2.12
+fact_procurement,is_on_time,94,2.12

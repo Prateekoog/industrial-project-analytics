@@ -1,0 +1,5 @@
+initiative,scenario,investment,annual_saving,running_cost,net_annual_benefit,payback_years,roi_3yr_pct,npv_5yr,rank_npv
+Predictive maintenance on chronic machines,base,5500000.0,21311202.14,1000000.0,20311202.14,0.27,652.16,67717338.13,2
+Digital procurement workflow,base,7000000.0,19420502.91,2000000.0,17420502.91,0.4,348.17,55797014.34,3
+Critical-item supplier switch,base,1500000.0,34121925.7,93301330.31,-59179404.61,inf,-63.62,-214828509.39,4
+Design-freeze stage gate,base,2000000.0,60973691.19,22026449.68,38947241.51,0.05,168.69,138396089.35,1

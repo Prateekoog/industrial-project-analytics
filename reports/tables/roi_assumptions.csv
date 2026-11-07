@@ -1,0 +1,20 @@
+,value
+pm_sensor_cost_per_machine,500000.0
+pm_platform_cost,2500000.0
+pm_running_cost,1000000.0
+pm_downtime_reduction,"{""low"": 0.15, ""base"": 0.35, ""high"": 0.5}"
+pm_repair_cost_per_event,25000
+pm_crew_per_machine,3
+pm_idle_share,0.6
+dp_implementation_cost,7000000.0
+dp_running_cost,2000000.0
+dp_buyer_hours_saved_per_line,1.5
+dp_buyer_rate,1000
+dp_target_achievement,"{""low"": 0.5, ""base"": 0.8, ""high"": 1.0}"
+ss_qualification_cost,1500000.0
+ss_effectiveness,"{""low"": 0.5, ""base"": 0.75, ""high"": 0.9}"
+dg_setup_cost,2000000.0
+dg_review_team_cost,12000000.0
+dg_gate_days_per_project,7
+dg_confounding_haircut,0.5
+dg_prevention,"{""low"": 0.1, ""base"": 0.25, ""high"": 0.4}"

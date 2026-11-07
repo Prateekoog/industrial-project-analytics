@@ -1,0 +1,50 @@
+table,rule,action,rows_affected
+projects_master,inconsistent industry labels,mapped to 10 canonical industries,10
+projects_master,mixed Y/Yes/1/TRUE flags,converted to boolean,59
+cost_ledger,exact duplicate postings,removed (would double-count cost),88
+cost_ledger,zero-amount placeholder postings,removed,44
+cost_ledger,category typos and legacy labels,mapped to 8 standard categories,434
+cost_ledger,missing cost category,inferred from GL account code,133
+purchase_orders,exact duplicate PO lines,removed (would double-count spend),67
+purchase_orders,inconsistent supplier names,matched to vendor master after normalising,464
+purchase_orders,supplier names not matching after normalising,matched by fuzzy similarity >= 0.85,69
+purchase_orders,date format DD/MM/YYYY in pr_date,parsed to ISO date,166
+purchase_orders,date format DD-Mon-YYYY in pr_date,parsed to ISO date,52
+purchase_orders,date format DD/MM/YYYY in pr_approval_date,parsed to ISO date,170
+purchase_orders,date format DD-Mon-YYYY in pr_approval_date,parsed to ISO date,41
+purchase_orders,date format DD/MM/YYYY in rfq_date,parsed to ISO date,188
+purchase_orders,date format DD-Mon-YYYY in rfq_date,parsed to ISO date,46
+purchase_orders,date format DD/MM/YYYY in po_date,parsed to ISO date,168
+purchase_orders,date format DD-Mon-YYYY in po_date,parsed to ISO date,42
+purchase_orders,date format DD/MM/YYYY in supplier_confirm_date,parsed to ISO date,161
+purchase_orders,date format DD-Mon-YYYY in supplier_confirm_date,parsed to ISO date,45
+purchase_orders,date format DD/MM/YYYY in promised_date,parsed to ISO date,170
+purchase_orders,date format DD-Mon-YYYY in promised_date,parsed to ISO date,49
+purchase_orders,date format DD/MM/YYYY in delivery_date,parsed to ISO date,198
+purchase_orders,date format DD-Mon-YYYY in delivery_date,parsed to ISO date,46
+purchase_orders,date format DD/MM/YYYY in inspection_date,parsed to ISO date,192
+purchase_orders,date format DD-Mon-YYYY in inspection_date,parsed to ISO date,33
+purchase_orders,date format DD/MM/YYYY in grn_date,parsed to ISO date,156
+purchase_orders,date format DD-Mon-YYYY in grn_date,parsed to ISO date,40
+purchase_orders,date format DD/MM/YYYY in need_by_date,parsed to ISO date,178
+purchase_orders,date format DD-Mon-YYYY in need_by_date,parsed to ISO date,44
+purchase_orders,delivery date before order confirmation,day/month swap corrected,4
+purchase_orders,delivery date before order confirmation,"could not be corrected, set to null",0
+purchase_orders,missing delivery date on received line,imputed as inspection date minus median lag (3 days),65
+purchase_orders,negative quantity,sign corrected (line value is positive),22
+purchase_orders,missing unit price,derived as line value / quantity,44
+purchase_orders,zero unit price,derived as line value / quantity,18
+purchase_orders,unit price inconsistent with line value (e.g. extra zero),replaced by line value / quantity,35
+production_log,output more than 3x plan and plausible after /10,decimal-shift corrected,53
+production_log,negative rework tonnes,sign corrected,40
+production_log,missing regular labour hours,imputed: output x works median hours per tonne,201
+machine_log,exact duplicate machine-day records,removed,324
+machine_log,negative downtime hours,sign corrected,194
+machine_log,downtime breaks available = downtime + operating + idle (e.g. extra zero),recalculated from the hour balance,220
+machine_log,downtime breaks the hour balance but is below available hours (hidden extra zero),recalculated from the hour balance,39
+machine_log,downtime without a reason code,labelled 'Unspecified',295
+site_timesheets,missing overtime hours,back-calculated from labour cost and the crew's hourly rate,38
+site_timesheets,zero headcount with hours booked,estimated from hours / standard weekly hours,15
+milestones,actual end before actual start,start and end swapped back,6
+billing,duplicate invoices in extract,removed (would double-count revenue),5
+billing,non-standard revenue type labels,mapped to 4 standard types,41

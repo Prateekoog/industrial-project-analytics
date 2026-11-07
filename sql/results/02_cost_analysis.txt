@@ -1,0 +1,233 @@
+SET search_path TO projectco;
+SET
+SELECT project_id, project_name, industry,
+       ROUND(revised_budget / 1e7, 2)   AS revised_budget_cr,
+       ROUND(final_cost / 1e7, 2)       AS actual_cost_cr,
+       ROUND(cost_variance / 1e7, 2)    AS cost_variance_cr,
+       cost_variance_pct, cost_status
+FROM v_project_kpis
+WHERE status = 'Completed'
+ORDER BY cost_variance_pct DESC;
+ project_id |                  project_name                   |          industry          | revised_budget_cr | actual_cost_cr | cost_variance_cr | cost_variance_pct | cost_status  
+------------+-------------------------------------------------+----------------------------+-------------------+----------------+------------------+-------------------+--------------
+ PRJ-044    | Kaliyan - Electrode Material Handling Line      | Industrial Batteries       |             62.48 |          74.30 |            11.83 |             18.93 | Critical
+ PRJ-036    | Vikrama - Kiln Drive Package                    | Industrial Equipment       |             25.53 |          30.23 |             4.71 |             18.43 | Critical
+ PRJ-007    | Vanshika - Hydraulic Press Line                 | Industrial Equipment       |             12.35 |          14.53 |             2.18 |             17.62 | Critical
+ PRJ-038    | Satpura - 200 TPD CO2 Capture Unit              | Carbon Capture             |             55.55 |          64.59 |             9.04 |             16.28 | Critical
+ PRJ-046    | Akshaya - Kiln Drive Package                    | Industrial Equipment       |             32.75 |          38.00 |             5.24 |             16.01 | Critical
+ PRJ-021    | Prayag - 120 KLPD Distillery                    | Biochemicals               |             20.83 |          23.97 |             3.14 |             15.07 | Critical
+ PRJ-058    | Vidarbha - 25 MW Electrolyser Balance-of-Plant  | Green Hydrogen             |             48.31 |          54.53 |             6.22 |             12.88 | Critical
+ PRJ-060    | Prayag - Fermentation and Evaporation Package   | Biochemicals               |             42.82 |          47.58 |             4.75 |             11.10 | Critical
+ PRJ-039    | Mahodaya - 5,500 TPD Clinker Line               | Cement                     |            118.61 |         130.81 |            12.20 |             10.29 | Critical
+ PRJ-054    | Suryansh - Electrode Material Handling Line     | Industrial Batteries       |            146.05 |         160.76 |            14.71 |             10.07 | Critical
+ PRJ-003    | Tejaswa - 800 TPH Overland Conveyor             | Mining & Material Handling |             53.85 |          59.03 |             5.18 |              9.62 | Warning
+ PRJ-012    | Tejaswa - Crushing and Screening Plant          | Mining & Material Handling |             82.59 |          90.53 |             7.94 |              9.61 | Warning
+ PRJ-028    | Dhanvira - Cogeneration Boiler Package          | Sugar                      |             82.50 |          89.50 |             7.00 |              8.49 | Warning
+ PRJ-015    | Indrayani - Sludge Handling System              | Wastewater Treatment       |             52.43 |          56.82 |             4.38 |              8.36 | Warning
+ PRJ-040    | Dhanvira - 3,000 TCD Cane Mill Expansion        | Sugar                      |             24.29 |          26.24 |             1.96 |              8.06 | Warning
+ PRJ-057    | Akshaya - Kiln Drive Package                    | Industrial Equipment       |             27.34 |          29.54 |             2.20 |              8.03 | Warning
+ PRJ-013    | Ujjwala - Kiln Drive Package                    | Industrial Equipment       |             63.10 |          68.14 |             5.04 |              7.99 | Warning
+ PRJ-033    | Vidarbha - 90 MW Electrolyser Balance-of-Plant  | Green Hydrogen             |            169.55 |         181.94 |            12.39 |              7.31 | Warning
+ PRJ-024    | Rohilkhand - 500 TPD CO2 Capture Unit           | Carbon Capture             |             61.66 |          66.00 |             4.34 |              7.04 | Warning
+ PRJ-017    | Meghalay - Sludge Handling System               | Wastewater Treatment       |             36.81 |          39.18 |             2.36 |              6.42 | Warning
+ PRJ-016    | Shivalik - 160 KLPD Distillery                  | Biochemicals               |             65.34 |          69.51 |             4.18 |              6.39 | Warning
+ PRJ-002    | Nirvaan - Crushing and Screening Plant          | Mining & Material Handling |            275.34 |         291.94 |            16.61 |              6.03 | Warning
+ PRJ-022    | Trivenya - Fermentation and Evaporation Package | Biochemicals               |             47.84 |          50.61 |             2.77 |              5.78 | Warning
+ PRJ-053    | Lokesha - Cement Grinding Unit                  | Cement                     |             84.61 |          89.16 |             4.55 |              5.38 | Warning
+ PRJ-029    | Vanshika - Ball Mill Package                    | Industrial Equipment       |             30.44 |          32.01 |             1.57 |              5.15 | Warning
+ PRJ-037    | Nirvaan - 3,400 TPH Overland Conveyor           | Mining & Material Handling |            129.73 |         136.30 |             6.57 |              5.06 | Warning
+ PRJ-047    | Prayag - 240 KLPD Distillery                    | Biochemicals               |             43.38 |          45.51 |             2.14 |              4.92 | On budget
+ PRJ-051    | Shivalik - Fermentation and Evaporation Package | Biochemicals               |             74.23 |          77.86 |             3.62 |              4.88 | On budget
+ PRJ-023    | Brahmora - Cogeneration Boiler Package          | Sugar                      |             28.59 |          29.97 |             1.38 |              4.83 | On budget
+ PRJ-019    | Indrayani - 30 MLD Effluent Treatment Plant     | Wastewater Treatment       |             46.17 |          48.39 |             2.22 |              4.81 | On budget
+ PRJ-025    | Yuvraj - Hydraulic Press Line                   | Industrial Equipment       |             14.51 |          15.20 |             0.69 |              4.78 | On budget
+ PRJ-050    | Jalpari - Clinker Cooler Retrofit               | Cement                     |             72.52 |          75.98 |             3.46 |              4.77 | On budget
+ PRJ-009    | Chandrika - Coal Handling Plant                 | Thermal Energy             |             66.30 |          69.41 |             3.11 |              4.69 | On budget
+ PRJ-049    | Indrayani - 45 MLD Effluent Treatment Plant     | Wastewater Treatment       |             28.01 |          29.33 |             1.31 |              4.69 | On budget
+ PRJ-056    | Akshaya - Kiln Drive Package                    | Industrial Equipment       |             31.57 |          33.02 |             1.46 |              4.62 | On budget
+ PRJ-048    | Kalpaka - Preheater and Kiln Upgrade            | Cement                     |            168.10 |         175.85 |             7.75 |              4.61 | On budget
+ PRJ-014    | Jalpari - 9,500 TPD Clinker Line                | Cement                     |             44.73 |          46.76 |             2.03 |              4.54 | On budget
+ PRJ-032    | Vidarbha - Hydrogen Compression and Storage     | Green Hydrogen             |             54.40 |          56.70 |             2.30 |              4.22 | On budget
+ PRJ-059    | Ujjwala - Ball Mill Package                     | Industrial Equipment       |             29.73 |          30.92 |             1.19 |              3.99 | On budget
+ PRJ-001    | Bhoomija - 160 TPH Boiler Package               | Thermal Energy             |            156.90 |         162.89 |             5.99 |              3.82 | On budget
+ PRJ-018    | Meghalay - 25 MLD Effluent Treatment Plant      | Wastewater Treatment       |             36.67 |          37.77 |             1.10 |              3.00 | On budget
+ PRJ-062    | Tejaswa - Crushing and Screening Plant          | Mining & Material Handling |             54.49 |          56.06 |             1.57 |              2.87 | On budget
+ PRJ-043    | Lokesha - Preheater and Kiln Upgrade            | Cement                     |            158.30 |         162.44 |             4.15 |              2.62 | On budget
+ PRJ-031    | Lokesha - Clinker Cooler Retrofit               | Cement                     |            116.83 |         119.80 |             2.97 |              2.55 | On budget
+ PRJ-035    | Devgiri - 240 TPH Boiler Package                | Thermal Energy             |            291.34 |         297.18 |             5.84 |              2.00 | On budget
+ PRJ-034    | Tejaswa - Stacker-Reclaimer Package             | Mining & Material Handling |             74.38 |          75.84 |             1.46 |              1.96 | On budget
+ PRJ-010    | Dhanvira - Cogeneration Boiler Package          | Sugar                      |             48.40 |          49.00 |             0.60 |              1.24 | On budget
+ PRJ-005    | Ekamra - Cogeneration Boiler Package            | Sugar                      |             41.62 |          42.06 |             0.44 |              1.07 | On budget
+ PRJ-026    | Padmavan - 3,800 TPH Overland Conveyor          | Mining & Material Handling |             84.46 |          84.95 |             0.49 |              0.58 | On budget
+ PRJ-011    | Hiranya - Preheater and Kiln Upgrade            | Cement                     |             44.75 |          44.99 |             0.24 |              0.53 | On budget
+ PRJ-052    | Gomukh - 100 TPH Boiler Package                 | Thermal Energy             |             82.96 |          82.98 |             0.02 |              0.02 | On budget
+ PRJ-004    | Sanjivani - Wagon Tippler Complex               | Mining & Material Handling |             60.04 |          59.74 |            -0.30 |             -0.50 | On budget
+ PRJ-041    | Chandrika - Ash Handling System                 | Thermal Energy             |             80.55 |          80.15 |            -0.40 |             -0.50 | On budget
+ PRJ-030    | Meghalay - Zero Liquid Discharge Plant          | Wastewater Treatment       |             42.17 |          41.89 |            -0.27 |             -0.65 | On budget
+ PRJ-055    | Bhoomija - Ash Handling System                  | Thermal Energy             |            142.49 |         141.45 |            -1.03 |             -0.73 | On budget
+ PRJ-068    | Ujjwala - Ball Mill Package                     | Industrial Equipment       |             39.78 |          39.11 |            -0.68 |             -1.70 | On budget
+ PRJ-008    | Narmadeya - 50 MLD Effluent Treatment Plant     | Wastewater Treatment       |             80.42 |          78.71 |            -1.71 |             -2.12 | Under budget
+ PRJ-027    | Gaurang - Cogeneration Boiler Package           | Sugar                      |             20.74 |          19.93 |            -0.80 |             -3.87 | Under budget
+ PRJ-042    | Dhanvira - Cogeneration Boiler Package          | Sugar                      |             36.57 |          35.09 |            -1.48 |             -4.05 | Under budget
+ PRJ-006    | Brahmora - Sugar Refinery Upgrade               | Sugar                      |             44.76 |          42.50 |            -2.26 |             -5.04 | Under budget
+ PRJ-045    | Jalpari - Preheater and Kiln Upgrade            | Cement                     |            232.87 |         219.46 |           -13.41 |             -5.76 | Under budget
+ PRJ-020    | Hiranya - Preheater and Kiln Upgrade            | Cement                     |             91.15 |          85.60 |            -5.55 |             -6.09 | Under budget
+(62 rows)
+
+SELECT cost_status, COUNT(*) AS projects,
+       ROUND(SUM(cost_variance) / 1e7, 1) AS total_variance_cr
+FROM v_project_kpis
+WHERE status = 'Completed'
+GROUP BY cost_status
+ORDER BY MIN(cost_variance_pct);
+ cost_status  | projects | total_variance_cr 
+--------------+----------+-------------------
+ Under budget |        6 |             -25.2
+ On budget    |       30 |              54.8
+ Warning      |       16 |              89.0
+ Critical     |       10 |              74.0
+(4 rows)
+
+WITH budget AS (
+    SELECT b.project_id, b.cost_category_id, b.revised_budget_inr
+    FROM fact_budget b
+    JOIN dim_project p ON p.project_id = b.project_id
+    WHERE p.status = 'Completed'
+),
+actual AS (
+    SELECT project_id, cost_category_id, SUM(amount_inr) AS actual_inr
+    FROM fact_project_cost
+    GROUP BY project_id, cost_category_id
+)
+SELECT cc.cost_category,
+       ROUND(SUM(b.revised_budget_inr) / 1e7, 1)                         AS budget_cr,
+       ROUND(SUM(a.actual_inr) / 1e7, 1)                                 AS actual_cr,
+       ROUND(SUM(a.actual_inr - b.revised_budget_inr) / 1e7, 1)          AS variance_cr,
+       ROUND(100 * SUM(a.actual_inr - b.revised_budget_inr) / SUM(b.revised_budget_inr), 1) AS variance_pct,
+       ROUND(100 * SUM(a.actual_inr - b.revised_budget_inr)
+             / SUM(SUM(a.actual_inr - b.revised_budget_inr)) OVER (), 1)  AS share_of_total_overrun_pct
+FROM budget b
+LEFT JOIN actual a ON a.project_id = b.project_id AND a.cost_category_id = b.cost_category_id
+JOIN dim_cost_category cc ON cc.cost_category_id = b.cost_category_id
+GROUP BY cc.cost_category
+ORDER BY variance_cr DESC;
+ cost_category  | budget_cr | actual_cr | variance_cr | variance_pct | share_of_total_overrun_pct 
+----------------+-----------+-----------+-------------+--------------+----------------------------
+ Labour         |     506.5 |     573.4 |        67.0 |         13.2 |                       34.8
+ Material       |    2380.0 |    2442.7 |        62.8 |          2.6 |                       32.6
+ Overhead       |     337.6 |     354.2 |        16.6 |          4.9 |                        8.6
+ Energy         |     138.3 |     152.0 |        13.7 |          9.9 |                        7.1
+ Equipment      |     258.1 |     271.4 |        13.4 |          5.2 |                        6.9
+ Transportation |     220.2 |     230.0 |         9.8 |          4.5 |                        5.1
+ Subcontractor  |     610.4 |     618.7 |         8.3 |          1.4 |                        4.3
+ Other          |     166.6 |     167.7 |         1.1 |          0.7 |                        0.6
+(8 rows)
+
+WITH worst AS (
+    SELECT project_id FROM v_project_kpis
+    WHERE status = 'Completed'
+    ORDER BY cost_variance_pct DESC
+    LIMIT 1
+),
+detail AS (
+    SELECT b.cost_category_id, b.revised_budget_inr,
+           (SELECT COALESCE(SUM(c.amount_inr), 0) FROM fact_project_cost c
+             WHERE c.project_id = b.project_id AND c.cost_category_id = b.cost_category_id) AS actual_inr
+    FROM fact_budget b
+    WHERE b.project_id = (SELECT project_id FROM worst)
+)
+SELECT (SELECT project_id FROM worst) AS project_id, cc.cost_category,
+       ROUND(d.revised_budget_inr / 1e7, 2)                      AS budget_cr,
+       ROUND(d.actual_inr / 1e7, 2)                              AS actual_cr,
+       ROUND((d.actual_inr - d.revised_budget_inr) / 1e7, 2)     AS variance_cr,
+       ROUND(100 * (d.actual_inr - d.revised_budget_inr)
+             / SUM(d.actual_inr - d.revised_budget_inr) OVER (), 1) AS contribution_pct
+FROM detail d
+JOIN dim_cost_category cc ON cc.cost_category_id = d.cost_category_id
+ORDER BY variance_cr DESC;
+ project_id | cost_category  | budget_cr | actual_cr | variance_cr | contribution_pct 
+------------+----------------+-----------+-----------+-------------+------------------
+ PRJ-044    | Material       |     32.94 |     40.59 |        7.65 |             64.7
+ PRJ-044    | Labour         |      6.61 |      8.43 |        1.82 |             15.3
+ PRJ-044    | Overhead       |      4.19 |      4.95 |        0.76 |              6.4
+ PRJ-044    | Equipment      |      3.48 |      4.04 |        0.56 |              4.7
+ PRJ-044    | Energy         |      1.78 |      2.28 |        0.50 |              4.2
+ PRJ-044    | Other          |      2.64 |      2.86 |        0.22 |              1.8
+ PRJ-044    | Subcontractor  |      8.27 |      8.48 |        0.21 |              1.8
+ PRJ-044    | Transportation |      2.55 |      2.68 |        0.12 |              1.0
+(8 rows)
+
+SELECT industry, COUNT(*) AS completed_projects,
+       ROUND(AVG(cost_variance_pct), 2)                                   AS avg_cv_pct,
+       SUM(CASE WHEN cost_status IN ('Warning', 'Critical') THEN 1 ELSE 0 END) AS over_5pct
+FROM v_project_kpis
+WHERE status = 'Completed'
+GROUP BY industry
+ORDER BY avg_cv_pct DESC;
+          industry          | completed_projects | avg_cv_pct | over_5pct 
+----------------------------+--------------------+------------+-----------
+ Industrial Batteries       |                  2 |      14.50 |         2
+ Carbon Capture             |                  2 |      11.66 |         2
+ Industrial Equipment       |                 10 |       8.49 |         6
+ Green Hydrogen             |                  3 |       8.14 |         2
+ Biochemicals               |                  6 |       8.02 |         4
+ Mining & Material Handling |                  8 |       4.40 |         4
+ Wastewater Treatment       |                  7 |       3.50 |         2
+ Cement                     |                 10 |       2.34 |         2
+ Thermal Energy             |                  6 |       1.55 |         0
+ Sugar                      |                  8 |       1.34 |         2
+(10 rows)
+
+SELECT source_system, cc.cost_category, ROUND(SUM(amount_inr) / 1e7, 1) AS cost_cr
+FROM fact_project_cost f
+JOIN dim_cost_category cc USING (cost_category_id)
+GROUP BY source_system, cc.cost_category
+ORDER BY source_system, cost_cr DESC;
+ source_system | cost_category  | cost_cr 
+---------------+----------------+---------
+ Finance       | Subcontractor  |   698.9
+ Finance       | Overhead       |   431.7
+ Finance       | Transportation |   277.4
+ Finance       | Equipment      |   211.5
+ Finance       | Other          |   204.4
+ Finance       | Energy         |   153.1
+ Procurement   | Material       |  3111.5
+ Production    | Labour         |   241.4
+ Production    | Equipment      |   107.6
+ Production    | Energy         |    18.2
+ Timesheet     | Labour         |   448.7
+(11 rows)
+
+SELECT project_id, project_name, percent_complete,
+       ROUND(revised_budget / 1e7, 1)        AS budget_cr,
+       ROUND(earned_value / 1e7, 1)          AS earned_value_cr,
+       ROUND(actual_cost_to_date / 1e7, 1)   AS actual_cost_cr,
+       cpi,
+       ROUND(final_cost / 1e7, 1)            AS eac_cr,
+       cost_variance_pct                     AS forecast_cv_pct,
+       cost_status                           AS forecast_status
+FROM v_project_kpis
+WHERE status = 'In Progress'
+ORDER BY cpi;
+ project_id |                  project_name                  | percent_complete | budget_cr | earned_value_cr | actual_cost_cr |  cpi  | eac_cr | forecast_cv_pct | forecast_status 
+------------+------------------------------------------------+------------------+-----------+-----------------+----------------+-------+--------+-----------------+-----------------
+ PRJ-072    | Indrayani - 15 MLD Effluent Treatment Plant    |             78.2 |      40.8 |            31.9 |           36.7 | 0.868 |   47.0 |           15.17 | Critical
+ PRJ-073    | Padmavan - 2,200 TPH Overland Conveyor         |             66.1 |      73.7 |            48.7 |           55.7 | 0.875 |   84.2 |           14.32 | Critical
+ PRJ-074    | Suryansh - Cell Plant Utilities Package        |             41.3 |      98.6 |            40.7 |           46.1 | 0.884 |  111.6 |           13.14 | Critical
+ PRJ-079    | Devgiri - Coal Handling Plant                  |             15.5 |     179.0 |            27.7 |           30.3 | 0.917 |  195.3 |            9.11 | Warning
+ PRJ-070    | Kaliyan - Electrode Material Handling Line     |             66.6 |     124.7 |            83.1 |           90.4 | 0.919 |  135.7 |            8.78 | Warning
+ PRJ-076    | Rohilkhand - 300 TPD CO2 Capture Unit          |             28.0 |     103.3 |            28.9 |           30.8 | 0.939 |  110.1 |            6.55 | Warning
+ PRJ-061    | Ekamra - Cogeneration Boiler Package           |             99.0 |     122.1 |           120.8 |          128.4 | 0.941 |  129.7 |            6.24 | Warning
+ PRJ-069    | Ekamra - Process House Modernisation           |             95.2 |      48.1 |            45.8 |           48.4 | 0.948 |   50.8 |            5.51 | Warning
+ PRJ-066    | Arvenya - 5,500 TCD Cane Mill Expansion        |             97.2 |      30.7 |            29.8 |           31.4 | 0.949 |   32.3 |            5.34 | Warning
+ PRJ-065    | Bhoomija - 100 TPH Boiler Package              |             98.3 |      48.4 |            47.6 |           49.9 | 0.953 |   50.8 |            4.92 | On budget
+ PRJ-071    | Jalpari - Cement Grinding Unit                 |             77.0 |      96.5 |            74.3 |           77.2 | 0.963 |  100.2 |            3.82 | On budget
+ PRJ-075    | Gaurang - Sugar Refinery Upgrade               |             85.1 |      48.4 |            41.2 |           42.4 | 0.972 |   49.8 |            2.89 | On budget
+ PRJ-063    | Lokesha - Clinker Cooler Retrofit              |             99.0 |      88.2 |            87.3 |           89.8 | 0.973 |   90.7 |            2.83 | On budget
+ PRJ-067    | Tejaswa - Wagon Tippler Complex                |             89.5 |     150.4 |           134.6 |          138.2 | 0.974 |  154.4 |            2.64 | On budget
+ PRJ-064    | Tejaswa - Wagon Tippler Complex                |             83.6 |     138.4 |           115.7 |          116.5 | 0.993 |  139.4 |            0.72 | On budget
+ PRJ-078    | Amaravat - 55 MW Electrolyser Balance-of-Plant |             34.4 |      69.5 |            23.9 |           24.0 | 0.996 |   69.8 |            0.44 | On budget
+ PRJ-080    | Vidarbha - Hydrogen Compression and Storage    |             23.8 |      75.3 |            17.9 |           16.8 | 1.068 |   70.5 |           -6.36 | Under budget
+ PRJ-077    | Rajvansh - Wagon Tippler Complex               |             66.7 |      66.7 |            44.5 |           41.0 | 1.084 |   61.5 |           -7.72 | Under budget
+(18 rows)
+

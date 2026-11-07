@@ -1,0 +1,16 @@
+SET
+                  check_name                   | result | max_diff 
+-----------------------------------------------+--------+----------
+ Material ledger = received PO value           | PASS   |     0.00
+ Works labour ledger = production log          | PASS   |     0.00
+ Site labour ledger = timesheets               | PASS   |     0.00
+ Completed projects billed 100% of contract    | PASS   |     0.00
+ LD within 5% cap                              | PASS   |         
+ Project end = commissioning end               | PASS   |         
+ Budget totals: revised = original + CO        | PASS   |         
+ Views do not fan out: one KPI row per project | PASS   |       80
+ View cost total = ledger total                | PASS   |         
+ View revenue total = billing total            | PASS   |         
+ Machine hours balance                         | PASS   |         
+(11 rows)
+

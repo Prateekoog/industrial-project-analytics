@@ -1,0 +1,9 @@
+cost_category_id,cost_category,sort_order,cost_behaviour,gl_account
+1,Material,1,Variable,GL-5100
+2,Labour,2,Variable,GL-5200
+3,Subcontractor,3,Variable,GL-5300
+4,Equipment,4,Time-based,GL-5400
+5,Transportation,5,Variable,GL-5500
+6,Energy,6,Mixed,GL-5600
+7,Overhead,7,Time-based,GL-5700
+8,Other,8,Mixed,GL-5800

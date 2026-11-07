@@ -1,0 +1,8 @@
+stage_id,stage_name,stage_order,billing_share,description
+1,Concept,1,0.1,"Kick-off, scope freeze, basic design basis; advance payment"
+2,Engineering,2,0.1,"Detailed design, drawings, specifications, bills of material"
+3,Procurement,3,0.3,"Purchase requisitions, RFQs, purchase orders, deliveries"
+4,Fabrication,4,0.2,"Cutting, rolling, welding, machining, assembly, painting in works"
+5,Installation,5,0.2,Site erection of fabricated and bought-out equipment
+6,Testing,6,0.0,"Mechanical completion checks, no-load and load trials"
+7,Commissioning,7,0.1,Performance guarantee test run and handover

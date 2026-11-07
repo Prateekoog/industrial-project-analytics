@@ -1,0 +1,84 @@
+layer,check,result,detail
+integrity,dim_project primary key project_id is unique,PASS,0 duplicates
+integrity,dim_client primary key client_id is unique,PASS,0 duplicates
+integrity,dim_supplier primary key supplier_id is unique,PASS,0 duplicates
+integrity,dim_material primary key material_id is unique,PASS,0 duplicates
+integrity,dim_location primary key location_id is unique,PASS,0 duplicates
+integrity,dim_employee primary key employee_id is unique,PASS,0 duplicates
+integrity,dim_equipment primary key equipment_id is unique,PASS,0 duplicates
+integrity,dim_work_centre primary key work_centre_id is unique,PASS,0 duplicates
+integrity,dim_date primary key date is unique,PASS,0 duplicates
+integrity,dim_cost_category primary key cost_category_id is unique,PASS,0 duplicates
+integrity,dim_stage primary key stage_id is unique,PASS,0 duplicates
+integrity,fact_budget primary key project_id+cost_category_id is unique,PASS,0 duplicates
+integrity,fact_project_cost primary key document_no is unique,PASS,0 duplicates
+integrity,fact_procurement primary key po_line_id is unique,PASS,0 duplicates
+integrity,fact_operations primary key production_id is unique,PASS,0 duplicates
+integrity,fact_equipment primary key machine_log_id is unique,PASS,0 duplicates
+integrity,fact_labor primary key labour_entry_id is unique,PASS,0 duplicates
+integrity,fact_milestones primary key project_id+stage_id is unique,PASS,0 duplicates
+integrity,fact_revenue primary key invoice_no is unique,PASS,0 duplicates
+integrity,dim_project.client_id -> dim_client.client_id,PASS,0 orphans
+integrity,dim_project.site_location_id -> dim_location.location_id,PASS,0 orphans
+integrity,dim_project.works_location_id -> dim_location.location_id,PASS,0 orphans
+integrity,dim_project.project_manager_id -> dim_employee.employee_id,PASS,0 orphans
+integrity,dim_equipment.work_centre_id -> dim_work_centre.work_centre_id,PASS,0 orphans
+integrity,fact_budget.project_id -> dim_project.project_id,PASS,0 orphans
+integrity,fact_budget.cost_category_id -> dim_cost_category.cost_category_id,PASS,0 orphans
+integrity,fact_project_cost.project_id -> dim_project.project_id,PASS,0 orphans
+integrity,fact_project_cost.cost_category_id -> dim_cost_category.cost_category_id,PASS,0 orphans
+integrity,fact_project_cost.posting_date -> dim_date.date,PASS,0 orphans
+integrity,fact_procurement.project_id -> dim_project.project_id,PASS,0 orphans
+integrity,fact_procurement.supplier_id -> dim_supplier.supplier_id,PASS,0 orphans
+integrity,fact_procurement.material_id -> dim_material.material_id,PASS,0 orphans
+integrity,fact_procurement.buyer_id -> dim_employee.employee_id,PASS,0 orphans
+integrity,fact_procurement.po_date -> dim_date.date,PASS,0 orphans
+integrity,fact_operations.project_id -> dim_project.project_id,PASS,0 orphans
+integrity,fact_operations.works_location_id -> dim_location.location_id,PASS,0 orphans
+integrity,fact_operations.bottleneck_work_centre_id -> dim_work_centre.work_centre_id,PASS,0 orphans
+integrity,fact_operations.production_date -> dim_date.date,PASS,0 orphans
+integrity,fact_equipment.equipment_id -> dim_equipment.equipment_id,PASS,0 orphans
+integrity,fact_equipment.log_date -> dim_date.date,PASS,0 orphans
+integrity,fact_labor.project_id -> dim_project.project_id,PASS,0 orphans
+integrity,fact_labor.supervisor_id -> dim_employee.employee_id,PASS,0 orphans
+integrity,fact_milestones.project_id -> dim_project.project_id,PASS,0 orphans
+integrity,fact_milestones.stage_id -> dim_stage.stage_id,PASS,0 orphans
+integrity,fact_revenue.project_id -> dim_project.project_id,PASS,0 orphans
+integrity,fact_revenue.invoice_date -> dim_date.date,PASS,0 orphans
+integrity,PO quantities and prices are positive,PASS,
+integrity,PO line value = quantity x unit price (within 1%),PASS,
+integrity,PO dates in process order (PR <= PO <= delivery),PASS,0 violations
+integrity,"machine hours: 0 <= downtime, operating <= available",PASS,
+integrity,production: output >= 0 and 0 <= rework <= output,PASS,
+integrity,milestones: actual end >= actual start,PASS,
+reconciliation,"Material ledger = received PO line value, per project",PASS,max difference Rs 0.00
+reconciliation,"Works labour ledger = production log labour cost, per project",PASS,max difference Rs 0.00
+reconciliation,"Site/engineering labour ledger = timesheet cost, per project",PASS,max difference Rs 0.00
+reconciliation,"Works machine cost ledger = production log machine cost, per project",PASS,max difference Rs 0.00
+reconciliation,"Works energy ledger = production log energy cost, per project",PASS,max difference Rs 0.00
+reconciliation,Revised budget = original + change-order budget,PASS,
+reconciliation,Completed projects billed 100% of contract value in milestones,PASS,min 1.0000
+reconciliation,Liquidated damages never exceed the 5% cap,PASS,
+reconciliation,LD amounts are whole weeks x 0.5% of contract value,PASS,
+reconciliation,Project actual end date = commissioning actual end date,PASS,
+reconciliation,Project actual start date = concept stage actual start,PASS,
+reconciliation,Status 'Completed' <=> actual end date present,PASS,
+reconciliation,Completed projects are 100% complete,PASS,
+reconciliation,No actual transactions after the data cut-off,PASS,0 rows
+cleaning,purchase_orders.delivery_date day_month_swapped: restored 44% of 9.0,PASS,(informational)
+cleaning,purchase_orders.supplier_name inconsistent_name: restored 100% of 533.0,PASS,(informational)
+cleaning,purchase_orders.delivery_date missing_value: restored 100% of 65.0,PASS,(informational)
+cleaning,purchase_orders.unit_price_inr missing_value: restored 100% of 44.0,PASS,(informational)
+cleaning,purchase_orders.quantity negative_value: restored 100% of 22.0,PASS,(informational)
+cleaning,purchase_orders.unit_price_inr outlier_extra_zero: restored 100% of 35.0,PASS,(informational)
+cleaning,purchase_orders.unit_price_inr zero_value: restored 100% of 18.0,PASS,(informational)
+cleaning,fact_project_cost.amount_inr total within 0.5% of truth,PASS,gap +0.000%
+cleaning,fact_procurement.line_value_inr total within 0.5% of truth,PASS,gap -0.000%
+cleaning,fact_operations.actual_output_t total within 0.5% of truth,PASS,gap +0.000%
+cleaning,fact_equipment.downtime_hours total within 0.5% of truth,PASS,gap +0.000%
+cleaning,fact_revenue.amount_inr total within 0.5% of truth,PASS,gap +0.000%
+cleaning,fact_labor.overtime_hours total within 0.5% of truth,PASS,gap -0.000%
+cleaning,fact_project_cost row count equals truth after de-duplication,PASS,"8,835 vs 8,835"
+cleaning,fact_procurement row count equals truth after de-duplication,PASS,"4,439 vs 4,439"
+cleaning,fact_equipment row count equals truth after de-duplication,PASS,"64,848 vs 64,848"
+cleaning,fact_revenue row count equals truth after de-duplication,PASS,510 vs 510

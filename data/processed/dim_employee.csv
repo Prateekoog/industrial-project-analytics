@@ -1,0 +1,85 @@
+employee_id,employee_name,role,department,base_location_id,join_year,hourly_cost_inr
+EMP-001,Prakash Gupta,Project Manager,Projects,LOC-W1,2016,2438.0
+EMP-002,Vikram Pillai,Project Manager,Projects,LOC-W3,2013,2423.0
+EMP-003,Aparna Ghosh,Project Manager,Projects,LOC-W3,2014,2090.0
+EMP-004,Priya Naidu,Project Manager,Projects,LOC-W1,2016,2368.0
+EMP-005,Priya Shetty,Project Manager,Projects,LOC-W2,2017,2043.0
+EMP-006,Riya Yadav,Project Manager,Projects,LOC-W3,2010,2401.0
+EMP-007,Rajesh Menon,Project Manager,Projects,LOC-W2,2015,1997.0
+EMP-008,Rajesh Mukherjee,Project Manager,Projects,LOC-W2,2013,2449.0
+EMP-009,Vivaan Rao,Project Manager,Projects,LOC-W3,2015,2344.0
+EMP-010,Aditya Kulkarni,Project Manager,Projects,LOC-W2,2017,2204.0
+EMP-011,Meera Naidu,Project Manager,Projects,LOC-W1,2016,2377.0
+EMP-012,Ishaan Chatterjee,Project Manager,Projects,LOC-W2,2017,2064.0
+EMP-013,Shreya Chatterjee,Planning Engineer,Projects,LOC-W2,2014,1294.0
+EMP-014,Vikram Banerjee,Planning Engineer,Projects,LOC-W3,2017,1288.0
+EMP-015,Tarun Patil,Planning Engineer,Projects,LOC-W2,2009,1483.0
+EMP-016,Neha Jain,Planning Engineer,Projects,LOC-W2,2018,1256.0
+EMP-017,Lakshmi Shah,Planning Engineer,Projects,LOC-W1,2019,1403.0
+EMP-018,Swati Yadav,Planning Engineer,Projects,LOC-W3,2012,1201.0
+EMP-019,Divya Jain,Planning Engineer,Projects,LOC-W1,2014,1236.0
+EMP-020,Anil Banerjee,Planning Engineer,Projects,LOC-W3,2016,1227.0
+EMP-021,Riya Bhat,Planning Engineer,Projects,LOC-W1,2019,1404.0
+EMP-022,Nitin Singh,Planning Engineer,Projects,LOC-W1,2017,1360.0
+EMP-023,Arjun Menon,Design Engineer,Engineering,LOC-W2,2009,1255.0
+EMP-024,Swati Verma,Design Engineer,Engineering,LOC-W1,2015,1228.0
+EMP-025,Nitin Iyer,Design Engineer,Engineering,LOC-W3,2009,1309.0
+EMP-026,Swati Nair,Design Engineer,Engineering,LOC-W1,2021,1307.0
+EMP-027,Divya Mukherjee,Design Engineer,Engineering,LOC-W2,2016,1132.0
+EMP-028,Ishaan Mehta,Design Engineer,Engineering,LOC-W2,2015,1370.0
+EMP-029,Aditya Patil,Design Engineer,Engineering,LOC-W1,2015,1278.0
+EMP-030,Divya Mehta,Design Engineer,Engineering,LOC-W1,2016,1273.0
+EMP-031,Nandini Das,Design Engineer,Engineering,LOC-W3,2012,1288.0
+EMP-032,Aparna Yadav,Design Engineer,Engineering,LOC-W1,2008,1383.0
+EMP-033,Aarav Kumar,Design Engineer,Engineering,LOC-W2,2010,1298.0
+EMP-034,Sneha Kulkarni,Design Engineer,Engineering,LOC-W2,2018,1213.0
+EMP-035,Vikram Menon,Design Engineer,Engineering,LOC-W3,2018,1365.0
+EMP-036,Manoj Jain,Design Engineer,Engineering,LOC-W3,2011,1137.0
+EMP-037,Karan Joshi,Design Engineer,Engineering,LOC-W2,2013,1384.0
+EMP-038,Riya Naidu,Design Engineer,Engineering,LOC-W3,2012,1423.0
+EMP-039,Deepak Das,Design Engineer,Engineering,LOC-W2,2015,1205.0
+EMP-040,Varun Mehta,Design Engineer,Engineering,LOC-W1,2010,1139.0
+EMP-041,Priya Yadav,Design Engineer,Engineering,LOC-W3,2022,1404.0
+EMP-042,Arjun Pandey,Design Engineer,Engineering,LOC-W3,2021,1404.0
+EMP-043,Rohan Agarwal,Site Supervisor,Construction,LOC-W2,2012,984.0
+EMP-044,Kavya Menon,Site Supervisor,Construction,LOC-W2,2013,831.0
+EMP-045,Ravi Pandey,Site Supervisor,Construction,LOC-W2,2011,1021.0
+EMP-046,Mahesh Rao,Site Supervisor,Construction,LOC-W1,2009,997.0
+EMP-047,Gaurav Iyer,Site Supervisor,Construction,LOC-W3,2010,945.0
+EMP-048,Anil Kumar,Site Supervisor,Construction,LOC-W1,2010,880.0
+EMP-049,Varun Shetty,Site Supervisor,Construction,LOC-W1,2022,923.0
+EMP-050,Divya Iyer,Site Supervisor,Construction,LOC-W3,2008,862.0
+EMP-051,Priya Kulkarni,Site Supervisor,Construction,LOC-W1,2018,837.0
+EMP-052,Priya Agarwal,Site Supervisor,Construction,LOC-W3,2018,941.0
+EMP-053,Meera Nair,Site Supervisor,Construction,LOC-W3,2020,971.0
+EMP-054,Aparna Kulkarni,Site Supervisor,Construction,LOC-W2,2009,1019.0
+EMP-055,Arjun Ghosh,Site Supervisor,Construction,LOC-W3,2012,920.0
+EMP-056,Amit Menon,Site Supervisor,Construction,LOC-W1,2022,874.0
+EMP-057,Tarun Jain,Site Supervisor,Construction,LOC-W2,2008,935.0
+EMP-058,Karan Menon,Site Supervisor,Construction,LOC-W3,2009,842.0
+EMP-059,Ravi Singh,Site Supervisor,Construction,LOC-W1,2022,944.0
+EMP-060,Siddharth Jain,Site Supervisor,Construction,LOC-W3,2020,915.0
+EMP-061,Deepak Shetty,Site Supervisor,Construction,LOC-W3,2008,835.0
+EMP-062,Ananya Shetty,Site Supervisor,Construction,LOC-W2,2011,929.0
+EMP-063,Lakshmi Pillai,Site Supervisor,Construction,LOC-W3,2021,946.0
+EMP-064,Priya Singh,Site Supervisor,Construction,LOC-W1,2013,906.0
+EMP-065,Rohan Menon,Site Supervisor,Construction,LOC-W3,2021,912.0
+EMP-066,Sanjay Rao,Site Supervisor,Construction,LOC-W1,2011,978.0
+EMP-067,Aparna Naidu,Works Supervisor,Manufacturing,LOC-W1,2022,779.0
+EMP-068,Rohan Gupta,Works Supervisor,Manufacturing,LOC-W2,2016,796.0
+EMP-069,Siddharth Naidu,Works Supervisor,Manufacturing,LOC-W3,2012,796.0
+EMP-070,Sneha Jain,Works Supervisor,Manufacturing,LOC-W1,2021,800.0
+EMP-071,Ishaan Das,Works Supervisor,Manufacturing,LOC-W2,2016,790.0
+EMP-072,Ishaan Joshi,Works Supervisor,Manufacturing,LOC-W3,2008,777.0
+EMP-073,Siddharth Nair,Works Supervisor,Manufacturing,LOC-W1,2020,891.0
+EMP-074,Aditya Agarwal,Works Supervisor,Manufacturing,LOC-W2,2018,849.0
+EMP-075,Aparna Banerjee,Works Supervisor,Manufacturing,LOC-W3,2022,951.0
+EMP-076,Amit Shetty,Works Supervisor,Manufacturing,LOC-W1,2020,774.0
+EMP-077,Shreya Nair,Works Supervisor,Manufacturing,LOC-W2,2021,818.0
+EMP-078,Rajesh Mehta,Works Supervisor,Manufacturing,LOC-W3,2014,775.0
+EMP-079,Aarav Ghosh,Procurement Buyer,Supply Chain,LOC-W3,2015,925.0
+EMP-080,Arjun Bhat,Procurement Buyer,Supply Chain,LOC-W1,2008,1131.0
+EMP-081,Prakash Patil,Procurement Buyer,Supply Chain,LOC-W3,2020,1126.0
+EMP-082,Vikram Shah,Procurement Buyer,Supply Chain,LOC-W1,2020,1095.0
+EMP-083,Deepak Menon,Procurement Buyer,Supply Chain,LOC-W2,2019,934.0
+EMP-084,Aparna Joshi,Procurement Buyer,Supply Chain,LOC-W1,2015,1114.0

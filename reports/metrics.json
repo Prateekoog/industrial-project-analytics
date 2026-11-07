@@ -1,0 +1,571 @@
+{
+  "eda": {
+    "projects": 80,
+    "completed": 62,
+    "in_progress": 18,
+    "contract_value_mean_cr": 87.7635,
+    "contract_value_median_cr": 71.225,
+    "portfolio_value_cr": 7021.08,
+    "cv_outliers": [
+      "PRJ-036",
+      "PRJ-044"
+    ],
+    "fact_rows": 97015
+  },
+  "cost_profitability": {
+    "completed_revenue_cr": 5247.2833942669995,
+    "completed_contract_cr": 5182.78,
+    "estimated_profit_cr": 682.6509,
+    "actual_profit_cr": 437.0390693780001,
+    "profit_lost_cr": 245.61183062199993,
+    "profit_lost_pct_of_plan": 35.97912646449304,
+    "weighted_est_margin_pct": 13.17151991788191,
+    "weighted_actual_margin_pct": 8.328863462101053,
+    "cost_overrun_cr": 192.67332488899999,
+    "cost_overrun_pct": 4.172612070047218,
+    "ld_cr": 69.522,
+    "co_profit_cr": 17.831800848,
+    "pvc_cr": -1.2483065809999996,
+    "status_counts": {
+      "Under budget": 6,
+      "On budget": 30,
+      "Warning": 16,
+      "Critical": 10
+    },
+    "loss_making": 8,
+    "below_5pct_margin": 16,
+    "top_overrun_category": "Labour",
+    "top_overrun_category_cr": 66.98050390799999,
+    "top_overrun_category_share_pct": 34.76376605146966,
+    "top2_overrun_share_pct": 67.33943485521246,
+    "category_variance_pct": {
+      "Labour": 13.2,
+      "Material": 2.6,
+      "Overhead": 4.9,
+      "Energy": 9.9,
+      "Equipment": 5.2,
+      "Transportation": 4.5,
+      "Subcontractor": 1.4,
+      "Other": 0.7
+    },
+    "category_variance_cr": {
+      "Labour": 67.0,
+      "Material": 62.8,
+      "Overhead": 16.6,
+      "Energy": 13.7,
+      "Equipment": 13.4,
+      "Transportation": 9.8,
+      "Subcontractor": 8.3,
+      "Other": 1.1
+    },
+    "worst_project": "PRJ-044",
+    "worst_project_cv_pct": 18.93021327891157,
+    "worst_project_top_driver": "Material",
+    "worst_project_top_driver_pct": 64.7024385884406,
+    "best_industry_margin": "Wastewater Treatment",
+    "worst_industry_margin": "Carbon Capture",
+    "industry_margin": {
+      "Carbon Capture": {
+        "est_margin_pct": 16.7,
+        "actual_margin_pct": 2.1
+      },
+      "Industrial Batteries": {
+        "est_margin_pct": 16.2,
+        "actual_margin_pct": 3.0
+      },
+      "Green Hydrogen": {
+        "est_margin_pct": 15.1,
+        "actual_margin_pct": 4.3
+      },
+      "Biochemicals": {
+        "est_margin_pct": 14.5,
+        "actual_margin_pct": 5.9
+      },
+      "Thermal Energy": {
+        "est_margin_pct": 9.6,
+        "actual_margin_pct": 8.2
+      },
+      "Mining & Material Handling": {
+        "est_margin_pct": 14.1,
+        "actual_margin_pct": 9.2
+      },
+      "Sugar": {
+        "est_margin_pct": 12.5,
+        "actual_margin_pct": 9.4
+      },
+      "Cement": {
+        "est_margin_pct": 12.0,
+        "actual_margin_pct": 9.6
+      },
+      "Industrial Equipment": {
+        "est_margin_pct": 17.3,
+        "actual_margin_pct": 9.6
+      },
+      "Wastewater Treatment": {
+        "est_margin_pct": 14.0,
+        "actual_margin_pct": 10.9
+      }
+    },
+    "new_energy_margin_lost_pp": 13.267491633335164,
+    "mature_margin_lost_pp": 4.97329364224902,
+    "wip_count": 18,
+    "wip_cpi_below_1": 16,
+    "wip_forecast_critical": 3,
+    "wip_forecast_overrun_cr": 90.8748728476838
+  },
+  "productivity": {
+    "works_scorecard": {
+      "Works-West": {
+        "output_t": 61259.11,
+        "mh_per_tonne": 28.89,
+        "overtime_pct": 7.89,
+        "defect_rate_pct": 1.7,
+        "output_achievement_pct": 104.83,
+        "conversion_cost_per_t": 18975.61,
+        "labour_cost_per_t": 12466.68,
+        "constrained_days_pct": 6.79,
+        "utilisation_pct": 41.01,
+        "downtime_pct": 2.55,
+        "idle_pct": 56.44,
+        "labour_efficiency_pct": 103.86
+      },
+      "Works-East": {
+        "output_t": 67150.58,
+        "mh_per_tonne": 33.53,
+        "overtime_pct": 8.04,
+        "defect_rate_pct": 4.05,
+        "output_achievement_pct": 95.7,
+        "conversion_cost_per_t": 18828.19,
+        "labour_cost_per_t": 12319.84,
+        "constrained_days_pct": 45.28,
+        "utilisation_pct": 45.26,
+        "downtime_pct": 8.74,
+        "idle_pct": 46.0,
+        "labour_efficiency_pct": 89.47
+      },
+      "Works-South": {
+        "output_t": 64817.78,
+        "mh_per_tonne": 30.71,
+        "overtime_pct": 8.75,
+        "defect_rate_pct": 2.56,
+        "output_achievement_pct": 102.95,
+        "conversion_cost_per_t": 19199.11,
+        "labour_cost_per_t": 12691.95,
+        "constrained_days_pct": 29.46,
+        "utilisation_pct": 43.38,
+        "downtime_pct": 4.71,
+        "idle_pct": 51.91,
+        "labour_efficiency_pct": 97.69
+      }
+    },
+    "east_vs_west_mh_per_t_gap_pct": 16.08146549904401,
+    "east_vs_west_cost_per_t_gap_pct": -0.7768782838374677,
+    "downtime_mh_slope": 0.6607025831748701,
+    "downtime_mh_corr": 0.9351708847584933,
+    "chronic_machines": [
+      "EQ-W3-W4",
+      "EQ-W2-PR1",
+      "EQ-W2-W2",
+      "EQ-W2-M1",
+      "EQ-W2-BP1",
+      "EQ-W3-M3"
+    ],
+    "chronic_machine_count": 6,
+    "chronic_share_of_downtime_pct": 43.51182311475581,
+    "chronic_share_of_machines_pct": 14.285714285714286,
+    "top_machine": "EQ-W3-W4",
+    "top_machine_downtime_pct": 19.454326555572543,
+    "east_top_bottleneck": "Plate Rolling",
+    "east_top_bottleneck_share_pct": 28.831725616291532,
+    "recent_time_split": {
+      "Works-West": {
+        "operating_hours": 59.8,
+        "downtime_hours": 2.6,
+        "idle_hours": 37.6
+      },
+      "Works-East": {
+        "operating_hours": 62.3,
+        "downtime_hours": 8.7,
+        "idle_hours": 29.1
+      },
+      "Works-South": {
+        "operating_hours": 61.3,
+        "downtime_hours": 4.2,
+        "idle_hours": 34.5
+      }
+    }
+  },
+  "procurement": {
+    "suppliers": 40,
+    "overall_otd_pct": 76.04142692750287,
+    "critical_otd_pct": 73.257328990228,
+    "low_otd_suppliers": [
+      "SUP-017",
+      "SUP-021",
+      "SUP-013",
+      "SUP-003",
+      "SUP-030",
+      "SUP-037",
+      "SUP-008"
+    ],
+    "low_otd_supplier_count": 7,
+    "low_otd_avg_otd_pct": 51.870111598725096,
+    "low_otd_avg_price_index": 0.9288301914479259,
+    "reliable_avg_otd_pct": 91.1171280571606,
+    "reliable_avg_price_index": 1.052550663964792,
+    "low_otd_spend_share_pct": 21.91740550085253,
+    "pass_through_days_per_day_late": 0.7347260756845269,
+    "avg_delay_cost_per_day_lakh": 7.329821394865086,
+    "avg_time_cost_per_day_lakh": 1.0609999662936576,
+    "low_otd_tco_net_lakh": 2495.0380090804206,
+    "low_otd_price_saving_lakh": 4841.496741399999,
+    "low_otd_lateness_cost_lakh": 2346.458732319579,
+    "most_volatile_group": "Structural Steel",
+    "most_volatile_cv": 0.09153942176395181,
+    "top_supplier": "SUP-004",
+    "bottom_supplier": "SUP-008",
+    "a_vs_b": [
+      {
+        "material_group": "Castings & Forgings",
+        "cheap": "SUP-013",
+        "reliable": "SUP-012",
+        "cheap_price_index": 0.936,
+        "reliable_price_index": 1.044,
+        "cheap_otd": 55.14,
+        "reliable_otd": 88.889,
+        "cheap_net_lakh": 448.776,
+        "reliable_net_lakh": -197.588,
+        "cheap_spend_cr": 74.547,
+        "reliable_spend_cr": 44.185
+      },
+      {
+        "material_group": "Gearboxes & Drives",
+        "cheap": "SUP-017",
+        "reliable": "SUP-016",
+        "cheap_price_index": 0.913,
+        "reliable_price_index": 1.071,
+        "cheap_otd": 52.027,
+        "reliable_otd": 96.739,
+        "cheap_net_lakh": 813.317,
+        "reliable_net_lakh": -442.1,
+        "cheap_spend_cr": 90.832,
+        "reliable_spend_cr": 64.301
+      },
+      {
+        "material_group": "Motors",
+        "cheap": "SUP-021",
+        "reliable": "SUP-019",
+        "cheap_price_index": 0.941,
+        "reliable_price_index": 1.064,
+        "cheap_otd": 51.724,
+        "reliable_otd": 87.097,
+        "cheap_net_lakh": 521.965,
+        "reliable_net_lakh": -414.985,
+        "cheap_spend_cr": 99.465,
+        "reliable_spend_cr": 67.767
+      },
+      {
+        "material_group": "Pumps & Compressors",
+        "cheap": "SUP-030",
+        "reliable": "SUP-028",
+        "cheap_price_index": 0.934,
+        "reliable_price_index": 1.044,
+        "cheap_otd": 54.286,
+        "reliable_otd": 90.0,
+        "cheap_net_lakh": 434.16,
+        "reliable_net_lakh": -177.474,
+        "cheap_spend_cr": 66.049,
+        "reliable_spend_cr": 40.657
+      }
+    ],
+    "total_spend_cr": 3206.7621810399996
+  },
+  "delays": {
+    "completed_delayed_pct": 95.16129032258065,
+    "avg_delay_days": 36.225806451612904,
+    "median_delay_days": 28.5,
+    "avg_delay_pct": 7.928023192049463,
+    "schedule_status_counts": {
+      "Minor delay": 35,
+      "Major delay": 16,
+      "On time": 7,
+      "Critical delay": 4
+    },
+    "ld_projects": 34,
+    "ld_cr": 69.522,
+    "extra_time_cost_cr": 19.918043271919572,
+    "delay_cost_total_cr": 89.44004327191958,
+    "top_cause": "Engineering rework",
+    "top_cause_share_pct": 54.769076305220885,
+    "top2_causes": [
+      "Engineering rework",
+      "Supplier delay"
+    ],
+    "top2_share_pct": 69.0512048192771,
+    "cause_share_pct": {
+      "Engineering rework": 54.8,
+      "Supplier delay": 14.3,
+      "Labour productivity": 7.0,
+      "Client-side": 7.0,
+      "Technical issues": 6.6,
+      "Equipment breakdown": 5.8,
+      "Weather": 4.5
+    },
+    "top_stage": "Engineering",
+    "top_stage_share_pct": 50.63709296838131,
+    "stage_share_pct": {
+      "Concept": 5.2,
+      "Engineering": 50.6,
+      "Procurement": -1.0,
+      "Fabrication": 7.1,
+      "Installation": 30.0,
+      "Testing": 5.0,
+      "Commissioning": 1.9
+    },
+    "procurement_avg_tail_days": 96.52777777777777,
+    "corr_delay_cost_variance": 0.6715695162124321,
+    "margin_on_time": 12.936706251952595,
+    "margin_major_or_worse": 4.141505693618974,
+    "wip_slipping": 17,
+    "wip_major_or_worse": 9
+  },
+  "root_cause_risk": {
+    "symptom_gap_pp": {
+      "Above-median low-OTD supplier spend": -0.89,
+      "Fabricated at Works-East": 0.92,
+      "Critical item arrived after need date": 6.47,
+      "Site labour efficiency < 90%": 6.54,
+      "New-energy technology": 8.29,
+      "Engineering slip > 30 days": 8.94
+    },
+    "regression_r2": 0.7522671476239273,
+    "regression_std_coef": {
+      "max_critical_lateness_days": 3.33,
+      "new_energy": 2.47,
+      "engineering_slip_days": 1.04,
+      "works_mh_per_t": 0.68,
+      "low_otd_supplier_share": -0.85,
+      "site_labour_efficiency": -1.32
+    },
+    "risk_weights": {
+      "cost_risk": 0.35,
+      "schedule_risk": 0.3,
+      "supplier_risk": 0.15,
+      "productivity_risk": 0.2
+    },
+    "risk_corr": {
+      "cost_risk": 0.959,
+      "schedule_risk": 0.748,
+      "supplier_risk": 0.395,
+      "productivity_risk": 0.447
+    },
+    "tier_validation_margin_lost": {
+      "Low": 0.22,
+      "Medium": 6.56,
+      "High": 10.81,
+      "Critical": 17.65
+    },
+    "tier_counts": {
+      "Completed": {
+        "Critical": 7,
+        "High": 8,
+        "Low": 24,
+        "Medium": 23
+      },
+      "In Progress": {
+        "Critical": 3,
+        "High": 0,
+        "Low": 9,
+        "Medium": 6
+      }
+    },
+    "top_risk_wip": [
+      {
+        "project_id": "PRJ-072",
+        "risk_score": 72.8,
+        "risk_tier": "Critical"
+      },
+      {
+        "project_id": "PRJ-073",
+        "risk_score": 71.9,
+        "risk_tier": "Critical"
+      },
+      {
+        "project_id": "PRJ-074",
+        "risk_score": 70.6,
+        "risk_tier": "Critical"
+      },
+      {
+        "project_id": "PRJ-066",
+        "risk_score": 44.9,
+        "risk_tier": "Medium"
+      },
+      {
+        "project_id": "PRJ-065",
+        "risk_score": 44.1,
+        "risk_tier": "Medium"
+      }
+    ],
+    "wip_high_or_critical": 3
+  },
+  "process": {
+    "as_is_internal_days": 34.51839796488874,
+    "to_be_internal_days": 22.21804307838533,
+    "internal_days_saved": 12.30035488650341,
+    "internal_reduction_pct": 35.63419976505,
+    "approval_as_is_mean": 9.270064575645756,
+    "approval_to_be_mean": 5.278828413284133,
+    "approval_share_of_internal_pct": 26.855431080767527,
+    "biggest_step": "Quotes and PO",
+    "projects_with_delay_avoided": 25,
+    "delay_days_avoided_total": 182.76311132652603,
+    "delay_value_avoided_total_cr": 8.094057004541305,
+    "completions_per_year": 17.5,
+    "annual_delay_value_cr": 2.284612864185046,
+    "po_lines_per_year": 953.0
+  },
+  "roi": {
+    "base": {
+      "Predictive maintenance on chronic machines": {
+        "investment": 5500000.0,
+        "annual_saving": 21311202.14,
+        "running_cost": 1000000.0,
+        "net_annual_benefit": 20311202.14,
+        "payback_years": 0.27,
+        "roi_3yr_pct": 652.16,
+        "npv_5yr": 67717338.13,
+        "rank_npv": 2
+      },
+      "Digital procurement workflow": {
+        "investment": 7000000.0,
+        "annual_saving": 19420502.91,
+        "running_cost": 2000000.0,
+        "net_annual_benefit": 17420502.91,
+        "payback_years": 0.4,
+        "roi_3yr_pct": 348.17,
+        "npv_5yr": 55797014.34,
+        "rank_npv": 3
+      },
+      "Critical-item supplier switch": {
+        "investment": 1500000.0,
+        "annual_saving": 34121925.7,
+        "running_cost": 93301330.31,
+        "net_annual_benefit": -59179404.61,
+        "payback_years": Infinity,
+        "roi_3yr_pct": -63.62,
+        "npv_5yr": -214828509.39,
+        "rank_npv": 4
+      },
+      "Design-freeze stage gate": {
+        "investment": 2000000.0,
+        "annual_saving": 60973691.19,
+        "running_cost": 22026449.68,
+        "net_annual_benefit": 38947241.51,
+        "payback_years": 0.05,
+        "roi_3yr_pct": 168.69,
+        "npv_5yr": 138396089.35,
+        "rank_npv": 1
+      }
+    },
+    "scenarios": {
+      "Critical-item supplier switch": {
+        "base": -214828509.0,
+        "high": -190228128.0,
+        "low": -255829145.0
+      },
+      "Design-freeze stage gate": {
+        "base": 138396089.0,
+        "high": 270273996.0,
+        "low": 6518183.0
+      },
+      "Digital procurement workflow": {
+        "base": 55797014.0,
+        "high": 73298656.0,
+        "low": 29544552.0
+      },
+      "Predictive maintenance on chronic machines": {
+        "base": 67717338.0,
+        "high": 100641101.0,
+        "low": 23818987.0
+      }
+    },
+    "details": {
+      "Predictive maintenance on chronic machines": {
+        "target_machines": [
+          "EQ-W2-BP1",
+          "EQ-W2-M1",
+          "EQ-W2-PR1",
+          "EQ-W2-W2",
+          "EQ-W3-M3",
+          "EQ-W3-W4"
+        ],
+        "downtime_hours_per_year": 5031.004999999999,
+        "breakdowns_per_year": 600.0,
+        "value_per_downtime_hour": 9121.268808392228,
+        "reduction": 0.35
+      },
+      "Digital procurement workflow": {
+        "internal_days_saved": 9.840283909202729,
+        "achievement": 0.8
+      },
+      "Critical-item supplier switch": {
+        "suppliers_switched": [
+          "SUP-008",
+          "SUP-011",
+          "SUP-010",
+          "SUP-002",
+          "SUP-004",
+          "SUP-018"
+        ],
+        "annual_price_premium": 93301330.30587596,
+        "annual_lateness_cost": 45495900.93233218
+      },
+      "Design-freeze stage gate": {
+        "excess_margin_lost_pp": 8.93789651063657,
+        "affected_revenue_per_year": 5457542823.045,
+        "prevention": 0.25,
+        "affected_share_pct": 32.25806451612903,
+        "gate_time_cost_per_year": 10026449.681475064,
+        "projects_started_per_year": 13.5
+      }
+    },
+    "assumptions": {
+      "pm_sensor_cost_per_machine": 500000.0,
+      "pm_platform_cost": 2500000.0,
+      "pm_running_cost": 1000000.0,
+      "pm_downtime_reduction": {
+        "low": 0.15,
+        "base": 0.35,
+        "high": 0.5
+      },
+      "pm_repair_cost_per_event": 25000,
+      "pm_crew_per_machine": 3,
+      "pm_idle_share": 0.6,
+      "dp_implementation_cost": 7000000.0,
+      "dp_running_cost": 2000000.0,
+      "dp_buyer_hours_saved_per_line": 1.5,
+      "dp_buyer_rate": 1000,
+      "dp_target_achievement": {
+        "low": 0.5,
+        "base": 0.8,
+        "high": 1.0
+      },
+      "ss_qualification_cost": 1500000.0,
+      "ss_effectiveness": {
+        "low": 0.5,
+        "base": 0.75,
+        "high": 0.9
+      },
+      "dg_setup_cost": 2000000.0,
+      "dg_review_team_cost": 12000000.0,
+      "dg_gate_days_per_project": 7,
+      "dg_confounding_haircut": 0.5,
+      "dg_prevention": {
+        "low": 0.1,
+        "base": 0.25,
+        "high": 0.4
+      }
+    },
+    "total_net_annual_benefit_cr": 7.667894656891261
+  }
+}

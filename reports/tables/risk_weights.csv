@@ -1,0 +1,5 @@
+component,correlation_with_margin_lost,weight
+cost_risk,0.959,0.35
+schedule_risk,0.748,0.3
+supplier_risk,0.395,0.15
+productivity_risk,0.447,0.2
